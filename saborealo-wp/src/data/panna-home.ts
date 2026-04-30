@@ -1,4 +1,5 @@
 import { pannaImage as image } from "@/data/panna-assets"
+import { PANNA_ORDER_URL } from "@/data/panna-links"
 
 const menuRowItem = (slug: string, label: string, imagePath: string) => ({
   label,
@@ -119,7 +120,9 @@ export const pannaHomeData = {
       title: "Latino Flavors Delivered to Your Door!",
       text: "Order Now and Savor Without the Wait - Pick Up and Delivery from Panna New Latino Food",
       cta: "STAR NOW",
-      href: "https://mypanna.com/orders/",
+      href: PANNA_ORDER_URL,
+      target: "_blank",
+      rel: "noopener noreferrer",
     },
     {
       image: image("2024/12/BANNER-GIFT-CARD-HOME.webp"),

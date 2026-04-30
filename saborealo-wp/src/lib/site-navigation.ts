@@ -1,4 +1,6 @@
-export type MatchableLink = {
+import type { LinkAttributes } from "@/lib/link-attributes"
+
+export type MatchableLink = LinkAttributes & {
   href: string
   matchPath?: string
 }

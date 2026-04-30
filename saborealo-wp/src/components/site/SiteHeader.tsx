@@ -6,7 +6,6 @@ import {
   Menu01Icon,
   Search01Icon,
 } from "@hugeicons/core-free-icons";
-import type { MouseEvent } from "react";
 
 import {
   Accordion,
@@ -39,6 +38,7 @@ import {
   isActiveLink,
   isCurrentPage,
 } from "@/lib/site-navigation";
+import { getLinkAttributes } from "@/lib/link-attributes";
 import { cn } from "@/lib/utils";
 
 type SiteHeaderProps = {
@@ -48,10 +48,6 @@ type SiteHeaderProps = {
 };
 
 type NavItem = PannaSiteData["nav"][number];
-
-function preventPlaceholderNavigation(event: MouseEvent<HTMLAnchorElement>) {
-  event.preventDefault();
-}
 
 export function SiteHeader({ logo, nav, currentPath }: SiteHeaderProps) {
   return (
@@ -97,17 +93,9 @@ function DesktopNavigation({
               {"sub" in item && item.sub ? (
                 <>
                   <NavigationMenuTrigger asChild className="main-nav__link">
-                    <a
-                      aria-current={
-                        isCurrentPage(currentPath, item.href) ? "page" : undefined
-                      }
+                    <button
+                      type="button"
                       data-active={isActive ? "true" : undefined}
-                      href={item.href}
-                      onClick={
-                        item.href === "#"
-                          ? preventPlaceholderNavigation
-                          : undefined
-                      }
                     >
                       <span>{item.label}</span>
                       <HugeiconsIcon
@@ -115,7 +103,7 @@ function DesktopNavigation({
                         strokeWidth={2}
                         aria-hidden="true"
                       />
-                    </a>
+                    </button>
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="main-nav__dropdown">
                     <ul className="main-nav__dropdown-list">
@@ -135,6 +123,7 @@ function DesktopNavigation({
                                   : undefined
                               }
                               href={subItem.href}
+                              {...getLinkAttributes(subItem)}
                             >
                               {subItem.label}
                             </a>
@@ -152,6 +141,7 @@ function DesktopNavigation({
                     }
                     data-active={isActive ? "true" : undefined}
                     href={item.href}
+                    {...getLinkAttributes(item)}
                   >
                     {item.label}
                   </a>
@@ -231,7 +221,7 @@ function HeaderSearch({ className }: { className?: string }) {
     >
       <Input
         name="s"
-        placeholder="Search Products..."
+        placeholder="Search Products…"
         type="search"
         autoComplete="off"
         aria-label="Search products"
@@ -273,6 +263,7 @@ function MobileNavigationItem({
           className="site-header__mobile-link"
           data-active={isActive ? "true" : undefined}
           href={item.href}
+          {...getLinkAttributes(item)}
         >
           {item.label}
         </a>
@@ -302,6 +293,7 @@ function MobileNavigationItem({
                   isActiveLink(currentPath, subItem) ? "true" : undefined
                 }
                 href={subItem.href}
+                {...getLinkAttributes(subItem)}
               >
                 {subItem.label}
               </a>

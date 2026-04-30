@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { SiteLogo } from "@/components/site/SiteLogo"
 import { SiteIcon } from "@/components/site/SiteIcon"
 import type { PannaSiteData } from "@/data/panna-site"
+import { getLinkAttributes } from "@/lib/link-attributes"
 import {
   isActiveLink,
   isCurrentPage,
@@ -156,6 +157,7 @@ function FooterLinks({
               className="site-footer__link"
               aria-current={isCurrentPage(currentPath, link.href) ? "page" : undefined}
               data-active={isActive ? "true" : undefined}
+              {...getLinkAttributes(link)}
             >
               {link.label}
             </a>

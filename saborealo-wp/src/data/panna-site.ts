@@ -1,4 +1,5 @@
 import { pannaImage as image } from "@/data/panna-assets"
+import { PANNA_ORDER_URL } from "@/data/panna-links"
 
 const siteContactItems = [
   { icon: "phone", label: "+1 (305) 97-PANNA" },
@@ -38,7 +39,9 @@ export const pannaSiteData = {
     { label: "CONTACT", href: "/contact/", matchPath: "/contact/" },
     {
       label: "ONLINE ORDER",
-      href: "https://mypanna.com/orders/",
+      href: PANNA_ORDER_URL,
+      target: "_blank",
+      rel: "noopener noreferrer",
     },
   ],
   contact: siteContactItems,
@@ -47,7 +50,12 @@ export const pannaSiteData = {
     quickLinks: [
       { label: "About Us", href: "https://mypanna.com/about-us/" },
       { label: "Our Menu", href: "/menu/" },
-      { label: "Orders", href: "https://mypanna.com/orders/" },
+      {
+        label: "Orders",
+        href: PANNA_ORDER_URL,
+        target: "_blank",
+        rel: "noopener noreferrer",
+      },
       { label: "Job Application", href: "/job-application/" },
       { label: "Contact", href: "/contact/" },
     ],

@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import type { PannaHomeData } from "@/data/panna-home"
+import { getLinkAttributes } from "@/lib/link-attributes"
 
 type PromoFeatureCard = PannaHomeData["promoCards"][number]
 
@@ -56,7 +57,9 @@ function PromoCard({ card }: { card: PromoFeatureCard }) {
 
       <CardFooter className="promo-card__footer">
         <Button className="btn" asChild>
-          <a href={card.href}>{card.cta}</a>
+          <a href={card.href} {...getLinkAttributes(card)}>
+            {card.cta}
+          </a>
         </Button>
       </CardFooter>
     </Card>
