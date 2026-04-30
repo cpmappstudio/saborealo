@@ -1,0 +1,50 @@
+.carousel-dots[data-slot="card-footer"] {
+  position: absolute;
+  right: auto;
+  bottom: 0;
+  left: 50%;
+  z-index: 3;
+  display: flex;
+  width: max-content;
+  height: max-content;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transform: translateX(-50%);
+}
+
+.carousel-dot[data-slot="button"] {
+  width: 6px;
+  min-width: 0;
+  height: 6px;
+  min-height: 0;
+  padding: 0;
+  touch-action: manipulation;
+  cursor: pointer;
+  background: var(--panna-black);
+  border: 0;
+  border-radius: 999px;
+  opacity: .2;
+  box-shadow: none;
+  transition: background-color .25s ease, opacity .25s ease;
+}
+
+.carousel-dot[data-slot="button"]:hover,
+.carousel-dot[data-slot="button"]:focus-visible {
+  background: var(--panna-red);
+  opacity: 1;
+  outline: 0;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--panna-red) 35%, transparent);
+}
+
+.carousel-dot[data-slot="button"].is-active {
+  background: var(--panna-black);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-dot[data-slot="button"] {
+    transition: none;
+  }
+}

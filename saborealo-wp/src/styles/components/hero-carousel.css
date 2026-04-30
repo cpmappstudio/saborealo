@@ -1,0 +1,77 @@
+.hero {
+  padding: 20px;
+  background: var(--panna-cream);
+}
+
+.hero__frame[data-slot="card"] {
+  position: relative;
+  display: block;
+  max-width: 1920px;
+  padding: 0 0 36px;
+  margin: 0 auto -20px;
+  overflow: visible;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  --tw-ring-shadow: 0 0 #0000;
+}
+
+.hero__picture[data-slot="carousel"] {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background: var(--panna-black);
+  border-radius: 20px;
+  aspect-ratio: 1920 / 500;
+}
+
+.hero__picture [data-slot="carousel-content"],
+.hero__track,
+.hero__slide,
+.hero__picture-element,
+.hero__image {
+  height: 100%;
+}
+
+.hero__track {
+  margin-left: 0;
+}
+
+.hero__slide[data-slot="carousel-item"] {
+  padding-left: 0;
+}
+
+.hero__picture-element,
+.hero__image {
+  display: block;
+  width: 100%;
+}
+
+.hero__image {
+  object-fit: cover;
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: 10px;
+  }
+
+  .hero__frame[data-slot="card"] {
+    padding-bottom: 16px;
+    margin: 0 auto;
+  }
+
+  .hero__picture[data-slot="carousel"] {
+    aspect-ratio: auto;
+  }
+
+  .hero__picture [data-slot="carousel-content"],
+  .hero__track,
+  .hero__slide,
+  .hero__picture-element,
+  .hero__image {
+    height: auto;
+  }
+}

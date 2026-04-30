@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PANNA - Website UI Kit</title>
+  <link rel="stylesheet" href="../../colors_and_type.css">
+  <link rel="stylesheet" href="./website.css">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="./SiteData.jsx"></script>
+  <script src="./Header.jsx"></script>
+  <script src="./Hero.jsx"></script>
+  <script src="./MenuGrid.jsx"></script>
+  <script src="./FeatureCards.jsx"></script>
+  <script src="./StoreCards.jsx"></script>
+  <script src="./Footer.jsx"></script>
+  <script>
+    const h = React.createElement;
+
+    function App() {
+      return h("div", { className: "panna-home" },
+        h(Header),
+        h("main", null,
+          h(Hero),
+          h(MenuGrid),
+          h(FeatureCards),
+          h(StoreCards)
+        ),
+        h(Footer)
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(h(App));
+  </script>
+</body>
+</html>

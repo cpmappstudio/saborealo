@@ -1,0 +1,39 @@
+---
+import { MenuBackLink } from "@/components/menu/MenuBackLink";
+import { MenuItemDetail } from "@/components/menu/MenuItemDetail";
+import {
+	pannaMenuData,
+	type PannaMenuCategoryPage,
+	type PannaMenuProduct,
+} from "@/data/panna-menu";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+
+export function getStaticPaths() {
+	return pannaMenuData.categoryPages.flatMap((category) =>
+		category.products.map((product) => ({
+			params: {
+				category: category.slug,
+				item: product.slug,
+			},
+			props: { category, product },
+		})),
+	);
+}
+
+interface Props {
+	category: PannaMenuCategoryPage;
+	product: PannaMenuProduct;
+}
+
+const { category, product } = Astro.props;
+---
+
+<SiteLayout
+	title={`${product.title} | PANNA`}
+	description={product.description}
+>
+	<div class="menu-item-page">
+		<MenuItemDetail product={product} />
+		<MenuBackLink href={`/menu/${category.slug}/`} label="GO BACK" />
+	</div>
+</SiteLayout>

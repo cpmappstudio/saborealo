@@ -1,0 +1,34 @@
+---
+import { MenuBackLink } from "@/components/menu/MenuBackLink";
+import MenuCategoryHero from "@/components/menu/MenuCategoryHero.astro";
+import { MenuProductGrid } from "@/components/menu/MenuProductGrid";
+import { pannaMenuData, type PannaMenuCategoryPage } from "@/data/panna-menu";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+
+export function getStaticPaths() {
+	return pannaMenuData.categoryPages.map((category) => ({
+		params: { category: category.slug },
+		props: { category },
+	}));
+}
+
+interface Props {
+	category: PannaMenuCategoryPage;
+}
+
+const { category } = Astro.props;
+---
+
+<SiteLayout
+	title={`${category.title} | PANNA`}
+	description={`Explore PANNA ${category.title.toLowerCase()} menu items and details.`}
+>
+	<div class="menu-category-page">
+		<MenuCategoryHero
+			category={category}
+			background={pannaMenuData.categoryHero.background}
+		/>
+		<MenuProductGrid title={category.title} products={category.products} />
+		<MenuBackLink href="/menu/" label="GO BACK" />
+	</div>
+</SiteLayout>

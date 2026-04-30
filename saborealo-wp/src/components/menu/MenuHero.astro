@@ -1,0 +1,40 @@
+---
+import type { PannaMenuData } from "@/data/panna-menu";
+
+interface Props {
+	hero: PannaMenuData["hero"];
+}
+
+const { hero } = Astro.props;
+---
+
+<section
+	class="menu-page__hero"
+	style={`--menu-hero-background: url("${hero.background}")`}
+	aria-labelledby="menu-page-title"
+>
+	<h1 id="menu-page-title" class="sr-only">{hero.title}</h1>
+
+	<div class="panna-shell menu-page__hero-inner">
+		<div class="menu-page__hero-title">
+			<img
+				src={hero.titleImage.src}
+				alt=""
+				width={hero.titleImage.width}
+				height={hero.titleImage.height}
+				decoding="async"
+				fetchpriority="high"
+			/>
+		</div>
+
+		<div class="menu-page__hero-logo">
+			<img
+				src={hero.logoImage.src}
+				alt=""
+				width={hero.logoImage.width}
+				height={hero.logoImage.height}
+				decoding="async"
+			/>
+		</div>
+	</div>
+</section>

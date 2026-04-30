@@ -1,0 +1,199 @@
+.menu-section {
+  padding: 20px 0 45px;
+  background: var(--panna-cream);
+}
+
+.menu-carousel {
+  --menu-hover-buffer: 8px;
+  --menu-items-per-view: 6;
+  --menu-slide-gap: 90px;
+
+  position: relative;
+  margin-top: 20px;
+}
+
+.menu-carousel + .menu-carousel {
+  margin-top: 12px;
+}
+
+.menu-carousel [data-slot="carousel-content"] {
+  width: 100%;
+  padding: var(--menu-hover-buffer) 0;
+  margin: calc(var(--menu-hover-buffer) * -1) 0;
+  overflow: hidden;
+}
+
+.menu-carousel__track {
+  display: flex;
+  margin-left: calc(var(--menu-slide-gap) * -1);
+  touch-action: pan-y pinch-zoom;
+}
+
+.menu-carousel__item[data-slot="carousel-item"] {
+  display: flex;
+  flex: 0 0 calc(100% / var(--menu-items-per-view));
+  min-width: 0;
+  justify-content: center;
+  padding-left: var(--menu-slide-gap);
+}
+
+.menu-chip[data-slot="button"] {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 0;
+  color: var(--panna-black);
+  text-align: center;
+  white-space: normal;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  translate: none;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transform-origin: center;
+  transition: transform .25s var(--ease-bounce);
+}
+
+.menu-chip[data-slot="button"]:hover,
+.menu-chip[data-slot="button"]:focus-visible {
+  color: var(--panna-black);
+  background: transparent;
+  transform: scale(1.1);
+}
+
+.menu-chip[data-slot="button"]:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--panna-red) 35%, transparent);
+}
+
+.menu-chip__image {
+  display: block;
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+
+.menu-chip__label {
+  display: block;
+  min-height: 36px;
+  color: var(--panna-black);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.carousel-arrow[data-slot="button"] {
+  position: absolute;
+  top: calc(50% - 15px);
+  z-index: 2;
+  display: inline-flex;
+  width: 25px;
+  min-width: 0;
+  height: 25px;
+  min-height: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--panna-black);
+  font-size: 25px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  translate: none;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transition: color .25s ease;
+}
+
+.carousel-arrow[data-slot="button"]:disabled {
+  color: var(--panna-black);
+  cursor: default;
+  opacity: .2;
+}
+
+.carousel-arrow--prev[data-slot="button"] {
+  left: -30px;
+}
+
+.carousel-arrow--next[data-slot="button"] {
+  right: -30px;
+}
+
+.carousel-arrow[data-slot="button"]:hover,
+.carousel-arrow[data-slot="button"]:focus-visible {
+  color: var(--panna-red);
+  background: transparent;
+}
+
+.carousel-arrow[data-slot="button"]:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--panna-red) 35%, transparent);
+}
+
+.carousel-arrow svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
+@media (max-width: 1024px) {
+  .menu-carousel {
+    --menu-items-per-view: 4;
+    --menu-slide-gap: 35px;
+  }
+
+  .carousel-arrow--prev[data-slot="button"] {
+    left: -10px;
+  }
+
+  .carousel-arrow--next[data-slot="button"] {
+    right: -10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .menu-carousel {
+    --menu-items-per-view: 2;
+    --menu-slide-gap: 20px;
+  }
+
+  .menu-section {
+    padding: 20px 0 50px;
+  }
+
+  .carousel-arrow--prev[data-slot="button"] {
+    left: -5px;
+  }
+
+  .carousel-arrow--next[data-slot="button"] {
+    right: -5px;
+  }
+
+  .menu-chip__image {
+    width: 82px;
+    height: 82px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-chip[data-slot="button"],
+  .carousel-arrow[data-slot="button"] {
+    transition: none;
+  }
+}

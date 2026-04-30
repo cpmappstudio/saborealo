@@ -1,0 +1,30 @@
+.panna-site .btn[data-slot="button"] {
+  display: inline-flex;
+  min-height: 60px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 50px;
+  color: var(--panna-white);
+  font-family: var(--font-button);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  touch-action: manipulation;
+  cursor: pointer;
+  background: var(--panna-red);
+  border: 0;
+  border-radius: 50px;
+  box-shadow: none;
+  translate: none;
+}
+
+.panna-site .btn[data-slot="button"]:hover,
+.panna-site .btn[data-slot="button"]:focus-visible {
+  color: var(--panna-white);
+  background: var(--panna-red-hover);
+  outline: 0;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--panna-red) 35%, transparent);
+}

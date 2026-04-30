@@ -1,0 +1,180 @@
+/* PANNA Design System — colors & type
+   Source: extracted from saborealo/wp-content/uploads/elementor/css/post-11395.css
+*/
+@font-face {
+  font-family: 'Fjalla One';
+  src: url('fonts/FjallaOne-Regular.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap');
+
+:root {
+  /* === BRAND COLORS === */
+  --panna-red:        #EA0029;  /* primary brand red — buttons, accents, highlights */
+  --panna-red-hover:  #FF002D;  /* button hover state */
+  --panna-black:      #000000;  /* primary text, dark sections */
+  --panna-cream:      #FFF9ED;  /* page background */
+  --panna-cream-2:    #FFF2DC;  /* section background (warm) */
+  --panna-white:      #FFFFFF;  /* card surface, button text on red */
+  --panna-yellow:     #F98D01;  /* warm accent (citrus/yellow) */
+  --panna-green:      #2FD91A;  /* success / fresh accent */
+  --panna-gray-50:    #F1F1F1;
+  --panna-gray-100:   #E9E9E9;
+  --panna-gray-300:   #BABABA;
+  --panna-gray-500:   #988C84;  /* warm gray, muted text */
+
+  /* === SEMANTIC FOREGROUND === */
+  --fg1: var(--panna-black);
+  --fg2: var(--panna-gray-500);
+  --fg-on-red: var(--panna-white);
+  --fg-on-cream: var(--panna-black);
+
+  /* === SEMANTIC SURFACE === */
+  --bg-app: var(--panna-cream);
+  --bg-section-warm: var(--panna-cream-2);
+  --bg-section-red: var(--panna-red);
+  --bg-section-dark: var(--panna-black);
+  --bg-card: var(--panna-white);
+
+  /* === TYPOGRAPHY === */
+  --font-display: "Fjalla One", "Oswald", "Arial Narrow", sans-serif;
+  --font-body: Verdana, "DejaVu Sans", "Bitstream Vera Sans", sans-serif;
+  --font-button: Arial, Verdana, "DejaVu Sans", "Bitstream Vera Sans", sans-serif;
+
+  /* Display sizes (Fjalla One) */
+  --type-hero:   45px;  /* h1 / hero */
+  --type-h1:     40px;  /* section title */
+  --type-h2:     30px;  /* subsection */
+  --type-h3:     29px;  /* card title */
+  --type-h4:     20px;  /* footer title */
+
+  /* Body sizes (Verdana) */
+  --type-body:    18px;
+  --type-body-sm: 15px;
+  --type-button:  15px;
+
+  --letter-spacing-display: 0.3px;
+  --letter-spacing-display-loose: 0.5px;
+
+  /* === RADII === */
+  --radius-sm:   15px; /* image corners inside cards */
+  --radius-md:   20px; /* image tiles, sections */
+  --radius-lg:   30px; /* cards */
+  --radius-pill: 50px; /* buttons */
+
+  /* === SHADOWS === */
+  --shadow-card: 2px 7px 8px -3px rgba(0, 0, 0, 0.3);
+
+  /* === SPACING (loose, for hero composition) === */
+  --space-1: 10px;
+  --space-2: 20px;
+  --space-3: 30px;
+  --space-4: 50px;
+  --space-5: 60px;
+  --space-6: 100px;
+
+  --container-max: 1140px;
+
+  /* === MOTION === */
+  --ease-bounce: cubic-bezier(.34,1.56,.64,1);
+  --hover-scale: 1.1;
+  --hover-rotate-left: -5deg;
+  --hover-rotate-right: 17deg;
+}
+
+/* === SEMANTIC ELEMENT STYLES === */
+body {
+  font-family: var(--font-body);
+  font-size: var(--type-body);
+  color: var(--fg1);
+  background: var(--bg-app);
+  margin: 0;
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: var(--type-h1);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-display-loose);
+  line-height: 1;
+  margin: 0;
+}
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: var(--type-h2);
+  font-weight: 500;
+  letter-spacing: var(--letter-spacing-display);
+  margin: 0;
+}
+h3, .h3 {
+  font-family: var(--font-display);
+  font-size: var(--type-h3);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-display);
+  color: var(--panna-red);
+  margin: 0;
+}
+h4, .h4 {
+  font-family: var(--font-display);
+  font-size: var(--type-h4);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-display);
+  margin: 0;
+}
+p { margin: 0; }
+.body-sm { font-size: var(--type-body-sm); letter-spacing: 0.3px; }
+
+/* === BUTTONS === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--panna-red);
+  color: var(--panna-white);
+  font-family: var(--font-button);
+  font-size: var(--type-button);
+  font-weight: 600;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 20px 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .25s ease;
+}
+.btn:hover { background: var(--panna-red-hover); }
+.btn--inverse { background: var(--panna-white); color: var(--panna-red); }
+.btn--inverse:hover { background: var(--panna-red); color: var(--panna-white); }
+
+/* === CARD === */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 30px 30px 50px;
+}
+.card img { border-radius: var(--radius-sm); width: 100%; display: block; }
+
+/* === MENU CATEGORY CHIP (line-art icon + label below) === */
+.menu-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .25s var(--ease-bounce);
+}
+.menu-chip:hover { transform: scale(1.1); }
+.menu-chip__label {
+  font-family: var(--font-body);
+  font-size: var(--type-body-sm);
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  color: var(--fg1);
+}

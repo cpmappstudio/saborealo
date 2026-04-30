@@ -1,0 +1,50 @@
+.menu-back {
+  padding: 50px 0;
+  background: var(--panna-cream);
+}
+
+.menu-back .panna-shell {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.panna-site .menu-back__button[data-slot="button"] {
+  height: auto;
+  min-height: 0;
+  gap: 5px;
+  padding: 0;
+  color: var(--panna-black);
+  fill: var(--panna-black);
+  font-family: Arial, var(--font-button);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.panna-site .menu-back__button[data-slot="button"]:hover,
+.panna-site .menu-back__button[data-slot="button"]:focus-visible {
+  color: var(--panna-red);
+  fill: var(--panna-red);
+  background: transparent;
+}
+
+.panna-site .menu-back__button[data-slot="button"]:focus-visible {
+  outline: 2px solid var(--panna-red);
+  outline-offset: 4px;
+}
+
+@media (max-width: 1024px) {
+  .menu-back {
+    padding: 20px 0 0;
+  }
+
+  .menu-back .panna-shell {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,21 @@
+---
+import { HeroCarousel } from "@/components/home/HeroCarousel";
+import { MenuGrid } from "@/components/home/MenuGrid";
+import { PromoCards } from "@/components/home/PromoCards";
+import { StarProductCarousel } from "@/components/home/StarProductCarousel";
+import { StoreCards } from "@/components/home/StoreCards";
+import { pannaHomeData } from "@/data/panna-home";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+---
+
+<SiteLayout
+    title="PANNA - New Latino Food"
+    description="Discover PANNA New Latino Food menus, promotions, store locations, and Venezuelan-inspired favorites."
+>
+    <h1 class="sr-only">PANNA New Latino Food</h1>
+    <HeroCarousel slides={pannaHomeData.heroSlides} client:load />
+    <MenuGrid rows={pannaHomeData.menuRows} client:visible={{ rootMargin: "200px" }} />
+    <StarProductCarousel slides={pannaHomeData.starProducts} client:visible={{ rootMargin: "200px" }} />
+    <PromoCards cards={pannaHomeData.promoCards} />
+    <StoreCards stores={pannaHomeData.stores} story={pannaHomeData.aboutStory} />
+</SiteLayout>

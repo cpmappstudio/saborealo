@@ -1,0 +1,16 @@
+---
+import MenuHero from "@/components/menu/MenuHero.astro";
+import { MenuCategoryGrid } from "@/components/menu/MenuCategoryGrid";
+import { pannaMenuData } from "@/data/panna-menu";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+---
+
+<SiteLayout
+	title="Menu | PANNA"
+	description="Explore PANNA menu categories, from arepas and cachapas to brunch, burgers, desserts, coffee, juices, and more."
+>
+	<div class="menu-page">
+		<MenuHero hero={pannaMenuData.hero} />
+		<MenuCategoryGrid categories={pannaMenuData.categories} />
+	</div>
+</SiteLayout>

@@ -1,0 +1,247 @@
+.feature-section {
+  padding: 0 20px;
+  background: var(--panna-cream);
+}
+
+.feature-section .section-title {
+  max-width: 571px;
+  margin: 50px auto 20px;
+}
+
+.star-card[data-slot="card"] {
+  position: relative;
+  display: block;
+  padding: 0 0 16px;
+  margin-top: 50px;
+  overflow: visible;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  --tw-ring-shadow: 0 0 #0000;
+}
+
+.star-card__track {
+  margin-left: 0;
+}
+
+.star-card__item[data-slot="carousel-item"] {
+  padding-left: 0;
+}
+
+.star-card .carousel-dots[data-slot="card-footer"] {
+  gap: 18px;
+}
+
+.star-card__slide[data-slot="card-content"] {
+  display: grid;
+  min-height: 500px;
+  grid-template-columns: 70% 30%;
+  align-items: center;
+  padding: 20px 40px 20px 0;
+  overflow: hidden;
+  background-color: var(--panna-cream-2);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
+}
+
+.star-card__media {
+  display: flex;
+  min-width: 0;
+  justify-content: center;
+}
+
+.star-card__product {
+  display: block;
+  width: 90%;
+  max-height: 430px;
+  object-fit: contain;
+  transition: transform .25s var(--ease-bounce);
+}
+
+.star-card__product:hover {
+  transform: rotate(-5deg) scale(1.1);
+}
+
+.star-card__copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.star-card__title-image {
+  display: block;
+  width: 90%;
+  height: auto;
+}
+
+.star-card__heading {
+  color: var(--panna-white);
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 44px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.star-card__text {
+  color: var(--panna-white);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+}
+
+.star-card__slide.is-light .star-card__heading,
+.star-card__slide.is-light .star-card__text {
+  color: var(--panna-black);
+}
+
+.promo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 50px;
+  padding: 50px 0;
+}
+
+.promo-card[data-slot="card"] {
+  position: relative;
+  display: flex;
+  gap: 0;
+  padding: 30px 30px 50px;
+  overflow: visible;
+  text-align: center;
+  background: var(--panna-white);
+  border: 0;
+  border-radius: 30px;
+  box-shadow: var(--shadow-card);
+  --tw-ring-shadow: 0 0 #0000;
+}
+
+.promo-card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.promo-card__header[data-slot="card-header"] {
+  display: block;
+  padding: 0;
+}
+
+.promo-card__title-wrap[data-slot="card-title"],
+.promo-card__text-wrap[data-slot="card-description"] {
+  display: block;
+}
+
+.promo-card__title {
+  margin: 25px 10px 0;
+  color: var(--panna-red);
+  font-family: var(--font-display);
+  font-size: 29px;
+  font-weight: 500;
+  line-height: 32px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.promo-card__text {
+  margin: 14px 10px 0;
+  color: var(--panna-black);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.promo-card__footer[data-slot="card-footer"] {
+  justify-content: center;
+  padding: 0;
+}
+
+.promo-card .btn[data-slot="button"] {
+  min-height: 54px;
+  padding: 18px 25px;
+  margin-top: 20px;
+}
+
+@media (max-width: 1024px) {
+  .star-card__slide[data-slot="card-content"] {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 30px 24px;
+  }
+
+  .star-card__product {
+    width: min(72%, 520px);
+  }
+
+  .promo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .feature-section {
+    padding: 0 10px;
+  }
+
+  .feature-section .panna-shell {
+    width: 100%;
+  }
+
+  .feature-section .section-title {
+    max-width: none;
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .star-card {
+    min-height: 0;
+  }
+
+  .star-card__slide[data-slot="card-content"] {
+    min-height: 0;
+    padding: 30px 0;
+  }
+
+  .star-card__heading {
+    font-size: 32px;
+    line-height: 36px;
+  }
+
+  .star-card__text {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .promo-grid {
+    gap: 50px;
+    padding: 50px 0;
+  }
+
+  .promo-card[data-slot="card"] {
+    padding: 15px 15px 25px;
+  }
+
+  .promo-card__title {
+    font-size: 25px;
+    line-height: 29px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-card__product {
+    transition: none;
+  }
+}
