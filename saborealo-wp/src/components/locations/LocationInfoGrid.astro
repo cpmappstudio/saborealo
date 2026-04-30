@@ -1,0 +1,90 @@
+---
+import type { PannaLocationsData, PannaLocationPage } from "@/data/panna-locations"
+
+interface Props {
+  icons: PannaLocationsData["infoIcons"]
+  location: PannaLocationPage
+}
+
+const { icons, location } = Astro.props
+const titleId = `${location.slug}-details-title`
+
+const infoCards = [
+  {
+    id: "hours",
+    title: "Hours",
+    icon: icons.hours,
+  },
+  {
+    id: "address",
+    title: "Address",
+    icon: icons.address,
+    value: location.details.address,
+    href: undefined,
+  },
+  {
+    id: "phone",
+    title: "Phone",
+    icon: icons.phone,
+    value: location.details.phone,
+    href: location.details.phoneHref,
+  },
+  {
+    id: "email",
+    title: "Email",
+    icon: icons.email,
+    value: location.details.email,
+    href: location.details.emailHref,
+  },
+  {
+    id: "opened-day",
+    title: "Opened Day",
+    icon: icons.openedDay,
+    value: location.details.openedDay,
+    href: undefined,
+  },
+] as const
+---
+
+<section class="location-info" aria-labelledby={titleId}>
+  <h2 id={titleId} class="sr-only">
+    {location.title} details
+  </h2>
+
+  <div class="panna-shell location-info__grid">
+    {infoCards.map((item) => (
+      <article class="location-info__card" aria-labelledby={`${location.slug}-${item.id}`}>
+        <img
+          src={item.icon}
+          alt=""
+          width="150"
+          height="150"
+          loading="lazy"
+          decoding="async"
+          class="location-info__icon"
+        />
+
+        <h3 id={`${location.slug}-${item.id}`} class="location-info__title">
+          {item.title}
+        </h3>
+
+        {item.id === "hours" ? (
+          <dl class="location-info__hours">
+            {location.details.hours.map((hour) => (
+              <div class="location-info__hour">
+                <dt>{hour.day}</dt>
+                <dd>{hour.time}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : item.href ? (
+          <p class="location-info__text">
+            <a href={item.href}>{item.value}</a>
+          </p>
+        ) : (
+          <p class="location-info__text">{item.value}</p>
+        )}
+      </article>
+    ))}
+  </div>
+</section>

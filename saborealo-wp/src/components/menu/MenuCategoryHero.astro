@@ -1,4 +1,5 @@
 ---
+import PannaTextHero from "@/components/site/PannaTextHero.astro";
 import type { PannaMenuCategoryPage } from "@/data/panna-menu";
 
 interface Props {
@@ -9,14 +10,8 @@ interface Props {
 const { category, background } = Astro.props;
 ---
 
-<section
-	class="menu-category-hero"
-	style={`--menu-category-hero-background: url("${background}")`}
-	aria-labelledby="menu-category-title"
->
-	<div class="panna-shell menu-category-hero__inner">
-		<h1 id="menu-category-title" class="menu-category-hero__title">
-			{category.title}
-		</h1>
-	</div>
-</section>
+<PannaTextHero
+	background={background}
+	title={category.title}
+	titleId="menu-category-title"
+/>

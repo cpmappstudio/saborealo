@@ -1,4 +1,8 @@
 import { pannaImage as image } from "@/data/panna-assets"
+import {
+  pannaLocationFooterLinks,
+  pannaLocationNavLinks,
+} from "@/data/panna-locations"
 import { PANNA_ORDER_URL } from "@/data/panna-links"
 
 const siteContactItems = [
@@ -30,12 +34,7 @@ export const pannaSiteData = {
       label: "LOCATIONS",
       href: "#",
       matchPath: "/locations/",
-      sub: [
-        { label: "DORAL", href: "https://mypanna.com/locations/doral/" },
-        { label: "ORLANDO", href: "https://mypanna.com/locations/orlando/" },
-        { label: "WESTON ROAD", href: "https://mypanna.com/locations/weston-road/" },
-        { label: "WESTON TOWN CENTER", href: "https://mypanna.com/locations/weston-town-center/" },
-      ],
+      sub: pannaLocationNavLinks,
     },
     { label: "CONTACT", href: "/contact/", matchPath: "/contact/" },
     {
@@ -60,12 +59,7 @@ export const pannaSiteData = {
       { label: "Job Application", href: "/job-application/" },
       { label: "Contact", href: "/contact/" },
     ],
-    storeLinks: [
-      { label: "Doral", href: "https://mypanna.com/locations/doral/" },
-      { label: "Orlando", href: "https://mypanna.com/locations/orlando/" },
-      { label: "Weston Road", href: "https://mypanna.com/locations/weston-road/" },
-      { label: "Weston Town Center", href: "https://mypanna.com/locations/weston-town-center/" },
-    ],
+    storeLinks: pannaLocationFooterLinks,
     social: [
       { type: "facebook", label: "Facebook", href: "https://www.facebook.com/pannastores" },
       { type: "instagram", label: "Instagram", href: "https://www.instagram.com/pannastores/" },

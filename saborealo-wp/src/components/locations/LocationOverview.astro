@@ -1,0 +1,52 @@
+---
+import { LocationGalleryCarousel } from "@/components/locations/LocationGalleryCarousel"
+import { PannaRestaurantGuruBadge } from "@/components/site/PannaRestaurantGuruBadge"
+import type { PannaLocationPage } from "@/data/panna-locations"
+
+interface Props {
+  location: PannaLocationPage
+}
+
+const { location } = Astro.props
+const overviewTitleId = `${location.slug}-overview-title`
+---
+
+<section class="location-overview" aria-labelledby={overviewTitleId}>
+  <h2 id={overviewTitleId} class="sr-only">
+    {location.title} restaurant overview
+  </h2>
+
+  <div class="panna-shell location-overview__inner">
+    <div class="location-overview__gallery">
+      <LocationGalleryCarousel
+        images={location.gallery}
+        locationName={location.title}
+        client:visible={{ rootMargin: "200px" }}
+      />
+    </div>
+
+    <div class="location-overview__content">
+      <PannaRestaurantGuruBadge
+        href={location.storeCard.guruHref}
+        placeName={location.storeCard.badgeName}
+        className="location-overview__badge"
+      />
+
+      <div class="location-overview__copy">
+        {location.overview.paragraphs.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+
+        <p>
+          <strong>{location.overview.highlight}</strong>
+        </p>
+
+        <ul>
+          {location.overview.bullets.map((bullet) => (
+            <li>{bullet}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

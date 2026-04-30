@@ -1,0 +1,49 @@
+---
+import LocationInfoGrid from "@/components/locations/LocationInfoGrid.astro"
+import LocationMapSection from "@/components/locations/LocationMapSection.astro"
+import LocationOverview from "@/components/locations/LocationOverview.astro"
+import PannaTextHero from "@/components/site/PannaTextHero.astro"
+import {
+  pannaLocationsData,
+  type PannaLocationPage,
+} from "@/data/panna-locations"
+import SiteLayout from "@/layouts/SiteLayout.astro"
+
+export function getStaticPaths() {
+  return pannaLocationsData.locations.map((location) => ({
+    params: { location: location.slug },
+    props: { location },
+  }))
+}
+
+interface Props {
+  location: PannaLocationPage
+}
+
+const { location } = Astro.props
+---
+
+<SiteLayout title={location.metaTitle} description={location.metaDescription}>
+  <div class="location-page">
+    <PannaTextHero
+      background={pannaLocationsData.hero.background}
+      title={location.title}
+      titleId="location-title"
+    />
+
+    <section class="location-phrase" aria-labelledby="location-phrase-title">
+      <div class="panna-shell">
+        <h2 id="location-phrase-title" class="section-title">
+          {location.phrase}
+        </h2>
+      </div>
+    </section>
+
+    <LocationOverview location={location} />
+    <LocationInfoGrid icons={pannaLocationsData.infoIcons} location={location} />
+    <LocationMapSection
+      background={pannaLocationsData.mapBackground}
+      location={location}
+    />
+  </div>
+</SiteLayout>
