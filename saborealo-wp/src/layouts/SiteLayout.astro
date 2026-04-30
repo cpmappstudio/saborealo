@@ -10,12 +10,19 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const currentPath = Astro.url.pathname;
 ---
 
 <Layout title={title} description={description}>
 	<div class="panna-site">
 		<a class="skip-link" href="#main-content">Skip to content</a>
-		<SiteHeader logo={pannaSiteData.logo} nav={pannaSiteData.nav} client:load />
+		<SiteHeader
+			logo={pannaSiteData.logo}
+			nav={pannaSiteData.nav}
+			currentPath={currentPath}
+			client:load
+			transition:persist
+		/>
 
 		<main id="main-content">
 			<slot />

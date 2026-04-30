@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { PannaDecoratedHeading } from "@/components/site/PannaDecoratedHeading"
 import {
   Card,
   CardContent,
@@ -143,18 +144,16 @@ function StoryBlock({ story }: { story: StoreCardsProps["story"] }) {
       <Card className="story-block">
         <CardHeader className="story-block__header">
           <CardTitle className="story-block__title-wrap">
-            <h2 className="story-block__title">{story.title}</h2>
+            <PannaDecoratedHeading
+              title={story.title}
+              underline={{
+                src: story.underline,
+                width: 500,
+                height: 54,
+              }}
+              className="story-block__heading"
+            />
           </CardTitle>
-          <img
-            src={story.underline}
-            alt=""
-            width={500}
-            height={54}
-            loading="lazy"
-            decoding="async"
-            className="story-block__underline"
-            aria-hidden="true"
-          />
         </CardHeader>
       </Card>
 

@@ -1,0 +1,25 @@
+.panna-decorated-heading {
+  min-width: 0;
+  color: var(--panna-decorated-heading-color, currentColor);
+  text-align: var(--panna-decorated-heading-align, center);
+}
+
+.panna-decorated-heading__title {
+  margin: 0;
+  color: inherit;
+  font-family: var(--font-display);
+  font-size: var(--panna-decorated-heading-size, 45px);
+  font-weight: var(--panna-decorated-heading-weight, 500);
+  line-height: var(--panna-decorated-heading-line-height, 1);
+  text-transform: uppercase;
+  text-wrap: balance;
+  letter-spacing: var(--panna-decorated-heading-letter-spacing, 1px);
+}
+
+.panna-decorated-heading__underline {
+  display: block;
+  width: var(--panna-decorated-heading-underline-width, 17%);
+  max-width: 100%;
+  height: auto;
+  margin: var(--panna-decorated-heading-underline-margin, 12px auto 0);
+}

@@ -192,7 +192,8 @@
 
 .site-header .main-nav__sub-link:hover,
 .site-header .main-nav__sub-link:focus,
-.site-header .main-nav__sub-link:focus-visible {
+.site-header .main-nav__sub-link:focus-visible,
+.site-header .main-nav__sub-link[data-active="true"] {
     color: var(--panna-white);
     background: var(--panna-red);
     outline: 0;
@@ -346,6 +347,12 @@
 .site-header__mobile-trigger:hover,
 .site-header__mobile-trigger:focus-visible {
     text-decoration: none;
+}
+
+.site-header__mobile-link[data-active="true"],
+.site-header__mobile-item[data-active="true"] .site-header__mobile-trigger,
+.site-header__mobile-sub-link[data-active="true"] {
+    color: var(--panna-red);
 }
 
 .site-header__mobile-link:focus-visible,

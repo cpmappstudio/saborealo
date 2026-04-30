@@ -4,6 +4,7 @@
 @import "shadcn/tailwind.css";
 @import "./components/site-header.css";
 @import "./components/panna-button.css";
+@import "./components/decorated-heading.css";
 @import "./components/carousel-dots.css";
 @import "./components/hero-carousel.css";
 @import "./components/menu-grid.css";
@@ -13,6 +14,7 @@
 @import "./components/menu-back.css";
 @import "./components/menu-category-page.css";
 @import "./components/menu-item-page.css";
+@import "./components/contact-page.css";
 @import "./components/site-footer.css";
 
 @font-face {

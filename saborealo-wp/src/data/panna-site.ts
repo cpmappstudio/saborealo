@@ -1,5 +1,12 @@
 import { pannaImage as image } from "@/data/panna-assets"
 
+const siteContactItems = [
+  { icon: "phone", label: "+1 (305) 97-PANNA" },
+  { icon: "phone", label: "+1 (305) 977-2662" },
+  { icon: "mail", label: "info@mypanna.com" },
+  { icon: "pin", label: "1130 NW 159th Dr, Miami FL 33169" },
+] as const
+
 export const pannaSiteData = {
   logo: {
     src: "/logo.png",
@@ -11,6 +18,7 @@ export const pannaSiteData = {
     {
       label: "MENU",
       href: "/menu/",
+      matchPath: "/menu/",
     },
     {
       label: "ABOUT US",
@@ -19,6 +27,7 @@ export const pannaSiteData = {
     {
       label: "LOCATIONS",
       href: "#",
+      matchPath: "/locations/",
       sub: [
         { label: "DORAL", href: "https://mypanna.com/locations/doral/" },
         { label: "ORLANDO", href: "https://mypanna.com/locations/orlando/" },
@@ -26,25 +35,21 @@ export const pannaSiteData = {
         { label: "WESTON TOWN CENTER", href: "https://mypanna.com/locations/weston-town-center/" },
       ],
     },
-    { label: "CONTACT", href: "https://mypanna.com/contact/" },
+    { label: "CONTACT", href: "/contact/", matchPath: "/contact/" },
     {
       label: "ONLINE ORDER",
       href: "https://mypanna.com/orders/",
     },
   ],
+  contact: siteContactItems,
   footer: {
-    contact: [
-      { icon: "phone", label: "+1 (305) 97-PANNA" },
-      { icon: "phone", label: "+1 (305) 977-2662" },
-      { icon: "mail", label: "info@mypanna.com" },
-      { icon: "pin", label: "1130 NW 159th Dr, Miami FL 33169" },
-    ],
+    contact: siteContactItems,
     quickLinks: [
       { label: "About Us", href: "https://mypanna.com/about-us/" },
       { label: "Our Menu", href: "/menu/" },
       { label: "Orders", href: "https://mypanna.com/orders/" },
       { label: "Job Application", href: "https://mypanna.com/job-application/" },
-      { label: "Contact", href: "https://mypanna.com/contact/" },
+      { label: "Contact", href: "/contact/" },
     ],
     storeLinks: [
       { label: "Doral", href: "https://mypanna.com/locations/doral/" },
