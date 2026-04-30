@@ -2,48 +2,108 @@
 import LocationInfoGrid from "@/components/locations/LocationInfoGrid.astro"
 import LocationMapSection from "@/components/locations/LocationMapSection.astro"
 import LocationOverview from "@/components/locations/LocationOverview.astro"
+import type { LocationDetail } from "@/components/locations/types"
 import PannaTextHero from "@/components/site/PannaTextHero.astro"
+import { pannaSectionAssets } from "@/data/panna-section-assets"
+import { emailToHref, phoneToHref } from "@/lib/contact-href"
+import { imageUrl } from "@/lib/sanity/image"
 import {
-  pannaLocationsData,
-  type PannaLocationPage,
-} from "@/data/panna-locations"
+	LOCATION_PAGE_QUERY,
+	LOCATION_SLUGS_QUERY,
+} from "@/lib/sanity/queries"
 import SiteLayout from "@/layouts/SiteLayout.astro"
+import { sanityClient } from "sanity:client"
 
-export function getStaticPaths() {
-  return pannaLocationsData.locations.map((location) => ({
-    params: { location: location.slug },
-    props: { location },
-  }))
+export async function getStaticPaths() {
+	const slugs = await sanityClient.fetch(LOCATION_SLUGS_QUERY)
+	return slugs
+		.filter((entry) => entry.slug)
+		.map((entry) => ({
+			params: { location: entry.slug as string },
+		}))
 }
 
-interface Props {
-  location: PannaLocationPage
+const { location: locationSlug } = Astro.params
+
+const data = await sanityClient.fetch(LOCATION_PAGE_QUERY, {
+	slug: locationSlug,
+})
+
+if (!data) {
+	return Astro.redirect("/")
 }
 
-const { location } = Astro.props
+const phrase = data.phrase ?? ""
+const phone = data.phone ?? ""
+const email = data.email ?? ""
+
+const location: LocationDetail = {
+	id: data._id,
+	slug: data.slug as string,
+	title: data.title ?? "",
+	phrase,
+	address: data.address ?? "",
+	phone,
+	phoneHref: phoneToHref(phone),
+	email,
+	emailHref: emailToHref(email),
+	openedDay: data.openedDay ?? "",
+	hours: (data.hours ?? []).map((hour) => ({
+		key: hour._key,
+		day: hour.day ?? "",
+		time: hour.time ?? "",
+	})),
+	guruHref: data.guruUrl ?? "",
+	badgeName: data.badgeName ?? "",
+	mapEmbedUrl: data.mapEmbedUrl ?? "",
+	mapTitle: data.mapTitle ?? "",
+	mapTagline: data.mapTagline ?? "",
+	overviewParagraphs: (data.overviewParagraphs ?? []).filter(
+		(p): p is string => typeof p === "string",
+	),
+	overviewHighlight: data.overviewHighlight ?? "",
+	overviewBullets: (data.overviewBullets ?? []).filter(
+		(b): b is string => typeof b === "string",
+	),
+	gallery: (data.gallery ?? [])
+		.filter((image) => image && image.asset)
+		.map((image) => ({
+			key: image._key,
+			src: imageUrl(image, { width: 1080, height: 800 }),
+			alt: image.alt ?? "",
+			width: 1080,
+			height: 800,
+		})),
+}
 ---
 
-<SiteLayout title={location.metaTitle} description={location.metaDescription}>
-  <div class="location-page">
-    <PannaTextHero
-      background={pannaLocationsData.hero.background}
-      title={location.title}
-      titleId="location-title"
-    />
+<SiteLayout
+	title={data.metaTitle ?? `${location.title} | PANNA New Latino Food`}
+	description={data.metaDescription ?? location.phrase}
+>
+	<div class="location-page">
+		<PannaTextHero
+			background={pannaSectionAssets.location.hero.background}
+			title={location.title}
+			titleId="location-title"
+		/>
 
-    <section class="location-phrase" aria-labelledby="location-phrase-title">
-      <div class="panna-shell">
-        <h2 id="location-phrase-title" class="section-title">
-          {location.phrase}
-        </h2>
-      </div>
-    </section>
+		<section class="location-phrase" aria-labelledby="location-phrase-title">
+			<div class="panna-shell">
+				<h2 id="location-phrase-title" class="section-title">
+					{location.phrase}
+				</h2>
+			</div>
+		</section>
 
-    <LocationOverview location={location} />
-    <LocationInfoGrid icons={pannaLocationsData.infoIcons} location={location} />
-    <LocationMapSection
-      background={pannaLocationsData.mapBackground}
-      location={location}
-    />
-  </div>
+		<LocationOverview location={location} />
+		<LocationInfoGrid
+			icons={pannaSectionAssets.location.infoIcons}
+			location={location}
+		/>
+		<LocationMapSection
+			background={pannaSectionAssets.location.mapBackground}
+			location={location}
+		/>
+	</div>
 </SiteLayout>

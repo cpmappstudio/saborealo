@@ -1,13 +1,24 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import type { PannaMenuProduct } from "@/data/panna-menu"
+
+export type MenuProductCard = {
+  id: string
+  slug: string
+  title: string
+  image: { src: string; alt: string }
+}
 
 type MenuProductGridProps = {
   title: string
-  products: readonly PannaMenuProduct[]
+  categorySlug: string
+  products: readonly MenuProductCard[]
 }
 
-export function MenuProductGrid({ title, products }: MenuProductGridProps) {
+export function MenuProductGrid({
+  title,
+  categorySlug,
+  products,
+}: MenuProductGridProps) {
   if (products.length === 0) {
     return null
   }
@@ -23,33 +34,38 @@ export function MenuProductGrid({ title, products }: MenuProductGridProps) {
         </h2>
 
         <ul className="menu-product-grid">
-          {products.map((product) => (
-            <li className="menu-product-item" key={product.href}>
-              <Card className="menu-product-card">
-                <img
-                  className="menu-product-card__image"
-                  src={product.image}
-                  alt={product.imageAlt}
-                  width={400}
-                  height={400}
-                  loading="lazy"
-                  decoding="async"
-                />
+          {products.map((product) => {
+            const href = `/menu/${categorySlug}/${product.slug}/`
+            return (
+              <li className="menu-product-item" key={product.id}>
+                <Card className="menu-product-card">
+                  <img
+                    className="menu-product-card__image"
+                    src={product.image.src}
+                    alt={product.image.alt}
+                    width={400}
+                    height={400}
+                    loading="lazy"
+                    decoding="async"
+                  />
 
-                <CardHeader className="menu-product-card__header">
-                  <CardTitle className="menu-product-card__title-wrap">
-                    <h3 className="menu-product-card__title">{product.title}</h3>
-                  </CardTitle>
-                </CardHeader>
+                  <CardHeader className="menu-product-card__header">
+                    <CardTitle className="menu-product-card__title-wrap">
+                      <h3 className="menu-product-card__title">
+                        {product.title}
+                      </h3>
+                    </CardTitle>
+                  </CardHeader>
 
-                <CardFooter className="menu-product-card__footer">
-                  <Button className="btn menu-product-card__button" asChild>
-                    <a href={product.href}>VIEW DETAILS</a>
-                  </Button>
-                </CardFooter>
-              </Card>
-            </li>
-          ))}
+                  <CardFooter className="menu-product-card__footer">
+                    <Button className="btn menu-product-card__button" asChild>
+                      <a href={href}>VIEW DETAILS</a>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </li>
+            )
+          })}
         </ul>
       </div>
     </section>

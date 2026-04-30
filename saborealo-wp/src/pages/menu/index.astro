@@ -1,8 +1,28 @@
 ---
-import MenuHero from "@/components/menu/MenuHero.astro";
-import { MenuCategoryGrid } from "@/components/menu/MenuCategoryGrid";
-import { pannaMenuData } from "@/data/panna-menu";
-import SiteLayout from "@/layouts/SiteLayout.astro";
+import MenuHero from "@/components/menu/MenuHero.astro"
+import {
+	MenuCategoryGrid,
+	type MenuCategoryCard,
+} from "@/components/menu/MenuCategoryGrid"
+import { pannaSectionAssets } from "@/data/panna-section-assets"
+import { imageUrl } from "@/lib/sanity/image"
+import { MENU_CATEGORIES_QUERY } from "@/lib/sanity/queries"
+import SiteLayout from "@/layouts/SiteLayout.astro"
+import { sanityClient } from "sanity:client"
+
+const categories = await sanityClient.fetch(MENU_CATEGORIES_QUERY)
+
+const cards: MenuCategoryCard[] = categories
+	.filter((category) => category.slug && category.image)
+	.map((category) => ({
+		id: category._id,
+		slug: category.slug as string,
+		label: category.label ?? "",
+		image: {
+			src: imageUrl(category.image!, { width: 800, height: 800 }),
+			alt: category.image?.alt ?? category.label ?? "",
+		},
+	}))
 ---
 
 <SiteLayout
@@ -10,7 +30,7 @@ import SiteLayout from "@/layouts/SiteLayout.astro";
 	description="Explore PANNA menu categories, from arepas and cachapas to brunch, burgers, desserts, coffee, juices, and more."
 >
 	<div class="menu-page">
-		<MenuHero hero={pannaMenuData.hero} />
-		<MenuCategoryGrid categories={pannaMenuData.categories} />
+		<MenuHero hero={pannaSectionAssets.menu.hero} />
+		<MenuCategoryGrid categories={cards} />
 	</div>
 </SiteLayout>

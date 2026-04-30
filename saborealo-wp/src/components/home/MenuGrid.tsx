@@ -7,13 +7,19 @@ import {
   CarouselItem,
   useCarousel,
 } from "@/components/ui/carousel"
-import type { PannaHomeData } from "@/data/panna-home"
 
-type MenuGridProps = {
-  rows: PannaHomeData["menuRows"]
+export type HomeMenuCategory = {
+  id: string
+  slug: string
+  label: string
+  icon: { src: string; alt: string }
+  homeRow: "top" | "bottom"
 }
 
-type MenuCategory = PannaHomeData["menuRows"][number][number]
+type MenuGridProps = {
+  categories: readonly HomeMenuCategory[]
+}
+
 type ChevronDirection = "prev" | "next"
 
 const MENU_CAROUSEL_OPTIONS = {
@@ -38,20 +44,24 @@ const CAROUSEL_ARROW_LABELS: Record<ChevronDirection, string> = {
   next: "Next menu categories",
 }
 
-export function MenuGrid({ rows }: MenuGridProps) {
-  const visibleRows = rows.filter((items) => items.length > 0)
+const ROW_ORDER = ["top", "bottom"] as const
 
-  if (visibleRows.length === 0) {
+export function MenuGrid({ categories }: MenuGridProps) {
+  const rows = ROW_ORDER.map((row) =>
+    categories.filter((category) => category.homeRow === row),
+  ).filter((row) => row.length > 0)
+
+  if (rows.length === 0) {
     return null
   }
 
   return (
     <section className="menu-section" aria-label="Menu categories">
       <div className="panna-shell">
-        {visibleRows.map((items, index) => (
+        {rows.map((items, index) => (
           <MenuCarousel
             items={items}
-            key={index}
+            key={items[0].homeRow}
             label={`Menu category carousel ${index + 1}`}
           />
         ))}
@@ -64,7 +74,7 @@ function MenuCarousel({
   items,
   label,
 }: {
-  items: readonly MenuCategory[]
+  items: readonly HomeMenuCategory[]
   label: string
 }) {
   return (
@@ -77,13 +87,13 @@ function MenuCarousel({
 
       <CarouselContent className="menu-carousel__track" aria-live="polite">
         {items.map((item) => (
-          <CarouselItem className="menu-carousel__item" key={item.href}>
+          <CarouselItem className="menu-carousel__item" key={item.id}>
             <Button variant="ghost" className="menu-chip" asChild>
-              <a href={item.href}>
+              <a href={`/menu/${item.slug}/`}>
                 <img
                   className="menu-chip__image"
-                  src={item.image}
-                  alt=""
+                  src={item.icon.src}
+                  alt={item.icon.alt}
                   width={90}
                   height={90}
                   loading="lazy"

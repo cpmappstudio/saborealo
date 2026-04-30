@@ -1,7 +1,7 @@
 ---
 import { ContactPage } from "@/components/contact/ContactPage";
 import { pannaContactData } from "@/data/panna-contact";
-import { pannaSiteData } from "@/data/panna-site";
+import { pannaSiteContact } from "@/data/panna-site";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 ---
 
@@ -11,6 +11,6 @@ import SiteLayout from "@/layouts/SiteLayout.astro";
 >
     <ContactPage
         contact={pannaContactData}
-        contactItems={pannaSiteData.contact}
+        contactItems={pannaSiteContact}
     />
 </SiteLayout>

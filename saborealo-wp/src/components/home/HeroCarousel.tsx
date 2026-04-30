@@ -6,12 +6,16 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel"
-import type { PannaHomeData } from "@/data/panna-home"
 import { useCarouselAutoplay } from "@/hooks/use-carousel-autoplay"
 
 import { CarouselDots } from "./CarouselDots"
 
-type HeroSlide = PannaHomeData["heroSlides"][number]
+export type HeroSlide = {
+  id: string
+  alt: string
+  desktop: string
+  mobile: string
+}
 
 type HeroCarouselProps = {
   slides: readonly HeroSlide[]
@@ -35,7 +39,7 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
         >
           <CarouselContent className="hero__track">
             {slides.map((slide, index) => (
-              <CarouselItem key={slide.desktop} className="hero__slide">
+              <CarouselItem key={slide.id} className="hero__slide">
                 <picture className="hero__picture-element">
                   <source media="(max-width: 767px)" srcSet={slide.mobile} />
                   <img

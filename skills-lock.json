@@ -7,11 +7,41 @@
       "skillPath": "skills/astro/SKILL.md",
       "computedHash": "ebefe26b231d32379c14e41a46c2de7b4b0184543bedab7febdabe4fb21fba4e"
     },
+    "content-modeling-best-practices": {
+      "source": "sanity-io/agent-toolkit",
+      "sourceType": "github",
+      "skillPath": "skills/content-modeling-best-practices/SKILL.md",
+      "computedHash": "9f0c62274cf8ccf41dd32fc2f2629f4c9a8e5a920826f30c2eb226d7e796b031"
+    },
+    "dial-your-context": {
+      "source": "sanity-io/agent-context",
+      "sourceType": "github",
+      "skillPath": "skills/dial-your-context/SKILL.md",
+      "computedHash": "6457172cf80695a7563116847f68fa64d1bf48b77cac6a850b964e5dacdb5241"
+    },
     "frontend-design": {
       "source": "anthropics/skills",
       "sourceType": "github",
       "skillPath": "skills/frontend-design/SKILL.md",
       "computedHash": "063a0e6448123cd359ad0044cc46b0e490cc7964d45ef4bb9fd842bd2ffbca67"
+    },
+    "pnpm": {
+      "source": "sanity-io/next-sanity",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/pnpm/SKILL.md",
+      "computedHash": "755a02251e7e24534d8e78ea50bcdb426cd82e7147d2e866d64dd21716c75dd9"
+    },
+    "sanity-best-practices": {
+      "source": "sanity-io/agent-toolkit",
+      "sourceType": "github",
+      "skillPath": "skills/sanity-best-practices/SKILL.md",
+      "computedHash": "cc5b4bd65ddd554c2ba2faf14f11858e59b48f6e600c578551cc58cc81b3e084"
+    },
+    "seo-aeo-best-practices": {
+      "source": "sanity-io/agent-toolkit",
+      "sourceType": "github",
+      "skillPath": "skills/seo-aeo-best-practices/SKILL.md",
+      "computedHash": "edb99db85683ff99678fcb1bebc3a5653c3ea927eea9ee2534f19be86c7b8b81"
     },
     "shadcn": {
       "source": "shadcn/ui",

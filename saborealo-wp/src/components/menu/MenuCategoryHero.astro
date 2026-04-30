@@ -1,17 +1,16 @@
 ---
-import PannaTextHero from "@/components/site/PannaTextHero.astro";
-import type { PannaMenuCategoryPage } from "@/data/panna-menu";
+import PannaTextHero from "@/components/site/PannaTextHero.astro"
 
 interface Props {
-	category: PannaMenuCategoryPage;
-	background: string;
+	title: string
+	background: string
 }
 
-const { category, background } = Astro.props;
+const { title, background } = Astro.props
 ---
 
 <PannaTextHero
 	background={background}
-	title={category.title}
+	title={title}
 	titleId="menu-category-title"
 />

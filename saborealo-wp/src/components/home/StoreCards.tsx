@@ -12,12 +12,23 @@ import {
 } from "@/components/ui/card"
 import type { PannaHomeData } from "@/data/panna-home"
 
+export type HomeStore = {
+  id: string
+  slug: string
+  name: string
+  badgeName: string
+  guruHref: string
+  image: { src: string; alt: string }
+  address: string
+  phone: string
+}
+
 type StoreCardsProps = {
-  stores: PannaHomeData["stores"]
+  stores: readonly HomeStore[]
   story: PannaHomeData["aboutStory"]
 }
 
-type Store = PannaHomeData["stores"][number]
+const STORE_CTA_LABEL = "MORE DETAILS"
 
 export function StoreCards({ stores, story }: StoreCardsProps) {
   return (
@@ -36,7 +47,7 @@ export function StoreCards({ stores, story }: StoreCardsProps) {
         <div className="stores-section__inner panna-shell">
           <div className="store-grid">
             {stores.map((store) => (
-              <StoreCard key={store.name} store={store} />
+              <StoreCard key={store.id} store={store} />
             ))}
             <StoryBlock story={story} />
           </div>
@@ -46,13 +57,13 @@ export function StoreCards({ stores, story }: StoreCardsProps) {
   )
 }
 
-function StoreCard({ store }: { store: Store }) {
+function StoreCard({ store }: { store: HomeStore }) {
   return (
     <Card className="store-card">
       <div className="store-card__media">
         <img
-          src={store.image}
-          alt={`PANNA ${store.name}`}
+          src={store.image.src}
+          alt={store.image.alt}
           width={768}
           height={384}
           loading="lazy"
@@ -82,7 +93,7 @@ function StoreCard({ store }: { store: Store }) {
 
       <CardFooter className="store-card__footer">
         <Button className="btn" asChild>
-          <a href={store.href}>{store.cta}</a>
+          <a href={`/locations/${store.slug}/`}>{STORE_CTA_LABEL}</a>
         </Button>
       </CardFooter>
     </Card>
