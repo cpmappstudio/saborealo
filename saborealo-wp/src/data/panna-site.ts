@@ -23,7 +23,8 @@ export const pannaSiteData = {
     },
     {
       label: "ABOUT US",
-      href: "https://mypanna.com/about-us/",
+      href: "/about-us/",
+      matchPath: "/about-us/",
     },
     {
       label: "LOCATIONS",
@@ -48,7 +49,7 @@ export const pannaSiteData = {
   footer: {
     contact: siteContactItems,
     quickLinks: [
-      { label: "About Us", href: "https://mypanna.com/about-us/" },
+      { label: "About Us", href: "/about-us/", matchPath: "/about-us/" },
       { label: "Our Menu", href: "/menu/" },
       {
         label: "Orders",

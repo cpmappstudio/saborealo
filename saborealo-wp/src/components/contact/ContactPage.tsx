@@ -5,6 +5,7 @@ import {
   PannaTextareaField,
 } from "@/components/site/PannaFormFields"
 import { PannaPageIntro } from "@/components/site/PannaPageIntro"
+import { PannaSectionNotch } from "@/components/site/PannaSectionNotch"
 import { SiteIcon } from "@/components/site/SiteIcon"
 import { Button } from "@/components/ui/button"
 import { FieldGroup, FieldLegend, FieldSet } from "@/components/ui/field"
@@ -42,17 +43,7 @@ export function ContactPage({ contact, contactItems }: ContactPageProps) {
         style={bandStyle}
         aria-labelledby="contact-band-title"
       >
-        <svg
-          className="contact-band__notch"
-          viewBox="0 0 1000 100"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
-            fill="currentColor"
-          />
-        </svg>
+        <PannaSectionNotch className="contact-band__notch" />
 
         <div className="contact-band__inner panna-shell">
           <div className="contact-band__content">

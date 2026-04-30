@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { PannaDecoratedHeading } from "@/components/site/PannaDecoratedHeading"
+import { PannaSectionNotch } from "@/components/site/PannaSectionNotch"
 import {
   Card,
   CardContent,
@@ -30,17 +31,7 @@ export function StoreCards({ stores, story }: StoreCardsProps) {
       </section>
 
       <section className="stores-section" aria-label="PANNA locations">
-        <svg
-          className="stores-section__notch"
-          viewBox="0 0 1000 100"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M500,98.9L0,6.1V0h1000v6.1L500,98.9z"
-            fill="currentColor"
-          />
-        </svg>
+        <PannaSectionNotch className="stores-section__notch" />
 
         <div className="stores-section__inner panna-shell">
           <div className="store-grid">
