@@ -37,9 +37,9 @@ export const pannaContactData = {
       width: 361,
       height: 44,
     },
-    copy: "We are here to serve you and hear about any feedback that can help us to improve our service.",
+    copy: "We are here to serve you and hear any feedback that helps us keep our food and service at its best.",
     officeHours:
-      "Our Corporate office hours are Monday thru Friday from 9 a.m. to 5 p.m. EST.",
+      "",
   },
   form: {
     name: "contact-us",
@@ -112,10 +112,10 @@ export const pannaContactData = {
   contactBand: {
     title: "CONTACT US",
     description:
-      "If you need to contact a specific PANNA restaurant, go to the menu “Locations” and scroll down to find all PANNA location’s contact information.",
-    background: image("2024/10/Graffiti-Negro.webp"),
+      "",
+    background: "#000000",
     mascot: {
-      src: image("2024/10/CHEFF.webp"),
+      src: "/images/stores/puerto-rico-flag.png",
       width: 414,
       height: 552,
     },

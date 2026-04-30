@@ -21,7 +21,7 @@ type AboutStoryColumn = {
 
 export const pannaAboutData = {
   intro: {
-    title: "A taste to remember, the place you love!",
+    title: "Authentic Puerto Rican flavor, right here in Kissimmee!",
     underline: {
       src: image("2024/10/MANCHA.png"),
       width: 361,
@@ -29,50 +29,51 @@ export const pannaAboutData = {
     },
   },
   story: {
-    title: "About PANNA",
-    background: image("2024/10/Graffiti-Negro.webp"),
+    title: "About Saborealo",
+    background: "#000000",
     columns: [
       {
-        id: "family-business",
+        id: "our-story",
         image: {
-          src: image("2024/10/PANNA-CAFE.webp"),
-          alt: "PANNA cafe",
+          src: "/images/stores/saborealo-matador-store.jpg",
+          alt: "Saborealo Bakery at Matador",
           width: 601,
           height: 400,
         },
         sections: [
           {
-            id: "family-business",
-            title: "A family business since 2000",
+            id: "our-story",
+            title: "Born from the flavors of Puerto Rico",
             paragraphs: [
-              "PANNA’s history began in 2000, when Mauricio and Beatriz Meneses opened a latin bakery on Collins Avenue in Miami Beach, FL.",
-              "After a few years of operation, they discovered that PANNA was born to create not only America’s best cheese stick “Tequeños” and ham & cheese filled bread “Cachitos” but exceptional arepas, sandwiches and salads as well. All served in inviting place for families and friends.",
-              "Today, PANNA is a vertically integrated organization , operating restaurants, a factory producing the best latin pastries for both PANNA and third-party partners plus, a distribution center.",
+              "Saborealo Bakery was born with one mission: bring the warmth, tradition, and bold flavors of Puerto Rico to Kissimmee, FL.",
+              "Located at 926 Cypress Pkwy, our bakery is a place where the community gathers for breakfast sandwiches, fresh coffee, mofongo, frituras, pastries, and hot plates — all made with heart.",
+              "Every dish carries the spirit of Puerto Rican home cooking, the kind that makes you feel welcome the moment you walk in.",
             ],
           },
         ],
       },
       {
-        id: "quality",
+        id: "chef-noel",
         image: {
-          src: image("2024/10/MAURICIO.webp"),
-          alt: "Mauricio Meneses",
+          src: "/images/stores/chef-noel.jpg",
+          alt: "Saborealo Bakery kitchen",
           width: 601,
           height: 400,
         },
         sections: [
           {
-            id: "quality",
-            title: "Flavor, Modern, Quality and Fresh",
+            id: "chef-noel",
+            title: "The hand behind the flavor",
             paragraphs: [
-              "PANNA delivers authentic latin food with exceptional customer service. Our products combine Latin American flavors with a focus on fresh, high quality ingredients. Our friendly and amazing team members, create a unique and memorable experience, leaving customers with a taste to remember and place they love.",
+              "Saborealo is led by Chef Noel, originally from Aibonito, Puerto Rico — a town known for its festivals, its flowers, and its food.",
+              "Chef Noel brings that tradition to every plate: fresh ingredients, authentic recipes, and the kind of attention to detail that turns a meal into a memory.",
             ],
           },
           {
-            id: "meaning",
-            title: "What does PANNA means?",
+            id: "community",
+            title: "Proudly boricua, proudly local",
             paragraphs: [
-              "In many Latin American countries, a “pana” is a friend, someone you can trust, someone you like to share and spend time with. So, we just added an extra “n” to our name to make it “double friendly”.",
+              "More than a bakery, Saborealo is a community hub — vibrant, welcoming, and always full of sabor. Whether you stop in for a quick bite or sit down for a full plate, you leave with a taste you won't forget.",
             ],
           },
         ],
