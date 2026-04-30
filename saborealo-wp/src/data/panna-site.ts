@@ -1,7 +1,12 @@
 import { pannaImage as image } from "@/data/panna-assets"
 
 export const pannaSiteData = {
-  logo: image("2024/10/PANNAnewlatinofood.png"),
+  logo: {
+    src: "/logo.png",
+    width: 1024,
+    height: 477,
+    alt: "PANNA New Latino Food",
+  },
   nav: [
     {
       label: "MENU",

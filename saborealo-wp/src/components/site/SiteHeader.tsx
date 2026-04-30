@@ -33,6 +33,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { SiteLogo } from "@/components/site/SiteLogo";
 import type { PannaSiteData } from "@/data/panna-site";
 import { cn } from "@/lib/utils";
 
@@ -51,14 +52,7 @@ export function SiteHeader({ logo, nav }: SiteHeaderProps) {
   return (
     <header className="site-header">
       <div className="site-header__inner panna-shell">
-        <a href="/" className="site-header__logo" aria-label="PANNA home">
-          <img
-            src={logo}
-            alt="PANNA New Latino Food"
-            width={1541}
-            height={718}
-          />
-        </a>
+        <SiteLogo logo={logo} href="/" linkClassName="site-header__logo" />
 
         <div className="site-header__nav-wrap site-header__desktop-nav">
           <DesktopNavigation nav={nav} />
@@ -152,7 +146,7 @@ function MobileNavigation({ logo, nav }: SiteHeaderProps) {
       <SheetContent side="left" className="site-header__sheet">
         <SheetHeader>
           <SheetTitle className="site-header__sheet-title">
-            <img src={logo} alt="" width={1541} height={718} />
+            <SiteLogo logo={logo} decorative />
             <span>Navigation</span>
           </SheetTitle>
           <SheetDescription className="site-header__sheet-description">

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { SiteLogo } from "@/components/site/SiteLogo"
 import type { PannaSiteData } from "@/data/panna-site"
 import type { ReactNode } from "react"
 
@@ -48,17 +49,12 @@ export function SiteFooter({ logo, footer }: SiteFooterProps) {
     <footer className="site-footer">
       <div className="site-footer__main">
         <div className="panna-shell">
-          <a href="/" aria-label="PANNA home">
-            <img
-              className="site-footer__logo"
-              src={logo}
-              alt="PANNA New Latino Food"
-              width={1541}
-              height={718}
-              loading="lazy"
-              decoding="async"
-            />
-          </a>
+          <SiteLogo
+            logo={logo}
+            href="/"
+            imageClassName="site-footer__logo"
+            loading="lazy"
+          />
 
           <div className="site-footer__grid">
             <FooterColumn title="PANNA GROUP">
