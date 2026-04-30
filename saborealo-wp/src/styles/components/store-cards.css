@@ -85,100 +85,11 @@
   border-radius: 15px;
 }
 
-.store-guru-badge[data-slot="badge"] {
+.store-card__badge[data-slot="badge"] {
   position: absolute;
   top: -30px;
   right: -30px;
   z-index: 2;
-  display: block;
-  width: 180px;
-  height: auto;
-  min-height: 130px;
-  padding: 18px 10px 10px;
-  overflow: hidden;
-  color: var(--panna-white);
-  text-align: center;
-  white-space: normal;
-  cursor: pointer;
-  background: linear-gradient(299.42deg, #000 2.86%, #666 153.45%);
-  border: 0;
-  border-radius: 10px;
-  font: 12px/14px "Montserrat Bold", "Helvetica Neue", Arial, sans-serif;
-}
-
-.store-guru-badge[data-slot="badge"]::before {
-  position: absolute;
-  inset: 6px;
-  display: block;
-  content: "";
-  background:
-    linear-gradient(299.42deg, #000 2.86%, #666 153.45%) padding-box,
-    linear-gradient(45deg, #EFD364, #884500) border-box;
-  border: 2px solid transparent;
-  border-radius: 10px;
-}
-
-.store-guru-badge[data-slot="badge"]:hover,
-.store-guru-badge[data-slot="badge"]:focus-visible {
-  color: var(--panna-white);
-  background: linear-gradient(299.42deg, #000 2.86%, #777 153.45%);
-  outline: 0;
-  box-shadow: 0 0 0 2px color-mix(in srgb, #EFD364 45%, transparent);
-}
-
-.store-guru-badge__place,
-.store-guru-badge__source,
-.store-guru-badge__year,
-.store-guru-badge__gem,
-.store-guru-badge__divider,
-.store-guru-badge__center {
-  position: relative;
-  z-index: 1;
-  display: block;
-}
-
-.store-guru-badge__place,
-.store-guru-badge__source {
-  color: var(--panna-white);
-  text-decoration: none;
-}
-
-.store-guru-badge__gem {
-  width: 102px;
-  height: 18px;
-  margin: 9px auto 0;
-}
-
-.store-guru-badge__divider {
-  width: 102px;
-  height: 12px;
-  margin: 4px auto 2px;
-}
-
-.store-guru-badge__gem svg,
-.store-guru-badge__divider svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.store-guru-badge__center {
-  margin-top: 0;
-  color: var(--panna-white);
-  font: 12px/1 "Times New Roman", Georgia, serif;
-  text-transform: uppercase;
-}
-
-.store-guru-badge__source {
-  font-family: "Montserrat Regular", "Helvetica Neue", Arial, sans-serif;
-  font-size: 10px;
-  line-height: 12px;
-}
-
-.store-guru-badge__year {
-  margin: 0;
-  color: var(--panna-white);
-  font: inherit;
 }
 
 .store-card__header[data-slot="card-header"] {
@@ -308,7 +219,7 @@
     padding: 20px;
   }
 
-  .store-guru-badge[data-slot="badge"] {
+  .store-card__badge[data-slot="badge"] {
     top: -5px;
     right: -5px;
   }
@@ -366,7 +277,7 @@
     display: none;
   }
 
-  .store-guru-badge[data-slot="badge"] {
+  .store-card__badge[data-slot="badge"] {
     top: 18px;
     right: auto;
     left: 50%;

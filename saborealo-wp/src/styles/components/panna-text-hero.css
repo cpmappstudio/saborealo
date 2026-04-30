@@ -1,0 +1,42 @@
+.panna-text-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  padding-bottom: 80px;
+  background-color: var(--panna-cream);
+  background-image: var(--panna-text-hero-background);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.panna-text-hero__inner {
+  display: grid;
+  place-items: center;
+}
+
+.panna-text-hero__title {
+  max-width: 100%;
+  margin: 0;
+  color: var(--panna-white);
+  font-family: var(--font-display);
+  font-size: 45px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 767px) {
+  .panna-text-hero {
+    padding: 42px 24px 70px;
+  }
+
+  .panna-text-hero__title {
+    font-size: 40px;
+  }
+}

@@ -4,9 +4,11 @@
 @import "shadcn/tailwind.css";
 @import "./components/site-header.css";
 @import "./components/panna-button.css";
+@import "./components/panna-text-hero.css";
 @import "./components/decorated-heading.css";
 @import "./components/page-intro.css";
 @import "./components/panna-form.css";
+@import "./components/restaurant-guru-badge.css";
 @import "./components/carousel-dots.css";
 @import "./components/hero-carousel.css";
 @import "./components/menu-grid.css";
@@ -16,6 +18,8 @@
 @import "./components/menu-back.css";
 @import "./components/menu-category-page.css";
 @import "./components/menu-item-page.css";
+@import "./components/location-page.css";
+@import "./components/about-page.css";
 @import "./components/contact-page.css";
 @import "./components/job-application-page.css";
 @import "./components/site-footer.css";

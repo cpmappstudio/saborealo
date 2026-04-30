@@ -1,5 +1,6 @@
-import { pannaImage as image } from "@/data/panna-assets";
-import { PANNA_ORDER_URL } from "@/data/panna-links";
+import { pannaImage as image } from "@/data/panna-assets"
+import { pannaLocationStoreCards } from "@/data/panna-locations"
+import { PANNA_ORDER_URL } from "@/data/panna-links"
 
 const menuRowItem = (slug: string, label: string, imagePath: string) => ({
   label,
@@ -149,48 +150,7 @@ export const pannaHomeData = {
       href: "https://mypanna.com/giftcards/",
     },
   ],
-  stores: [
-    {
-      name: "DORAL",
-      badgeName: "PANNA Doral",
-      guruHref: "https://restaurantguru.com/Panna-Doral-Doral",
-      image: image("2024/10/DORAL-768x384.webp"),
-      address: "3887 NW 107th AVE. Suite #101 Doral, 33178",
-      phone: "(305) 614-0202",
-      cta: "MORE DETAILS",
-      href: "https://mypanna.com/locations/doral/",
-    },
-    {
-      name: "ORLANDO",
-      badgeName: "PANNA Orlando",
-      guruHref: "https://restaurantguru.com/PANNA-Orlando",
-      image: image("2024/10/PANNA-ORLANDO-768x384.webp"),
-      address: "13526 Village Park Dr #200 Orlando, FL 32837",
-      phone: "(407) 270-7891",
-      cta: "ORDER NOW",
-      href: "https://www.getsauce.com/order/panna-orlando/menu",
-    },
-    {
-      name: "WESTON ROAD",
-      badgeName: "PANNA Weston Road",
-      guruHref: "https://restaurantguru.com/Panna-Cafe-Weston-Weston",
-      image: image("2024/10/WESTON-ROAD-768x384.webp"),
-      address: "2620 Weston Rd, Weston, FL 33331",
-      phone: "(954) 618-4017",
-      cta: "MORE DETAILS",
-      href: "https://mypanna.com/locations/weston-road/",
-    },
-    {
-      name: "WESTON TOWN CENTER",
-      badgeName: "PANNA Weston Town Center",
-      guruHref: "https://restaurantguru.com/PANNA-Weston-Town-Center-Weston",
-      image: image("2024/10/WESTON-768x384.webp"),
-      address: "1731 Main Street Weston, FL 33326",
-      phone: "(954) 372-1944",
-      cta: "MORE DETAILS",
-      href: "https://mypanna.com/locations/weston-town-center/",
-    },
-  ],
+  stores: pannaLocationStoreCards,
   aboutStory: {
     title: "Authentic Puerto Rican Flavor, Fresh Every Day",
     underline: image("2024/10/TRAZO@2x.webp"),

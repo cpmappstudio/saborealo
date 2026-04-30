@@ -7,6 +7,7 @@ import type { CarouselApi } from "@/components/ui/carousel"
 export function useCarouselAutoplay(slideCount: number, intervalMs = 5000) {
   const [api, setApi] = React.useState<CarouselApi>()
   const [selectedIndex, setSelectedIndex] = React.useState(0)
+  const [isPaused, setIsPaused] = React.useState(false)
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false)
 
   React.useEffect(() => {
@@ -41,14 +42,22 @@ export function useCarouselAutoplay(slideCount: number, intervalMs = 5000) {
   }, [])
 
   React.useEffect(() => {
-    if (!api || slideCount < 2 || prefersReducedMotion) return
+    if (!api || slideCount < 2 || prefersReducedMotion || isPaused) return
 
     const timer = window.setInterval(() => {
       api.scrollNext()
     }, intervalMs)
 
     return () => window.clearInterval(timer)
-  }, [api, intervalMs, prefersReducedMotion, slideCount])
+  }, [api, intervalMs, isPaused, prefersReducedMotion, slideCount])
+
+  const pause = React.useCallback(() => {
+    setIsPaused(true)
+  }, [])
+
+  const resume = React.useCallback(() => {
+    setIsPaused(false)
+  }, [])
 
   const scrollTo = React.useCallback(
     (index: number) => {
@@ -57,5 +66,5 @@ export function useCarouselAutoplay(slideCount: number, intervalMs = 5000) {
     [api]
   )
 
-  return { selectedIndex, setApi, scrollTo }
+  return { pause, resume, selectedIndex, setApi, scrollTo }
 }

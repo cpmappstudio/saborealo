@@ -2,39 +2,6 @@
   background: var(--panna-cream);
 }
 
-.menu-category-hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 50px;
-  padding-bottom: 80px;
-  background-color: var(--panna-cream);
-  background-image: var(--menu-category-hero-background);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.menu-category-hero__inner {
-  display: grid;
-  place-items: center;
-}
-
-.menu-category-hero__title {
-  max-width: 100%;
-  margin: 0;
-  color: var(--panna-white);
-  font-family: var(--font-display);
-  font-size: 45px;
-  font-weight: 500;
-  line-height: 1;
-  text-align: center;
-  text-transform: uppercase;
-  text-wrap: balance;
-  overflow-wrap: break-word;
-  letter-spacing: 0.3px;
-}
-
 .menu-category-products {
   padding: 50px 0 0;
   background: var(--panna-cream);

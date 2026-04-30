@@ -1,0 +1,22 @@
+---
+interface Props {
+  background: string
+  title: string
+  titleId: string
+  class?: string
+}
+
+const { background, title, titleId, class: className } = Astro.props
+---
+
+<section
+  class:list={["panna-text-hero", className]}
+  style={`--panna-text-hero-background: url("${background}")`}
+  aria-labelledby={titleId}
+>
+  <div class="panna-shell panna-text-hero__inner">
+    <h1 id={titleId} class="panna-text-hero__title">
+      {title}
+    </h1>
+  </div>
+</section>

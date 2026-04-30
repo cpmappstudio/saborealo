@@ -1,0 +1,12 @@
+---
+import { AboutPage } from "@/components/about/AboutPage";
+import { pannaAboutData } from "@/data/panna-about";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+---
+
+<SiteLayout
+    title="About Us - PANNA New Latino Food"
+    description="Learn about PANNA New Latino Food, a family business serving Latin flavors, fresh ingredients, and a place guests love since 2000."
+>
+    <AboutPage about={pannaAboutData} />
+</SiteLayout>
