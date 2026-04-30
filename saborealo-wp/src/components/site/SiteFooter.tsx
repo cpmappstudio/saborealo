@@ -2,18 +2,24 @@ import { Button } from "@/components/ui/button"
 import { SiteLogo } from "@/components/site/SiteLogo"
 import { SiteIcon } from "@/components/site/SiteIcon"
 import type { PannaSiteData } from "@/data/panna-site"
+import {
+  isActiveLink,
+  isCurrentPage,
+  type MatchableLink,
+} from "@/lib/site-navigation"
 import type { ReactNode } from "react"
 
 type SiteFooterProps = {
   logo: PannaSiteData["logo"]
   footer: PannaSiteData["footer"]
+  currentPath: string
 }
 
 type FooterData = SiteFooterProps["footer"]
 type FooterContactItem = FooterData["contact"][number]
-type FooterLink = { label: string; href: string }
+type FooterLink = MatchableLink & { label: string }
 
-export function SiteFooter({ logo, footer }: SiteFooterProps) {
+export function SiteFooter({ logo, footer, currentPath }: SiteFooterProps) {
   return (
     <footer className="site-footer">
       <div className="site-footer__main">
@@ -35,11 +41,11 @@ export function SiteFooter({ logo, footer }: SiteFooterProps) {
             </FooterColumn>
 
             <FooterColumn title="QUICK LINKS">
-              <FooterLinks links={footer.quickLinks} />
+              <FooterLinks currentPath={currentPath} links={footer.quickLinks} />
             </FooterColumn>
 
             <FooterColumn title="STORES">
-              <FooterLinks links={footer.storeLinks} />
+              <FooterLinks currentPath={currentPath} links={footer.storeLinks} />
             </FooterColumn>
 
             <FooterColumn title="SUBSCRIBE">
@@ -131,16 +137,31 @@ function ContactItem({ item }: { item: FooterContactItem }) {
   )
 }
 
-function FooterLinks({ links }: { links: readonly FooterLink[] }) {
+function FooterLinks({
+  links,
+  currentPath,
+}: {
+  links: readonly FooterLink[]
+  currentPath: string
+}) {
   return (
     <ul className="site-footer__list">
-      {links.map((link) => (
-        <li key={link.label}>
-          <a href={link.href} className="site-footer__link">
-            {link.label}
-          </a>
-        </li>
-      ))}
+      {links.map((link) => {
+        const isActive = isActiveLink(currentPath, link)
+
+        return (
+          <li key={link.label}>
+            <a
+              href={link.href}
+              className="site-footer__link"
+              aria-current={isCurrentPage(currentPath, link.href) ? "page" : undefined}
+              data-active={isActive ? "true" : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        )
+      })}
     </ul>
   )
 }

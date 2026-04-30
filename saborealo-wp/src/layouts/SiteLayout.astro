@@ -28,6 +28,10 @@ const currentPath = Astro.url.pathname;
 			<slot />
 		</main>
 
-		<SiteFooter logo={pannaSiteData.logo} footer={pannaSiteData.footer} />
+		<SiteFooter
+			logo={pannaSiteData.logo}
+			footer={pannaSiteData.footer}
+			currentPath={currentPath}
+		/>
 	</div>
 </Layout>

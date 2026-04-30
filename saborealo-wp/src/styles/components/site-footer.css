@@ -74,11 +74,20 @@
 }
 
 .site-footer__link:hover,
-.site-footer__link:focus-visible {
+.site-footer__link:focus-visible,
+.site-footer__link[data-active="true"] {
   color: var(--panna-red);
+}
+
+.site-footer__link:hover,
+.site-footer__link:focus-visible {
   text-decoration: underline;
-  outline: 0;
   text-underline-offset: 3px;
+}
+
+.site-footer__link:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--panna-red) 35%, transparent);
+  outline-offset: 3px;
 }
 
 .site-footer__form {
@@ -224,8 +233,12 @@
 .site-footer__legal a:hover,
 .site-footer__legal a:focus-visible {
   text-decoration: underline;
-  outline: 0;
   text-underline-offset: 3px;
+}
+
+.site-footer__legal a:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--panna-white) 45%, transparent);
+  outline-offset: 3px;
 }
 
 @media (max-width: 1024px) {

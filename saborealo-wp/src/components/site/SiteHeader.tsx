@@ -35,6 +35,10 @@ import {
 } from "@/components/ui/sheet";
 import { SiteLogo } from "@/components/site/SiteLogo";
 import type { PannaSiteData } from "@/data/panna-site";
+import {
+  isActiveLink,
+  isCurrentPage,
+} from "@/lib/site-navigation";
 import { cn } from "@/lib/utils";
 
 type SiteHeaderProps = {
@@ -44,58 +48,9 @@ type SiteHeaderProps = {
 };
 
 type NavItem = PannaSiteData["nav"][number];
-type MatchableLink = {
-  href: string;
-  matchPath?: string;
-};
 
 function preventPlaceholderNavigation(event: MouseEvent<HTMLAnchorElement>) {
   event.preventDefault();
-}
-
-function normalizePath(path: string) {
-  if (path === "/") {
-    return path;
-  }
-
-  return path.endsWith("/") ? path : `${path}/`;
-}
-
-function isInternalPath(href: string) {
-  return href.startsWith("/");
-}
-
-function isCurrentPage(currentPath: string, href: string) {
-  return isInternalPath(href) && normalizePath(currentPath) === normalizePath(href);
-}
-
-function isCurrentSection(
-  currentPath: string,
-  href: string,
-  matchPath?: string,
-) {
-  const candidatePath = matchPath ?? (isInternalPath(href) ? href : undefined);
-
-  if (!candidatePath) {
-    return false;
-  }
-
-  const normalizedCurrentPath = normalizePath(currentPath);
-  const normalizedCandidatePath = normalizePath(candidatePath);
-
-  if (normalizedCandidatePath === "/") {
-    return normalizedCurrentPath === "/";
-  }
-
-  return normalizedCurrentPath.startsWith(normalizedCandidatePath);
-}
-
-function isNavItemActive(item: MatchableLink, currentPath: string) {
-  return isCurrentSection(currentPath, item.href, item.matchPath);
-}
-
-function isNavSubItemActive(item: MatchableLink, currentPath: string) {
-  return isCurrentSection(currentPath, item.href, item.matchPath);
 }
 
 export function SiteHeader({ logo, nav, currentPath }: SiteHeaderProps) {
@@ -135,7 +90,7 @@ function DesktopNavigation({
     >
       <NavigationMenuList>
         {nav.map((item) => {
-          const isActive = isNavItemActive(item, currentPath);
+          const isActive = isActiveLink(currentPath, item);
 
           return (
             <NavigationMenuItem key={item.label} className="main-nav__item">
@@ -175,7 +130,7 @@ function DesktopNavigation({
                               }
                               className="main-nav__sub-link"
                               data-active={
-                                isNavSubItemActive(subItem, currentPath)
+                                isActiveLink(currentPath, subItem)
                                   ? "true"
                                   : undefined
                               }
@@ -306,7 +261,7 @@ function MobileNavigationItem({
   item: NavItem;
   currentPath: string;
 }) {
-  const isActive = isNavItemActive(item, currentPath);
+  const isActive = isActiveLink(currentPath, item);
 
   if (!("sub" in item) || !item.sub || item.href !== "#") {
     return (
@@ -344,7 +299,7 @@ function MobileNavigationItem({
                 }
                 className="site-header__mobile-sub-link"
                 data-active={
-                  isNavSubItemActive(subItem, currentPath) ? "true" : undefined
+                  isActiveLink(currentPath, subItem) ? "true" : undefined
                 }
                 href={subItem.href}
               >
