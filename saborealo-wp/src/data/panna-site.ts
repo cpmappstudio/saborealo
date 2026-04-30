@@ -8,11 +8,10 @@ type LocationNavLink = {
 }
 
 export const pannaSiteContact = [
-  { icon: "phone", label: "+1 (305) 97-PANNA" },
-  { icon: "phone", label: "+1 (305) 977-2662" },
-  { icon: "mail", label: "info@mypanna.com" },
-  { icon: "pin", label: "1130 NW 159th Dr, Miami FL 33169" },
-] as const
+  { icon: "phone", label: "+1 (407) 201-8976" },
+  { icon: "mail", label: "noel.saborealo@gmail.com" },
+  { icon: "pin", label: "926 Cypress Pkwy,\nKissimmee FL 34759" },
+] as const;
 
 type BuildPannaSiteDataInput = {
   /** Sub-links for the LOCATIONS dropdown in the main nav. */
@@ -27,7 +26,7 @@ export function buildPannaSiteData({
 }: BuildPannaSiteDataInput) {
   return {
     logo: {
-      src: "/logo.png",
+      src: "/logo.svg",
       width: 1024,
       height: 477,
       alt: "PANNA New Latino Food",
@@ -76,22 +75,22 @@ export function buildPannaSiteData({
         {
           type: "facebook",
           label: "Facebook",
-          href: "https://www.facebook.com/pannastores",
+          href: "https://www.facebook.com/Saboréalo-bakery-61561592674562",
         },
         {
           type: "instagram",
           label: "Instagram",
-          href: "https://www.instagram.com/pannastores/",
+          href: "https://www.instagram.com/saborealobakery/",
         },
         {
           type: "tiktok",
           label: "TikTok",
-          href: "https://www.tiktok.com/@pannastores",
+          href: "https://www.tiktok.com/@saborealo.bakery",
         },
         {
           type: "google",
           label: "Google",
-          href: "https://www.google.com/search?q=MYPANNA",
+          href: "https://www.google.com/search?q=saborealo+bakery",
         },
       ],
       appButtons: [

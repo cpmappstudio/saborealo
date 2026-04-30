@@ -65,15 +65,27 @@ const yesNoOptions = [
   { label: "No", value: "no" },
 ] as const
 
-const shiftOptions = [
-  { label: "Any", value: "any" },
-  { label: "Day", value: "day" },
-  { label: "Night", value: "night" },
-  { label: "Swing", value: "swing" },
-  { label: "Rotating", value: "rotating" },
-  { label: "Split", value: "split" },
+const yesNoNaOptions = [
+  { label: "Yes", value: "yes" },
+  { label: "No", value: "no" },
+  { label: "N/A", value: "na" },
+] as const
+
+const hoursOptions = [
+  { label: "Full Time", value: "full-time" },
+  { label: "Part Time", value: "part-time" },
+] as const
+
+const scheduleOptions = [
+  { label: "Days", value: "days" },
+  { label: "Evenings", value: "evenings" },
   { label: "Graveyard", value: "graveyard" },
-  { label: "Other", value: "other" },
+  { label: "Weekends", value: "weekends" },
+] as const
+
+const statusOptions = [
+  { label: "Regular", value: "regular" },
+  { label: "Temporary", value: "temporary" },
 ] as const
 
 function inputField(
@@ -128,18 +140,9 @@ function choiceGroup(
 function yesNoGroup(
   id: string,
   label: string,
-  width: JobApplicationFieldWidth = "half"
+  width: JobApplicationFieldWidth = "full"
 ) {
   return choiceGroup(id, label, yesNoOptions, "radio", width)
-}
-
-function checkboxGroup(
-  id: string,
-  label: string,
-  options: JobApplicationChoiceGroup["options"],
-  width: JobApplicationFieldWidth = "half"
-) {
-  return choiceGroup(id, label, options, "checkbox", width)
 }
 
 function section(
@@ -155,192 +158,161 @@ function section(
   }
 }
 
-function employmentFields(jobNumber: 1 | 2): JobApplicationFormItemConfig[] {
-  const prefix = `employment_${jobNumber}`
-
+function educationFields(prefix: string, title: string): JobApplicationFormItemConfig[] {
   return [
-    section(`${prefix}_heading`, [`Job ${jobNumber}`], 3),
-    inputField(`${prefix}_employer_name`, "Employer Name", { required: true }),
-    inputField(`${prefix}_employer_address`, "Employer Address", {
-      required: true,
-    }),
-    inputField(`${prefix}_start_date`, "Start Date", {
-      inputType: "date",
-      required: true,
-    }),
-    inputField(`${prefix}_end_date`, "End Date", {
-      inputType: "date",
-      required: true,
-    }),
-    inputField(`${prefix}_position_title`, "Position Title", { required: true }),
-    phoneField(`${prefix}_telephone`, "Telephone", { required: true }),
-    inputField(`${prefix}_duties`, "Duties", { required: true }),
-    inputField(`${prefix}_reason_for_leaving`, "Reason for leaving", {
-      required: true,
-    }),
-    inputField(`${prefix}_skills`, "Skills", { required: true }),
-    inputField(`${prefix}_supervisor`, "Supervisor", { required: true }),
-    inputField(`${prefix}_pay_per_month`, "Pay Per Month $", { required: true }),
+    section(`education_${prefix}`, [title], 3),
+    inputField(`${prefix}_school_name`, "School Name"),
+    inputField(`${prefix}_degree`, "Degree"),
+    inputField(`${prefix}_address`, "Address/City/State", { width: "full" }),
   ]
 }
 
-function educationFields(id: string, title: string): JobApplicationFormItemConfig[] {
+function referenceFields(n: 1 | 2 | 3): JobApplicationFormItemConfig[] {
+  const prefix = `reference_${n}`
   return [
-    section(`education_${id}`, [title], 3),
-    inputField(`${id}_institution_name`, "Institution Name", { required: true }),
-    inputField(`${id}_years_completed`, "Years Completed", { required: true }),
-    inputField(`${id}_fields_of_study`, "Fields of Study", { required: true }),
-    inputField(`${id}_degree`, "Graduate or degree", { required: true }),
-  ]
-}
-
-function referenceFields(referenceNumber: 1 | 2): JobApplicationFormItemConfig[] {
-  const prefix = `reference_${referenceNumber}`
-
-  return [
-    section(`${prefix}_heading`, [`Reference ${referenceNumber}`], 3),
+    section(`${prefix}_heading`, [`Reference ${n}`], 3),
     inputField(`${prefix}_name`, "Name", { required: true }),
-    inputField(`${prefix}_address`, "Address", { required: true }),
-    phoneField(`${prefix}_telephone`, "Telephone", { required: true }),
-    inputField(`${prefix}_occupation`, "Occupation", { required: true }),
-    inputField(`${prefix}_years_known`, "Years Known", { required: true }),
+    inputField(`${prefix}_address`, "Address/City/State", { width: "full", required: true }),
+    phoneField(`${prefix}_phone`, "Phone", { required: true }),
+    inputField(`${prefix}_relationship`, "Relationship", { required: true }),
   ]
+}
+
+function workHistoryFields(n: 1 | 2): JobApplicationFormItemConfig[] {
+  const prefix = `job_${n}`
+  const items: JobApplicationFormItemConfig[] = [
+    section(`${prefix}_heading`, [`Job Title #${n}`], 3),
+    inputField(`${prefix}_title`, "Job Title", { required: true }),
+    inputField(`${prefix}_start_date`, "Start Date", { inputType: "date", required: true }),
+    inputField(`${prefix}_end_date`, "End Date", { inputType: "date", required: true }),
+    inputField(`${prefix}_company_name`, "Company Name", { required: true }),
+    inputField(`${prefix}_supervisor_name`, "Supervisor's Name", { required: true }),
+    phoneField(`${prefix}_phone`, "Phone Number", { required: true }),
+    inputField(`${prefix}_city`, "City", { required: true }),
+    inputField(`${prefix}_state`, "State", { required: true }),
+    inputField(`${prefix}_zip`, "Zip", { required: true }),
+    {
+      kind: "textarea",
+      id: `job-${prefix}_duties`,
+      name: `${prefix}_duties`,
+      label: "Duties",
+      width: "full",
+      autoComplete: "off",
+      rows: 3,
+    },
+    inputField(`${prefix}_reason_for_leaving`, "Reason for Leaving", { required: true }),
+    inputField(`${prefix}_starting_salary`, "Starting Salary"),
+    inputField(`${prefix}_ending_salary`, "Ending Salary"),
+  ]
+
+  if (n === 1) {
+    items.push(
+      choiceGroup(
+        `${prefix}_may_contact`,
+        "May we contact your present employer?",
+        yesNoNaOptions,
+        "radio",
+        "full"
+      )
+    )
+  }
+
+  return items
 }
 
 export const pannaJobApplicationData = {
   intro: {
-    title: "JOIN OUR TALENTED TEAM!",
+    title: "JOIN OUR TEAM!",
     underline: {
       src: image("2024/10/MANCHA.png"),
       width: 361,
       height: 44,
     },
-    copy: "If you carry the soul of a leader inside, you like challenges and responsibilities, welcome to the PANNA Family. Please complete the form below and we will be contacting you as soon as we have a vacancy in our organization. Thank you!",
+    copy: "Please carefully read and answer all questions. You will not be considered for employment if you fail to completely answer all the questions on this application. You may attach a resume, but all questions must be answered.",
   },
   form: {
     name: "job-application",
-    title: "Job Application Form",
+    title: "Employment Application",
     submitLabel: "Send",
-    background: image("2024/10/FONDO-NEGRO-PANNA.webp"),
+    background: "#0000",
     items: [
-      inputField("position", "Applying for which position?", {
+      inputField("position", "Position Applying For", {
         autoComplete: "organization-title",
         required: true,
+        width: "full",
       }),
-      section("employee_information", ["EMPLOYEE INFORMATION"]),
-      inputField("first_name", "First Name", {
-        autoComplete: "given-name",
+
+      section("personal_data", ["PERSONAL DATA"]),
+      inputField("name", "Name (last, first, middle)", {
+        autoComplete: "name",
         required: true,
+        width: "full",
       }),
-      inputField("middle_name", "Middle Name", {
-        autoComplete: "additional-name",
-        required: true,
-      }),
-      inputField("last_name", "Last Name", {
-        autoComplete: "family-name",
-        required: true,
-      }),
-      inputField("email", "Email", {
-        autoComplete: "email",
-        inputMode: "email",
-        inputType: "email",
-        required: true,
-        spellCheck: false,
-      }),
-      phoneField("telephone", "Telephone", {
-        autoComplete: "tel",
-        required: true,
-      }),
-      phoneField("alternate_telephone", "Alternate Telephone"),
-      inputField("mailing_address", "Mailing Address", {
+      inputField("street_address", "Street Address and/or Mailing Address", {
         autoComplete: "street-address",
         width: "full",
       }),
-      yesNoGroup(
-        "essential_functions",
-        "Are you able to perform the essential functions of the position with or without accommodations?"
-      ),
-      yesNoGroup(
-        "employment_eligibility",
-        "I am legally eligible for employment in the U.S.?"
-      ),
-      yesNoGroup(
-        "permanent_position",
-        "I am seeking a permanent position:"
-      ),
-      yesNoGroup(
-        "valid_drivers_license",
-        "Can you provide a valid Driver's License?"
-      ),
-      inputField("drivers_license_state", "If so, fill out the following:", {
-        placeholder: "Issuing State…",
-      }),
-      inputField("drivers_license_number", "Driver's License Number", {
-        placeholder: "Type and Driver's License Number…",
-      }),
-      checkboxGroup(
-        "available_shifts",
-        "Work the following shifts: (check all that apply)",
-        shiftOptions,
-        "full"
-      ),
-      section("employment_history", [
-        "EMPLOYMENT HISTORY (Most Recent Employment, No more than 10 years).",
-      ]),
-      ...employmentFields(1),
-      ...employmentFields(2),
+      inputField("city", "City", { autoComplete: "address-level2" }),
+      inputField("state", "State", { autoComplete: "address-level1" }),
+      inputField("zip", "Zip", { autoComplete: "postal-code" }),
+      phoneField("home_telephone", "Home Telephone Number", { autoComplete: "tel" }),
+      phoneField("business_telephone", "Business Telephone Number"),
+      phoneField("cellular_telephone", "Cellular Telephone Number", { autoComplete: "tel" }),
+      inputField("start_date", "Date You Can Start Work", { inputType: "date" }),
+      inputField("salary_desired", "Salary Desired"),
+      yesNoGroup("high_school_diploma", "Do you have a High School Diploma or GED?", "half"),
+
+      section("position_information", ["POSITION INFORMATION", "Check all that you are willing to work"]),
+      choiceGroup("hours", "Hours", hoursOptions, "checkbox"),
+      choiceGroup("schedule", "Schedule", scheduleOptions, "checkbox"),
+      choiceGroup("status", "Status", statusOptions, "radio"),
+      yesNoGroup("authorized_to_work", "Are you authorized to work in the U.S. on an unrestricted basis?"),
+      yesNoGroup("felony_conviction", "Have you ever been convicted of a felony? (Convictions will not necessarily disqualify an applicant for employment.)"),
       {
         kind: "textarea",
-        id: "job-related-employment-summary",
-        name: "related_employment_summary",
-        label: "Summarize other employment related to this job:",
+        id: "job-felony_explanation",
+        name: "felony_explanation",
+        label: "If yes, explain:",
+        width: "full",
+        autoComplete: "off",
+        rows: 2,
+      },
+      yesNoGroup("essential_functions_told", "Have you been told the essential functions of the job, or have you been viewed a copy of the job description listing the essential functions?"),
+      yesNoGroup("essential_functions_perform", "Can you perform these essential functions of the job with or without reasonable accommodation?"),
+
+      section("qualifications", ["QUALIFICATIONS", "Please list any education or training you feel relates to the position applied for."]),
+      ...educationFields("school_1", "School"),
+      ...educationFields("school_2", "School"),
+      ...educationFields("other", "Other"),
+
+      section("special_skills", ["SPECIAL SKILLS"]),
+      {
+        kind: "textarea",
+        id: "job-special_skills",
+        name: "special_skills",
+        label: "List any special skills or experience that you feel would help you in this position (leadership, organizations/teams, etc.):",
         width: "full",
         autoComplete: "off",
         rows: 4,
       },
-      section("education_history", ["EDUCATION HISTORY"]),
-      ...educationFields("high_school", "High School"),
-      ...educationFields("business_technical", "Business/Technical"),
-      ...educationFields("college_university", "College/University"),
-      ...educationFields("additional_education", "Additional"),
-      section("military", ["MILITARY"]),
-      yesNoGroup("veteran", "Are you a veteran?", "full"),
-      inputField("military_training", "Duty/Specialized Training", {
-        placeholder: "If you are not veteran then write here NO…",
-        width: "full",
-      }),
-      section("skills_qualifications", ["SKILLS & QUALIFICATIONS"]),
-      inputField(
-        "other_qualifications",
-        "Other qualifications such as special skills, abilities or honors that should be considered:",
-        { width: "full" }
-      ),
-      inputField(
-        "equipment_skills",
-        "Types of computers, software, and other equipment you are qualified to operate or repair:",
-        { width: "full" }
-      ),
-      inputField(
-        "certifications",
-        "Professional licenses, certifications or registrations:",
-        { width: "full" }
-      ),
-      inputField(
-        "additional_skills",
-        "Additional skills, including supervision skills, other languages or information regarding the career/occupation you wish to bring to the employer's attention:",
-        { width: "full" }
-      ),
-      section("personal_references", ["PERSONAL REFERENCES"]),
+
+      section("references", ["REFERENCES", "Please list two professional references not related to you. If you don't have professional references, list personal unrelated references."]),
       ...referenceFields(1),
       ...referenceFields(2),
+      ...referenceFields(3),
+
+      section("work_history", ["WORK HISTORY", "Start with your present or most recent employment and work back. Include paid and unpaid positions."]),
+      ...workHistoryFields(1),
+      ...workHistoryFields(2),
+
       {
         kind: "acceptance",
-        id: "job-applicant-certification",
+        id: "job-applicant_certification",
         name: "applicant_certification",
-        label: "INFORMATION TO THE APPLICANT",
+        label: "APPLICANT CERTIFICATION",
         width: "full",
         required: true,
-        text: "I certify that the information provided in this application is complete and accurate. I understand that PANNA may verify my personal, education, and employment references, and that omissions or misrepresentations may affect employment decisions. I also understand that employment requirements may include proof of authorization to work in the United States, a physical examination, a drug test, or other documents required for the position.",
+        text: "I certify that the facts set forth in this Application for Employment are true and complete to the best of my knowledge. I understand that if I am employed, false statements, omissions or misrepresentations may result in my dismissal. I authorize the Employer to make an investigation of any of the facts set forth in this application and release the Employer from any liability. The employer may contact any listed references on this application. I acknowledge and understand that the company is an \"at will\" employer. Therefore, any employee may resign at any time, just as the employer may terminate the employment relationship with any employee at any time, with or without cause, with or without notice to the other party.",
       },
     ] satisfies JobApplicationFormItemConfig[],
   },

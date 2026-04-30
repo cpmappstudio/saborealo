@@ -16,16 +16,6 @@
   border-radius: 0 0 30px 30px;
 }
 
-.stores-section::before {
-  position: absolute;
-  inset: 0;
-  content: "";
-  background-image: url("https://mypanna.com/wp-content/uploads/2024/10/FONDO-NEGRO-PANNA.webp");
-  background-position: center;
-  background-repeat: repeat;
-  background-size: 640px auto;
-  opacity: .25;
-}
 
 .stores-section__notch {
   position: absolute;

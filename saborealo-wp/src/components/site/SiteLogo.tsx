@@ -1,7 +1,14 @@
 import type { PannaSiteData } from "@/data/panna-site"
 
+const logoVariantSrc = {
+  alt: "/logo-alt.svg",
+} as const
+
+type SiteLogoVariant = "primary" | keyof typeof logoVariantSrc
+
 type SiteLogoProps = {
   logo: PannaSiteData["logo"]
+  variant?: SiteLogoVariant
   href?: string
   alt?: string
   ariaLabel?: string
@@ -13,6 +20,7 @@ type SiteLogoProps = {
 
 export function SiteLogo({
   logo,
+  variant = "primary",
   href,
   alt = logo.alt,
   ariaLabel = "PANNA home",
@@ -21,9 +29,11 @@ export function SiteLogo({
   loading,
   decorative = false,
 }: SiteLogoProps) {
+  const src = variant === "primary" ? logo.src : logoVariantSrc[variant]
+
   const image = (
     <img
-      src={logo.src}
+      src={src}
       alt={decorative ? "" : alt}
       width={logo.width}
       height={logo.height}

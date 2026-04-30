@@ -81,12 +81,15 @@
   overflow: hidden;
   border-radius: 15px;
   line-height: 0;
+  aspect-ratio: 3 / 2;
 }
 
 .about-story__image {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
   border-radius: inherit;
 }
 
