@@ -43,7 +43,7 @@ export function MenuItemDetail({ product }: MenuItemDetailProps) {
           <p className="menu-item-detail__description">{product.description}</p>
 
           {product.orderUrl ? (
-            <Button className="menu-item-order__cta" asChild>
+            <Button className="menu-item-order__trigger" asChild>
               <a
                 href={product.orderUrl}
                 target="_blank"
