@@ -2,7 +2,6 @@
 
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  ArrowDown01Icon,
   Menu01Icon,
   Search01Icon,
 } from "@hugeicons/core-free-icons";
@@ -92,18 +91,11 @@ function DesktopNavigation({
             <NavigationMenuItem key={item.label} className="main-nav__item">
               {"sub" in item && item.sub ? (
                 <>
-                  <NavigationMenuTrigger asChild className="main-nav__link">
-                    <button
-                      type="button"
-                      data-active={isActive ? "true" : undefined}
-                    >
-                      <span>{item.label}</span>
-                      <HugeiconsIcon
-                        icon={ArrowDown01Icon}
-                        strokeWidth={2}
-                        aria-hidden="true"
-                      />
-                    </button>
+                  <NavigationMenuTrigger
+                    className="main-nav__link"
+                    data-active={isActive ? "true" : undefined}
+                  >
+                    {item.label}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="main-nav__dropdown">
                     <ul className="main-nav__dropdown-list">
