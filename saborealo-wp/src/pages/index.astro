@@ -12,10 +12,10 @@ import SiteLayout from "@/layouts/SiteLayout.astro";
     title="PANNA - New Latino Food"
     description="Discover PANNA New Latino Food menus, promotions, store locations, and Venezuelan-inspired favorites."
 >
-    <h1 class="sr-only">PANNA New Latino Food</h1>
+    <h1 class="sr-only">Saborealo</h1>
     <HeroCarousel slides={pannaHomeData.heroSlides} client:load />
     <MenuGrid rows={pannaHomeData.menuRows} client:visible={{ rootMargin: "200px" }} />
     <StarProductCarousel slides={pannaHomeData.starProducts} client:visible={{ rootMargin: "200px" }} />
-    <PromoCards cards={pannaHomeData.promoCards} />
+    <!-- <PromoCards cards={pannaHomeData.promoCards} /> -->
     <StoreCards stores={pannaHomeData.stores} story={pannaHomeData.aboutStory} />
 </SiteLayout>

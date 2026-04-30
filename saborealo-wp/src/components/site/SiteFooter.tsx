@@ -27,13 +27,14 @@ export function SiteFooter({ logo, footer, currentPath }: SiteFooterProps) {
         <div className="panna-shell">
           <SiteLogo
             logo={logo}
+            variant="alt"
             href="/"
             imageClassName="site-footer__logo"
             loading="lazy"
           />
 
           <div className="site-footer__grid">
-            <FooterColumn title="PANNA GROUP">
+            <FooterColumn title="SABOREALO">
               <ul className="site-footer__contact">
                 {footer.contact.map((item) => (
                   <ContactItem key={`${item.icon}-${item.label}`} item={item} />
@@ -105,8 +106,8 @@ export function SiteFooter({ logo, footer, currentPath }: SiteFooterProps) {
       </div>
 
       <div className="site-footer__legal">
-        <span>{"\u00a9 2024 PANNA | All Rights Reserved |\u00a0"}</span>
-        <a href="https://mypanna.com/privacy-policy/">Privacy Policy</a>
+        <span>{"\u00a9 2026 Saborealo| All Rights Reserved \u00a0"}</span>
+        {/* <a href="https://mypanna.com/privacy-policy/">Privacy Policy</a> */}
       </div>
     </footer>
   )

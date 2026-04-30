@@ -1,19 +1,18 @@
-import { pannaImage as image } from "@/data/panna-assets"
-import { PANNA_ORDER_URL } from "@/data/panna-links"
+import { pannaImage as image } from "@/data/panna-assets";
+import { PANNA_ORDER_URL } from "@/data/panna-links";
 
 const siteContactItems = [
-  { icon: "phone", label: "+1 (305) 97-PANNA" },
-  { icon: "phone", label: "+1 (305) 977-2662" },
-  { icon: "mail", label: "info@mypanna.com" },
-  { icon: "pin", label: "1130 NW 159th Dr, Miami FL 33169" },
-] as const
+  { icon: "phone", label: "+1 (407) 201-8976" },
+  { icon: "mail", label: "noel.saborealo@gmail.com" },
+  { icon: "pin", label: "926 Cypress Pkwy,\nKissimmee FL 34759" },
+] as const;
 
 export const pannaSiteData = {
   logo: {
-    src: "/logo.png",
+    src: "/logo.svg",
     width: 1024,
     height: 477,
-    alt: "PANNA New Latino Food",
+    alt: "Saborealo Logo",
   },
   nav: [
     {
@@ -32,8 +31,14 @@ export const pannaSiteData = {
       sub: [
         { label: "DORAL", href: "https://mypanna.com/locations/doral/" },
         { label: "ORLANDO", href: "https://mypanna.com/locations/orlando/" },
-        { label: "WESTON ROAD", href: "https://mypanna.com/locations/weston-road/" },
-        { label: "WESTON TOWN CENTER", href: "https://mypanna.com/locations/weston-town-center/" },
+        {
+          label: "WESTON ROAD",
+          href: "https://mypanna.com/locations/weston-road/",
+        },
+        {
+          label: "WESTON TOWN CENTER",
+          href: "https://mypanna.com/locations/weston-town-center/",
+        },
       ],
     },
     { label: "CONTACT", href: "/contact/", matchPath: "/contact/" },
@@ -62,20 +67,50 @@ export const pannaSiteData = {
     storeLinks: [
       { label: "Doral", href: "https://mypanna.com/locations/doral/" },
       { label: "Orlando", href: "https://mypanna.com/locations/orlando/" },
-      { label: "Weston Road", href: "https://mypanna.com/locations/weston-road/" },
-      { label: "Weston Town Center", href: "https://mypanna.com/locations/weston-town-center/" },
+      {
+        label: "Weston Road",
+        href: "https://mypanna.com/locations/weston-road/",
+      },
+      {
+        label: "Weston Town Center",
+        href: "https://mypanna.com/locations/weston-town-center/",
+      },
     ],
     social: [
-      { type: "facebook", label: "Facebook", href: "https://www.facebook.com/pannastores" },
-      { type: "instagram", label: "Instagram", href: "https://www.instagram.com/pannastores/" },
-      { type: "tiktok", label: "TikTok", href: "https://www.tiktok.com/@pannastores" },
-      { type: "google", label: "Google", href: "https://www.google.com/search?q=MYPANNA" },
+      {
+        type: "facebook",
+        label: "Facebook",
+        href: "https://www.facebook.com/Saboréalo-bakery-61561592674562",
+      },
+      {
+        type: "instagram",
+        label: "Instagram",
+        href: "https://www.instagram.com/saborealobakery/",
+      },
+      {
+        type: "tiktok",
+        label: "TikTok",
+        href: "https://www.tiktok.com/@saborealo.bakery",
+      },
+      {
+        type: "google",
+        label: "Google",
+        href: "https://www.google.com/search?q=saborealo+bakery",
+      },
     ],
     appButtons: [
-      { image: image("2024/10/APP-STORE.webp"), href: "https://apps.apple.com/us/app/panna-new-latino-food/id6474134808", alt: "Download on the App Store" },
-      { image: image("2024/10/GOOGLE-PLAY.webp"), href: "https://play.google.com/store/apps/details?id=com.como.prod976720239767", alt: "Get it on Google Play" },
+      {
+        image: image("2024/10/APP-STORE.webp"),
+        href: "https://apps.apple.com/us/app/panna-new-latino-food/id6474134808",
+        alt: "Download on the App Store",
+      },
+      {
+        image: image("2024/10/GOOGLE-PLAY.webp"),
+        href: "https://play.google.com/store/apps/details?id=com.como.prod976720239767",
+        alt: "Get it on Google Play",
+      },
     ],
   },
-} as const
+} as const;
 
-export type PannaSiteData = typeof pannaSiteData
+export type PannaSiteData = typeof pannaSiteData;

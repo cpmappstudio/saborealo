@@ -71,6 +71,7 @@
   line-height: 18px;
   text-decoration: none;
   letter-spacing: 0;
+  white-space: pre-line;
 }
 
 .site-footer__link:hover,
@@ -147,7 +148,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-  justify-content: center;
   margin-top: 20px;
 }
 

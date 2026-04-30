@@ -1,11 +1,11 @@
-import { pannaImage as image } from "@/data/panna-assets"
-import { PANNA_ORDER_URL } from "@/data/panna-links"
+import { pannaImage as image } from "@/data/panna-assets";
+import { PANNA_ORDER_URL } from "@/data/panna-links";
 
 const menuRowItem = (slug: string, label: string, imagePath: string) => ({
   label,
   image: image(imagePath),
   href: `/menu/${slug}/`,
-})
+});
 
 export const pannaHomeData = {
   heroSlides: [
@@ -70,8 +70,16 @@ export const pannaHomeData = {
       menuRowItem("arepas", "AREPAS", "2024/10/ICONO_AREPAS.webp"),
       menuRowItem("cachapas", "CACHAPAS", "2024/10/ICONO_CACHAPAS.webp"),
       menuRowItem("brunch", "BRUNCH", "2025/09/BRUNCH2.webp"),
-      menuRowItem("from-the-grill", "FROM THE GRILL", "2024/10/FROM-THE-GRILL.webp"),
-      menuRowItem("latin-corner-retail", "LATIN CORNER", "2024/10/ICONO_LATIN-CORNER.webp"),
+      menuRowItem(
+        "from-the-grill",
+        "FROM THE GRILL",
+        "2024/10/FROM-THE-GRILL.webp",
+      ),
+      menuRowItem(
+        "latin-corner-retail",
+        "LATIN CORNER",
+        "2024/10/ICONO_LATIN-CORNER.webp",
+      ),
       menuRowItem("platters", "PLATTERS", "2024/10/ICONO_PLATTERS.webp"),
       menuRowItem("grab-and-go", "GRAB 'N GO", "2024/10/ICONO_GRAB-GO.webp"),
       menuRowItem("burgers", "BURGERS", "2024/10/BURGER.webp"),
@@ -81,37 +89,46 @@ export const pannaHomeData = {
       menuRowItem("patacones", "PATACONES", "2024/10/ICONO_PATACON.webp"),
       menuRowItem("breakfast", "BREAKFAST", "2024/10/ICONO_BREAKFAST.webp"),
       menuRowItem("coffees", "COFFEE", "2024/10/ICONO_COFFEE.webp"),
-      menuRowItem("juices-and-smoothies", "JUICES & SMOOTHIES", "2024/10/ICONO_JUICE-SMOOTHIES.webp"),
+      menuRowItem(
+        "juices-and-smoothies",
+        "JUICES & SMOOTHIES",
+        "2024/10/ICONO_JUICE-SMOOTHIES.webp",
+      ),
       menuRowItem("desserts", "DESSERT", "2024/10/ICONO_DESSERT.webp"),
-      menuRowItem("plato-latino", "PLATO LATINO", "2024/10/NEW-LATINO-MIX-1.webp"),
+      menuRowItem(
+        "plato-latino",
+        "PLATO LATINO",
+        "2024/10/NEW-LATINO-MIX-1.webp",
+      ),
     ],
   ],
   starProducts: [
     {
-      layout: "image-title",
-      bg: "#FFF2DC",
-      product: image("2024/10/PICK-4-FLAVORS-BANNER-PUBLICIDAD.webp"),
-      titleImage: image("2024/10/TITULO-PICK-4-FLAVORS.webp"),
-      cta: "CALL TO ORDER",
-      href: "https://mypanna.com/menu/arepa-pick-4-flavors/",
+      layout: "text",
+      bg: "#FFBA52",
+      product: "/images/products/breakfast.png",
+      title: "START YOUR DAY THE SABOREALO WAY",
+      text: "Build your perfect breakfast plate. Pick your eggs, pick your side — come in and make it yours.",
+      cta: "SEE BREAKFAST MENU",
+      href: "/menu",
     },
     {
       layout: "text",
-      bgImage: image("2024/10/FONDO-PLATTERS.webp"),
-      product: image("2024/10/PLATTERS.webp"),
-      title: "CREATE YOUR OWN PLATTERS!",
-      text: "Combine and savor the finest PANNA delights. It's simple and delicious.",
-      cta: "CALL TO ORDER",
-      href: "https://mypanna.com/menu/catering/",
+      bg: "#FFBA52",
+      product: "/images/products/puerto-rico-food.png",
+      title: "A TASTE OF PUERTO RICO",
+      text: "Authentic flavors straight from the island. Bring the tradition to your table.",
+      cta: "SEE FULL MENU",
+      href: "/menu",
     },
     {
-      layout: "image-title",
-      bgImage: image("2024/10/BACK-GRAB.webp"),
-      product: image("2025/06/PRODUCTOS-GRAB-GO-VERTICAL.webp"),
-      titleImage: image("2025/01/GRAB-N-GO-TITULO.webp"),
-      text: "Enjoy the best flavors of PANNA at home. Visit our Grab 'n Go section and choose your favorites!",
-      cta: "ORDER NOW!",
-      href: "https://mypanna.com/menu/grab-and-go/",
+      layout: "text",
+      bg: "#FFBA52",
+      product: "/images/products/drinks.png",
+      title: "DRINKS FOR EVERY MOOD",
+      text: "Fresh juices, smoothies, and coffee. Always cold, always hot, always SABOREALO.",
+      cta: "SEE DRINKS MENU",
+      href: "/menu",
     },
   ],
   promoCards: [
@@ -175,24 +192,21 @@ export const pannaHomeData = {
     },
   ],
   aboutStory: {
-    title: "A Fast Casual Venezuelan Restaurant Making History in the USA!",
+    title: "Authentic Puerto Rican Flavor, Fresh Every Day",
     underline: image("2024/10/TRAZO@2x.webp"),
-    image: image("2024/10/PANNA-STORES.webp"),
-    imageAlt: "PANNA store exterior",
+    image: "/images/stores/saborealo-matador-store.jpg",
+    imageAlt: "Saborealo Bakery store exterior",
     paragraphs: [
       [
-        "PANNA, a taste to remember, the place you love. We began as a Venezuelan restaurant since 2000. Come and visit any of our fast, casual locations to enjoy the most delicious",
-        "Venezuelan food combined with other traditional delights from Colombia and Argentina.",
+        "Saborealo Bakery brings the warmth and flavor of Puerto Rico to Kissimmee with food made to satisfy every craving.",
+        "From breakfast sandwiches and fresh coffee to mofongo, frituras, pastries, and hot plates, every visit is full of comfort, tradition, and sabor.",
       ],
       [
-        "At PANNA, everyone can find something to eat for",
-        "breakfast, lunch, snack, dinner, and even late night. Latin people and guests from around the World have great time at PANNA with its casual environment and friendly service. Latin American food is well known for its diversity of",
-        "flavors and textures; we are proud to offer the best",
-        "enezuelan “cachitos and tequeños” in the USA, made with traditional recipes that you can eat at any Venezuelan",
-        "estaurant . Try something different, try the best Venezuelan food at PANNA today!",
+        "Inspired by the spirit of Puerto Rican home cooking and the energy of the local community, Saborealo feels welcoming, vibrant, and proudly boricua.",
+        "With the touch of Chef Noel from Aibonito, Puerto Rico, it is the kind of place where family favorites, quick bites, and everyday meals come together.",
       ],
     ],
   },
-} as const
+} as const;
 
-export type PannaHomeData = typeof pannaHomeData
+export type PannaHomeData = typeof pannaHomeData;
