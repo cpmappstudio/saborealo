@@ -48,7 +48,7 @@ export const pannaSiteData = {
       { label: "About Us", href: "https://mypanna.com/about-us/" },
       { label: "Our Menu", href: "/menu/" },
       { label: "Orders", href: "https://mypanna.com/orders/" },
-      { label: "Job Application", href: "https://mypanna.com/job-application/" },
+      { label: "Job Application", href: "/job-application/" },
       { label: "Contact", href: "/contact/" },
     ],
     storeLinks: [

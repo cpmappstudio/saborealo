@@ -1,0 +1,12 @@
+---
+import { JobApplicationPage } from "@/components/job-application/JobApplicationPage";
+import { pannaJobApplicationData } from "@/data/panna-job-application";
+import SiteLayout from "@/layouts/SiteLayout.astro";
+---
+
+<SiteLayout
+    title="Job Application - PANNA New Latino Food"
+    description="Apply to join the PANNA New Latino Food team."
+>
+    <JobApplicationPage jobApplication={pannaJobApplicationData} />
+</SiteLayout>

@@ -1,17 +1,13 @@
 import type { CSSProperties } from "react"
 
-import { PannaDecoratedHeading } from "@/components/site/PannaDecoratedHeading"
+import {
+  PannaTextField,
+  PannaTextareaField,
+} from "@/components/site/PannaFormFields"
+import { PannaPageIntro } from "@/components/site/PannaPageIntro"
 import { SiteIcon } from "@/components/site/SiteIcon"
 import { Button } from "@/components/ui/button"
-import {
-  Field,
-  FieldGroup,
-  FieldLabel,
-  FieldLegend,
-  FieldSet,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import { FieldGroup, FieldLegend, FieldSet } from "@/components/ui/field"
 import type {
   ContactFormFieldConfig,
   PannaContactData,
@@ -89,22 +85,22 @@ export function ContactPage({ contact, contactItems }: ContactPageProps) {
 function ContactForm({ form }: { form: PannaContactData["form"] }) {
   return (
     <form
-      className="contact-form"
+      className="contact-form panna-form"
       name={form.name}
       method="post"
       encType="application/x-www-form-urlencoded"
       aria-label="Contact PANNA"
     >
-      <FieldSet className="contact-form__fieldset">
+      <FieldSet className="panna-form__fieldset">
         <FieldLegend className="sr-only">Contact PANNA</FieldLegend>
-        <FieldGroup className="contact-form__fields">
+        <FieldGroup className="panna-form__fields">
           {form.fields.map((field) => (
             <ContactFormField key={field.id} field={field} />
           ))}
         </FieldGroup>
       </FieldSet>
 
-      <Button type="submit" className="contact-form__submit">
+      <Button type="submit" className="panna-form__submit">
         Submit
       </Button>
     </form>
@@ -112,57 +108,55 @@ function ContactForm({ form }: { form: PannaContactData["form"] }) {
 }
 
 function ContactFormField({ field }: { field: ContactFormFieldConfig }) {
+  if (field.control === "textarea") {
+    return (
+      <PannaTextareaField
+        id={field.id}
+        name={field.name}
+        label={field.label}
+        placeholder={field.placeholder}
+        autoComplete={field.autoComplete}
+        required={field.required}
+        rows={field.rows}
+        spellCheck={field.spellCheck}
+        labelClassName="sr-only"
+      />
+    )
+  }
+
   return (
-    <Field className="contact-form__field">
-      <FieldLabel htmlFor={field.id} className="sr-only">
-        {field.label}
-      </FieldLabel>
-      {field.control === "textarea" ? (
-        <Textarea
-          id={field.id}
-          name={field.name}
-          placeholder={field.placeholder}
-          autoComplete={field.autoComplete}
-          required={field.required}
-          rows={field.rows}
-          spellCheck={field.spellCheck}
-          className="contact-form__control contact-form__textarea"
-        />
-      ) : (
-        <Input
-          id={field.id}
-          name={field.name}
-          type={field.type}
-          placeholder={field.placeholder}
-          autoComplete={field.autoComplete}
-          required={field.required}
-          inputMode={field.inputMode}
-          pattern={field.pattern}
-          title={field.title}
-          spellCheck={field.spellCheck}
-          className="contact-form__control"
-        />
-      )}
-    </Field>
+    <PannaTextField
+      id={field.id}
+      name={field.name}
+      label={field.label}
+      type={field.type}
+      placeholder={field.placeholder}
+      autoComplete={field.autoComplete}
+      required={field.required}
+      inputMode={field.inputMode}
+      pattern={field.pattern}
+      title={field.title}
+      spellCheck={field.spellCheck}
+      labelClassName="sr-only"
+    />
   )
 }
 
 function ContactHelp({ help }: { help: PannaContactData["help"] }) {
   return (
-    <div className="contact-help">
-      <PannaDecoratedHeading
-        as="h1"
-        id="contact-title"
-        title={help.title}
-        underline={help.underline}
-        className="contact-help__heading"
-      />
-      <p className="contact-help__copy">
+    <PannaPageIntro
+      as="h1"
+      id="contact-title"
+      title={help.title}
+      underline={help.underline}
+      className="contact-help"
+    >
+      <p>
         {help.copy}
         <br />
         <strong>{help.officeHours}</strong>
       </p>
-    </div>
+    </PannaPageIntro>
   )
 }
 
