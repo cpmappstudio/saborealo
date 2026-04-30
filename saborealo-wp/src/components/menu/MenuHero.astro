@@ -1,11 +1,11 @@
 ---
-import type { PannaMenuData } from "@/data/panna-menu";
+import type { PannaSectionAssets } from "@/data/panna-section-assets"
 
 interface Props {
-	hero: PannaMenuData["hero"];
+	hero: PannaSectionAssets["menu"]["hero"]
 }
 
-const { hero } = Astro.props;
+const { hero } = Astro.props
 ---
 
 <section

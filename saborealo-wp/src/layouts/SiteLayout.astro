@@ -1,24 +1,53 @@
 ---
-import { SiteFooter } from "@/components/site/SiteFooter";
-import { SiteHeader } from "@/components/site/SiteHeader";
-import { pannaSiteData } from "@/data/panna-site";
-import Layout from "./Layout.astro";
+import { SiteFooter } from "@/components/site/SiteFooter"
+import { SiteHeader } from "@/components/site/SiteHeader"
+import { buildPannaSiteData } from "@/data/panna-site"
+import { LOCATIONS_NAV_QUERY } from "@/lib/sanity/queries"
+import Layout from "./Layout.astro"
+import { sanityClient } from "sanity:client"
 
 interface Props {
-	title?: string;
-	description?: string;
+	title?: string
+	description?: string
 }
 
-const { title, description } = Astro.props;
-const currentPath = Astro.url.pathname;
+const { title, description } = Astro.props
+const currentPath = Astro.url.pathname
+
+const navLocations = await sanityClient.fetch(LOCATIONS_NAV_QUERY)
+
+const locationLinks = navLocations
+	.filter((location) => location.slug)
+	.map((location) => {
+		const path = `/locations/${location.slug as string}/`
+		return {
+			label: location.title ?? location.footerLabel ?? "",
+			footerLabel: location.footerLabel ?? location.title ?? "",
+			href: path,
+			matchPath: path,
+		}
+	})
+
+const siteData = buildPannaSiteData({
+	locationNavLinks: locationLinks.map(({ label, href, matchPath }) => ({
+		label,
+		href,
+		matchPath,
+	})),
+	locationFooterLinks: locationLinks.map(({ footerLabel, href, matchPath }) => ({
+		label: footerLabel,
+		href,
+		matchPath,
+	})),
+})
 ---
 
 <Layout title={title} description={description}>
 	<div class="panna-site">
 		<a class="skip-link" href="#main-content">Skip to content</a>
 		<SiteHeader
-			logo={pannaSiteData.logo}
-			nav={pannaSiteData.nav}
+			logo={siteData.logo}
+			nav={siteData.nav}
 			currentPath={currentPath}
 			client:load
 			transition:persist
@@ -29,8 +58,8 @@ const currentPath = Astro.url.pathname;
 		</main>
 
 		<SiteFooter
-			logo={pannaSiteData.logo}
-			footer={pannaSiteData.footer}
+			logo={siteData.logo}
+			footer={siteData.footer}
 			currentPath={currentPath}
 		/>
 	</div>

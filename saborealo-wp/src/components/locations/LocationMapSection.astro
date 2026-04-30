@@ -1,10 +1,10 @@
 ---
+import type { LocationDetail } from "@/components/locations/types"
 import { PannaSectionNotch } from "@/components/site/PannaSectionNotch"
-import type { PannaLocationsData, PannaLocationPage } from "@/data/panna-locations"
 
 interface Props {
-  background: PannaLocationsData["mapBackground"]
-  location: PannaLocationPage
+	background: string
+	location: LocationDetail
 }
 
 const { background, location } = Astro.props
@@ -12,25 +12,25 @@ const titleId = `${location.slug}-map-title`
 ---
 
 <section
-  class="location-map"
-  style={`--location-map-background: url("${background}")`}
-  aria-labelledby={titleId}
+	class="location-map"
+	style={`--location-map-background: url("${background}")`}
+	aria-labelledby={titleId}
 >
-  <PannaSectionNotch className="location-map__notch" />
+	<PannaSectionNotch className="location-map__notch" />
 
-  <div class="panna-shell location-map__inner">
-    <div class="location-map__embed">
-      <iframe
-        src={location.map.src}
-        title={location.map.title}
-        aria-label={location.map.title}
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </div>
+	<div class="panna-shell location-map__inner">
+		<div class="location-map__embed">
+			<iframe
+				src={location.mapEmbedUrl}
+				title={location.mapTitle}
+				aria-label={location.mapTitle}
+				loading="lazy"
+				referrerpolicy="no-referrer-when-downgrade"
+			></iframe>
+		</div>
 
-    <h2 id={titleId} class="location-map__title">
-      {location.map.tagline}
-    </h2>
-  </div>
+		<h2 id={titleId} class="location-map__title">
+			{location.mapTagline}
+		</h2>
+	</div>
 </section>

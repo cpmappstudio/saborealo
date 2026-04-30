@@ -1,10 +1,17 @@
 import { Button } from "@/components/ui/button"
-import type { PannaMenuProduct } from "@/data/panna-menu"
 
 const MAX_RATING = 5
 
+export type MenuItemDetailData = {
+  title: string
+  description: string
+  rating: number
+  image: { src: string; alt: string }
+  orderUrl: string
+}
+
 type MenuItemDetailProps = {
-  product: PannaMenuProduct
+  product: MenuItemDetailData
 }
 
 export function MenuItemDetail({ product }: MenuItemDetailProps) {
@@ -16,8 +23,8 @@ export function MenuItemDetail({ product }: MenuItemDetailProps) {
         <div className="menu-item-detail__media">
           <img
             className="menu-item-detail__image"
-            src={product.image}
-            alt={product.imageAlt}
+            src={product.image.src}
+            alt={product.image.alt}
             width={400}
             height={400}
             loading="eager"
@@ -35,8 +42,16 @@ export function MenuItemDetail({ product }: MenuItemDetailProps) {
 
           <p className="menu-item-detail__description">{product.description}</p>
 
-          {product.orderLocations.length > 0 ? (
-            <MenuItemOrder locations={product.orderLocations} />
+          {product.orderUrl ? (
+            <Button className="menu-item-order__cta" asChild>
+              <a
+                href={product.orderUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Order now
+              </a>
+            </Button>
           ) : null}
         </div>
       </div>
@@ -64,34 +79,5 @@ function RatingStars({ rating }: { rating: number }) {
         </svg>
       ))}
     </div>
-  )
-}
-
-function MenuItemOrder({
-  locations,
-}: {
-  locations: PannaMenuProduct["orderLocations"]
-}) {
-  return (
-    <details className="menu-item-order">
-      <Button className="menu-item-order__trigger" asChild>
-        <summary>Order now</summary>
-      </Button>
-
-      <ul className="menu-item-order__menu">
-        {locations.map((location) => (
-          <li key={location.href}>
-            <a
-              className="menu-item-order__link"
-              href={location.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {location.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </details>
   )
 }

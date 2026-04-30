@@ -10,12 +10,13 @@ import {
   CarouselItem,
   useCarousel,
 } from "@/components/ui/carousel"
-import type { PannaLocationGalleryImage } from "@/data/panna-locations"
 import { useCarouselAutoplay } from "@/hooks/use-carousel-autoplay"
 import { cn } from "@/lib/utils"
 
+import type { LocationGalleryImage } from "./types"
+
 type LocationGalleryCarouselProps = {
-  images: readonly PannaLocationGalleryImage[]
+  images: readonly LocationGalleryImage[]
   locationName: string
 }
 
@@ -102,7 +103,7 @@ export function LocationGalleryCarousel({
         <CarouselContent className="location-gallery__main-track">
           {images.map((image, index) => (
             <CarouselItem
-              key={image.src}
+              key={image.key}
               className="location-gallery__main-slide"
             >
               <img
@@ -132,7 +133,7 @@ export function LocationGalleryCarousel({
           <CarouselContent className="location-gallery__thumbnail-track">
             {images.map((image, index) => (
               <CarouselItem
-                key={image.src}
+                key={image.key}
                 className="location-gallery__thumbnail-slide"
               >
                 <Button
@@ -232,7 +233,6 @@ function LocationGalleryChevron({
       viewBox="0 0 1000 1000"
       aria-hidden="true"
       focusable="false"
-      data-icon="inline-start"
       className="location-gallery__control-icon"
     >
       <path d={LOCATION_GALLERY_CHEVRON_PATHS[direction]} />

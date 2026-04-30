@@ -1,34 +1,65 @@
 ---
-import { MenuBackLink } from "@/components/menu/MenuBackLink";
-import MenuCategoryHero from "@/components/menu/MenuCategoryHero.astro";
-import { MenuProductGrid } from "@/components/menu/MenuProductGrid";
-import { pannaMenuData, type PannaMenuCategoryPage } from "@/data/panna-menu";
-import SiteLayout from "@/layouts/SiteLayout.astro";
+import { MenuBackLink } from "@/components/menu/MenuBackLink"
+import MenuCategoryHero from "@/components/menu/MenuCategoryHero.astro"
+import {
+	MenuProductGrid,
+	type MenuProductCard,
+} from "@/components/menu/MenuProductGrid"
+import { pannaSectionAssets } from "@/data/panna-section-assets"
+import { imageUrl } from "@/lib/sanity/image"
+import {
+	MENU_CATEGORY_PAGE_QUERY,
+	MENU_CATEGORY_SLUGS_QUERY,
+} from "@/lib/sanity/queries"
+import SiteLayout from "@/layouts/SiteLayout.astro"
+import { sanityClient } from "sanity:client"
 
-export function getStaticPaths() {
-	return pannaMenuData.categoryPages.map((category) => ({
-		params: { category: category.slug },
-		props: { category },
-	}));
+export async function getStaticPaths() {
+	const slugs = await sanityClient.fetch(MENU_CATEGORY_SLUGS_QUERY)
+	return slugs
+		.filter((entry) => entry.slug)
+		.map((entry) => ({
+			params: { category: entry.slug as string },
+		}))
 }
 
-interface Props {
-	category: PannaMenuCategoryPage;
+const { category: categorySlug } = Astro.params
+
+const category = await sanityClient.fetch(MENU_CATEGORY_PAGE_QUERY, {
+	slug: categorySlug,
+})
+
+if (!category) {
+	return Astro.redirect("/menu/")
 }
 
-const { category } = Astro.props;
+const products: MenuProductCard[] = (category.items ?? [])
+	.filter((item) => item.slug && item.image)
+	.map((item) => ({
+		id: item._id,
+		slug: item.slug as string,
+		title: item.title ?? "",
+		image: {
+			src: imageUrl(item.image!, { width: 800, height: 800 }),
+			alt: item.image?.alt ?? item.title ?? "",
+		},
+	}))
 ---
 
 <SiteLayout
-	title={`${category.title} | PANNA`}
-	description={`Explore PANNA ${category.title.toLowerCase()} menu items and details.`}
+	title={`${category.label} | PANNA`}
+	description={`Explore PANNA ${category.label?.toLowerCase()} menu items and details.`}
 >
 	<div class="menu-category-page">
 		<MenuCategoryHero
-			category={category}
-			background={pannaMenuData.categoryHero.background}
+			title={category.label ?? ""}
+			background={pannaSectionAssets.menu.categoryHero.background}
 		/>
-		<MenuProductGrid title={category.title} products={category.products} />
+		<MenuProductGrid
+			title={category.label ?? ""}
+			categorySlug={category.slug as string}
+			products={products}
+		/>
 		<MenuBackLink href="/menu/" label="GO BACK" />
 	</div>
 </SiteLayout>

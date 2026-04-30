@@ -1,31 +1,50 @@
 ---
-import { MenuBackLink } from "@/components/menu/MenuBackLink";
-import { MenuItemDetail } from "@/components/menu/MenuItemDetail";
+import { MenuBackLink } from "@/components/menu/MenuBackLink"
 import {
-	pannaMenuData,
-	type PannaMenuCategoryPage,
-	type PannaMenuProduct,
-} from "@/data/panna-menu";
-import SiteLayout from "@/layouts/SiteLayout.astro";
+	MenuItemDetail,
+	type MenuItemDetailData,
+} from "@/components/menu/MenuItemDetail"
+import { imageUrl } from "@/lib/sanity/image"
+import {
+	MENU_ITEM_PAGE_QUERY,
+	MENU_ITEM_SLUGS_QUERY,
+} from "@/lib/sanity/queries"
+import SiteLayout from "@/layouts/SiteLayout.astro"
+import { sanityClient } from "sanity:client"
 
-export function getStaticPaths() {
-	return pannaMenuData.categoryPages.flatMap((category) =>
-		category.products.map((product) => ({
+export async function getStaticPaths() {
+	const items = await sanityClient.fetch(MENU_ITEM_SLUGS_QUERY)
+	return items
+		.filter((entry) => entry.slug && entry.categorySlug)
+		.map((entry) => ({
 			params: {
-				category: category.slug,
-				item: product.slug,
+				category: entry.categorySlug as string,
+				item: entry.slug as string,
 			},
-			props: { category, product },
-		})),
-	);
+		}))
 }
 
-interface Props {
-	category: PannaMenuCategoryPage;
-	product: PannaMenuProduct;
+const { category: categorySlug, item: itemSlug } = Astro.params
+
+const item = await sanityClient.fetch(MENU_ITEM_PAGE_QUERY, {
+	categorySlug,
+	itemSlug,
+})
+
+if (!item || !item.image) {
+	return Astro.redirect(`/menu/${categorySlug}/`)
 }
 
-const { category, product } = Astro.props;
+const product: MenuItemDetailData = {
+	title: item.title ?? "",
+	description: item.description ?? "",
+	rating: item.rating ?? 0,
+	image: {
+		src: imageUrl(item.image, { width: 800, height: 800 }),
+		alt: item.image.alt ?? item.title ?? "",
+	},
+	orderUrl: item.orderUrl ?? "",
+}
 ---
 
 <SiteLayout
@@ -34,6 +53,6 @@ const { category, product } = Astro.props;
 >
 	<div class="menu-item-page">
 		<MenuItemDetail product={product} />
-		<MenuBackLink href={`/menu/${category.slug}/`} label="GO BACK" />
+		<MenuBackLink href={`/menu/${categorySlug}/`} label="GO BACK" />
 	</div>
 </SiteLayout>

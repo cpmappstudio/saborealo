@@ -1,8 +1,14 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
-import type { PannaMenuData } from "@/data/panna-menu"
+
+export type MenuCategoryCard = {
+  id: string
+  slug: string
+  label: string
+  image: { src: string; alt: string }
+}
 
 type MenuCategoryGridProps = {
-  categories: readonly PannaMenuData["categories"][number][]
+  categories: readonly MenuCategoryCard[]
 }
 
 export function MenuCategoryGrid({ categories }: MenuCategoryGridProps) {
@@ -22,13 +28,16 @@ export function MenuCategoryGrid({ categories }: MenuCategoryGridProps) {
 
         <ul className="menu-category-grid">
           {categories.map((category) => (
-            <li className="menu-category-item" key={category.label}>
-              <a className="menu-category-link" href={category.href}>
+            <li className="menu-category-item" key={category.id}>
+              <a
+                className="menu-category-link"
+                href={`/menu/${category.slug}/`}
+              >
                 <Card className="menu-category-card">
                   <img
                     className="menu-category-card__image"
-                    src={category.image}
-                    alt=""
+                    src={category.image.src}
+                    alt={category.image.alt}
                     width={400}
                     height={400}
                     loading="lazy"
