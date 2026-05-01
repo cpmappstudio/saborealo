@@ -18,7 +18,7 @@ const category = await sanityClient.fetch(MENU_CATEGORY_PAGE_QUERY, {
 })
 
 if (!category) {
-	return Astro.redirect("/menu/")
+	return Astro.rewrite("/404")
 }
 
 const products: MenuProductCard[] = (category.items ?? [])

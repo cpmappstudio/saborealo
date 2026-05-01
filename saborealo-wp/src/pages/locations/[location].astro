@@ -18,7 +18,7 @@ const data = await sanityClient.fetch(LOCATION_PAGE_QUERY, {
 })
 
 if (!data) {
-	return Astro.redirect("/")
+	return Astro.rewrite("/404")
 }
 
 const phrase = data.phrase ?? ""

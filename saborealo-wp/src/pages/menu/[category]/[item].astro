@@ -17,7 +17,7 @@ const item = await sanityClient.fetch(MENU_ITEM_PAGE_QUERY, {
 })
 
 if (!item || !item.image) {
-	return Astro.redirect(`/menu/${categorySlug}/`)
+	return Astro.rewrite("/404")
 }
 
 const product: MenuItemDetailData = {

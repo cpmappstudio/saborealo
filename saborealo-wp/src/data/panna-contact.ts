@@ -1,5 +1,3 @@
-import { pannaImage as image } from "@/data/panna-assets";
-
 type ContactInputField = {
   control: "input";
   id: string;
