@@ -1,7 +1,5 @@
 "use client"
 
-import * as React from "react"
-
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -11,7 +9,6 @@ import {
 } from "@/components/ui/carousel"
 import type { PannaHomeData } from "@/data/panna-home"
 import { useCarouselAutoplay } from "@/hooks/use-carousel-autoplay"
-import { cn } from "@/lib/utils"
 
 import { CarouselDots } from "./CarouselDots"
 
@@ -65,21 +62,10 @@ export function StarProductCarousel({ slides }: StarProductCarouselProps) {
 }
 
 function StarProductSlide({ slide }: { slide: StarProduct }) {
-  const style: React.CSSProperties = {}
-  const hasBackgroundImage = "bgImage" in slide && Boolean(slide.bgImage)
-
-  if ("bg" in slide && slide.bg) {
-    style.backgroundColor = slide.bg
-  }
-
-  if (hasBackgroundImage) {
-    style.backgroundImage = `url("${slide.bgImage}")`
-  }
-
   return (
     <CardContent
-      className={cn("star-card__slide", !hasBackgroundImage && "is-light")}
-      style={style}
+      className="star-card__slide is-light"
+      style={{ backgroundColor: slide.bg }}
     >
       <div className="star-card__media">
         <img
@@ -94,26 +80,8 @@ function StarProductSlide({ slide }: { slide: StarProduct }) {
       </div>
 
       <div className="star-card__copy">
-        {"titleImage" in slide && slide.titleImage ? (
-          <img
-            src={slide.titleImage}
-            alt=""
-            width={520}
-            height={180}
-            loading="lazy"
-            decoding="async"
-            className="star-card__title-image"
-          />
-        ) : (
-          <h3 className="star-card__heading">
-            {"title" in slide ? slide.title : ""}
-          </h3>
-        )}
-
-        {"text" in slide && slide.text ? (
-          <p className="star-card__text">{slide.text}</p>
-        ) : null}
-
+        <h3 className="star-card__heading">{slide.title}</h3>
+        <p className="star-card__text">{slide.text}</p>
         <Button className="btn" asChild>
           <a href={slide.href}>{slide.cta}</a>
         </Button>

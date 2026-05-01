@@ -84,22 +84,17 @@ export function SiteFooter({ logo, footer, currentPath }: SiteFooterProps) {
                 ))}
               </div>
 
-              {/*
               <div className="site-footer__apps">
-                {footer.appButtons.map((item) => (
-                  <a href={item.href} key={item.alt}>
-                    <img
-                      src={item.image}
-                      alt={item.alt}
-                      width={420}
-                      height={125}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </a>
-                ))}
+                <img
+                  src={footer.legalNotice.src}
+                  alt={footer.legalNotice.alt}
+                  width={footer.legalNotice.width}
+                  height={footer.legalNotice.height}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
-              */}
+
             </FooterColumn>
           </div>
         </div>

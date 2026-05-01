@@ -44,6 +44,10 @@ type SiteIconProps = {
 
 export function SiteIcon({ type, className, dataIcon }: SiteIconProps) {
   const icon = SITE_ICONS[type]
+  // Only some icons (e.g. instagram) need fill-rule="evenodd" so that
+  // overlapping paths render correctly. Narrow with `in` to keep the data
+  // sparse without polluting every icon definition with `fillRule: undefined`.
+  const fillRule = "fillRule" in icon ? icon.fillRule : undefined
 
   return (
     <svg
@@ -53,11 +57,7 @@ export function SiteIcon({ type, className, dataIcon }: SiteIconProps) {
       className={className}
       data-icon={dataIcon}
     >
-      <path
-        d={icon.path}
-        fillRule={icon.fillRule}
-        clipRule={icon.fillRule}
-      />
+      <path d={icon.path} fillRule={fillRule} clipRule={fillRule} />
     </svg>
   )
 }

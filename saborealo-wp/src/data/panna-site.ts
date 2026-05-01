@@ -1,4 +1,3 @@
-import { pannaImage as image } from "@/data/panna-assets"
 import { PANNA_ORDER_URL } from "@/data/panna-links"
 
 type LocationNavLink = {
@@ -93,18 +92,12 @@ export function buildPannaSiteData({
           href: "https://www.google.com/search?q=saborealo+bakery",
         },
       ],
-      appButtons: [
-        {
-          image: image("2024/10/APP-STORE.webp"),
-          href: "https://apps.apple.com/us/app/panna-new-latino-food/id6474134808",
-          alt: "Download on the App Store",
-        },
-        {
-          image: image("2024/10/GOOGLE-PLAY.webp"),
-          href: "https://play.google.com/store/apps/details?id=com.como.prod976720239767",
-          alt: "Get it on Google Play",
-        },
-      ],
+      legalNotice: {
+        src: "/images/stores/consumer-advisory.png",
+        alt: "Consumer Advisory: consuming raw or undercooked meats, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness, especially if you have certain medical conditions. Florida Department of Business and Professional Regulation, Division of Hotels and Restaurants. Section 3-603.11, FDA Food Code.",
+        width: 577,
+        height: 442,
+      },
     },
   } as const
 }
