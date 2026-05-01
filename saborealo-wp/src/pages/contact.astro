@@ -14,6 +14,9 @@ const result = Astro.getActionResult(actions.submitContact);
 if (result?.data) {
     return Astro.redirect("/contact/");
 }
+if (result?.error) {
+    console.error("[submitContact]", result.error);
+}
 
 const inputErrors = isInputError(result?.error) ? result.error.fields : {};
 ---

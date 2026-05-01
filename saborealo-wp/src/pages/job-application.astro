@@ -13,6 +13,9 @@ const result = Astro.getActionResult(actions.submitJobApplication);
 if (result?.data) {
     return Astro.redirect("/job-application/");
 }
+if (result?.error) {
+    console.error("[submitJobApplication]", result.error);
+}
 
 const inputErrors = isInputError(result?.error) ? result.error.fields : {};
 ---
