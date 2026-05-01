@@ -18,13 +18,25 @@ import type { PannaSiteData } from "@/data/panna-site"
 type ContactPageProps = {
   contact: PannaContactData
   contactItems: PannaSiteData["contact"]
+  /**
+   * URL string of the Astro action endpoint. Pass `String(actions.X)`
+   * from the `.astro` page — passing the action object directly makes
+   * React 19 treat it as a Server Action and override `method`/`encType`.
+   */
+  action?: string
+  inputErrors?: Record<string, string[] | undefined>
 }
 
 type ContactBandStyle = CSSProperties & {
   "--contact-band-background": string
 }
 
-export function ContactPage({ contact, contactItems }: ContactPageProps) {
+export function ContactPage({
+  contact,
+  contactItems,
+  action,
+  inputErrors,
+}: ContactPageProps) {
   const bandStyle: ContactBandStyle = {
     "--contact-band-background": `url("${contact.contactBand.background}")`,
   }
@@ -34,7 +46,11 @@ export function ContactPage({ contact, contactItems }: ContactPageProps) {
       <section className="contact-intro" aria-labelledby="contact-title">
         <div className="contact-intro__inner panna-shell">
           <ContactHelp help={contact.help} />
-          <ContactForm form={contact.form} />
+          <ContactForm
+            form={contact.form}
+            action={action}
+            inputErrors={inputErrors}
+          />
         </div>
       </section>
 
@@ -73,20 +89,44 @@ export function ContactPage({ contact, contactItems }: ContactPageProps) {
   )
 }
 
-function ContactForm({ form }: { form: PannaContactData["form"] }) {
+function ContactForm({
+  form,
+  action,
+  inputErrors,
+}: {
+  form: PannaContactData["form"]
+  action?: string
+  inputErrors?: Record<string, string[] | undefined>
+}) {
   return (
     <form
       className="contact-form panna-form"
       name={form.name}
       method="post"
+      action={action}
       encType="application/x-www-form-urlencoded"
-      aria-label="Contact PANNA"
+      aria-label="Contact Saborealo Bakery"
+      data-astro-reload
     >
+      {/* Honeypot — bots fill this, humans don't */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={honeypotStyle}
+      />
+
       <FieldSet className="panna-form__fieldset">
-        <FieldLegend className="sr-only">Contact PANNA</FieldLegend>
+        <FieldLegend className="sr-only">Contact Saborealo Bakery</FieldLegend>
         <FieldGroup className="panna-form__fields">
           {form.fields.map((field) => (
-            <ContactFormField key={field.id} field={field} />
+            <ContactFormField
+              key={field.id}
+              field={field}
+              error={inputErrors?.[field.name]?.[0]}
+            />
           ))}
         </FieldGroup>
       </FieldSet>
@@ -98,7 +138,13 @@ function ContactForm({ form }: { form: PannaContactData["form"] }) {
   )
 }
 
-function ContactFormField({ field }: { field: ContactFormFieldConfig }) {
+function ContactFormField({
+  field,
+  error,
+}: {
+  field: ContactFormFieldConfig
+  error?: string
+}) {
   if (field.control === "textarea") {
     return (
       <PannaTextareaField
@@ -111,6 +157,7 @@ function ContactFormField({ field }: { field: ContactFormFieldConfig }) {
         rows={field.rows}
         spellCheck={field.spellCheck}
         labelClassName="sr-only"
+        error={error}
       />
     )
   }
@@ -129,6 +176,7 @@ function ContactFormField({ field }: { field: ContactFormFieldConfig }) {
       title={field.title}
       spellCheck={field.spellCheck}
       labelClassName="sr-only"
+      error={error}
     />
   )
 }
@@ -157,7 +205,7 @@ function ContactInfoList({
   items: ContactPageProps["contactItems"]
 }) {
   return (
-    <ul className="contact-info-list" aria-label="PANNA contact information">
+    <ul className="contact-info-list" aria-label="Saborealo Bakery contact information">
       {items.map((item) => {
         const icon = item.icon === "pin" ? "searchLocation" : item.icon
 
@@ -172,4 +220,12 @@ function ContactInfoList({
       })}
     </ul>
   )
+}
+
+const honeypotStyle: CSSProperties = {
+  position: "absolute",
+  left: "-9999px",
+  width: 1,
+  height: 1,
+  overflow: "hidden",
 }

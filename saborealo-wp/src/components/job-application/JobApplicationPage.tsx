@@ -16,6 +16,13 @@ import type {
 
 type JobApplicationPageProps = {
   jobApplication: PannaJobApplicationData
+  /**
+   * URL string of the Astro action endpoint. Pass `String(actions.X)`
+   * from the `.astro` page — passing the action object directly makes
+   * React 19 treat it as a Server Action and override `method`/`encType`.
+   */
+  action?: string
+  inputErrors?: Record<string, string[] | undefined>
 }
 
 type JobApplicationFormStyle = CSSProperties & {
@@ -24,6 +31,8 @@ type JobApplicationFormStyle = CSSProperties & {
 
 export function JobApplicationPage({
   jobApplication,
+  action,
+  inputErrors,
 }: JobApplicationPageProps) {
   return (
     <div className="job-application-page">
@@ -52,14 +61,26 @@ export function JobApplicationPage({
           <h2 id="job-application-form-title" className="sr-only">
             {jobApplication.form.title}
           </h2>
-          <JobApplicationForm form={jobApplication.form} />
+          <JobApplicationForm
+            form={jobApplication.form}
+            action={action}
+            inputErrors={inputErrors}
+          />
         </div>
       </section>
     </div>
   )
 }
 
-function JobApplicationForm({ form }: { form: PannaJobApplicationData["form"] }) {
+function JobApplicationForm({
+  form,
+  action,
+  inputErrors,
+}: {
+  form: PannaJobApplicationData["form"]
+  action?: string
+  inputErrors?: Record<string, string[] | undefined>
+}) {
   const formStyle: JobApplicationFormStyle = {
     "--job-application-form-background": `url("${form.background}")`,
   }
@@ -70,14 +91,30 @@ function JobApplicationForm({ form }: { form: PannaJobApplicationData["form"] })
       style={formStyle}
       name={form.name}
       method="post"
+      action={action}
       encType="application/x-www-form-urlencoded"
       aria-label={form.title}
+      data-astro-reload
     >
+      {/* Honeypot — bots fill this, humans don't */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={honeypotStyle}
+      />
+
       <FieldSet className="panna-form__fieldset">
         <FieldLegend className="sr-only">{form.title}</FieldLegend>
         <FieldGroup className="panna-form__grid">
           {form.items.map((item) => (
-            <JobApplicationFormItem key={item.id} item={item} />
+            <JobApplicationFormItem
+              key={item.id}
+              item={item}
+              inputErrors={inputErrors}
+            />
           ))}
         </FieldGroup>
       </FieldSet>
@@ -91,9 +128,14 @@ function JobApplicationForm({ form }: { form: PannaJobApplicationData["form"] })
 
 function JobApplicationFormItem({
   item,
+  inputErrors,
 }: {
   item: JobApplicationFormItemConfig
+  inputErrors?: Record<string, string[] | undefined>
 }) {
+  const fieldError =
+    item.kind !== "section" ? inputErrors?.[item.name]?.[0] : undefined
+
   switch (item.kind) {
     case "acceptance":
       return (
@@ -104,6 +146,7 @@ function JobApplicationFormItem({
           required={item.required}
           width={item.width}
           text={item.text}
+          error={fieldError}
         />
       )
     case "choice-group":
@@ -116,6 +159,7 @@ function JobApplicationFormItem({
           width={item.width}
           inputType={item.inputType}
           options={item.options}
+          error={fieldError}
         />
       )
     case "input":
@@ -133,6 +177,7 @@ function JobApplicationFormItem({
           spellCheck={item.spellCheck}
           title={item.title}
           width={item.width}
+          error={fieldError}
         />
       )
     case "section":
@@ -148,6 +193,7 @@ function JobApplicationFormItem({
           rows={item.rows}
           spellCheck={item.spellCheck}
           width={item.width}
+          error={fieldError}
         />
       )
   }
@@ -173,4 +219,12 @@ function JobApplicationSection({
       {content}
     </h2>
   )
+}
+
+const honeypotStyle: CSSProperties = {
+  position: "absolute",
+  left: "-9999px",
+  width: 1,
+  height: 1,
+  overflow: "hidden",
 }

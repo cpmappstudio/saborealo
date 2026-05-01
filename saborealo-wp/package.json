@@ -15,8 +15,8 @@
     "sanity": "sanity"
   },
   "dependencies": {
-    "@astrojs/node": "^10.0.6",
     "@astrojs/react": "^5.0.4",
+    "@astrojs/vercel": "^10.0.6",
     "@hugeicons/core-free-icons": "^4.1.1",
     "@hugeicons/react": "^1.1.6",
     "@sanity/astro": "^3.3.1",
@@ -34,7 +34,9 @@
     "radix-ui": "^1.4.3",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
+    "react-email": "^6.0.5",
     "react-is": "^19.2.5",
+    "resend": "^6.12.2",
     "sanity": "^5.23.0",
     "shadcn": "^4.6.0",
     "styled-components": "^6.4.1",

@@ -21,6 +21,7 @@ type PannaFormBaseFieldProps = {
   className?: string
   labelClassName?: string
   controlClassName?: string
+  error?: string
 }
 
 type PannaTextFieldProps = PannaFormBaseFieldProps &
@@ -66,6 +67,7 @@ export function PannaTextField({
   className,
   labelClassName,
   controlClassName,
+  error,
   type = "text",
   autoComplete,
   inputMode,
@@ -74,8 +76,12 @@ export function PannaTextField({
   spellCheck,
   title,
 }: PannaTextFieldProps) {
+  const errorId = `${id}-error`
   return (
-    <Field className={pannaFormFieldClassName(width, className)}>
+    <Field
+      className={pannaFormFieldClassName(width, className)}
+      data-invalid={error ? true : undefined}
+    >
       <FieldLabel
         htmlFor={id}
         className={cn("panna-form__label", labelClassName)}
@@ -94,8 +100,11 @@ export function PannaTextField({
         required={required}
         spellCheck={spellCheck}
         title={title}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? errorId : undefined}
         className={cn("panna-form__control", controlClassName)}
       />
+      <PannaFieldError id={errorId} message={error} />
     </Field>
   )
 }
@@ -109,13 +118,18 @@ export function PannaTextareaField({
   className,
   labelClassName,
   controlClassName,
+  error,
   autoComplete,
   placeholder,
   rows,
   spellCheck,
 }: PannaTextareaFieldProps) {
+  const errorId = `${id}-error`
   return (
-    <Field className={pannaFormFieldClassName(width, className)}>
+    <Field
+      className={pannaFormFieldClassName(width, className)}
+      data-invalid={error ? true : undefined}
+    >
       <FieldLabel
         htmlFor={id}
         className={cn("panna-form__label", labelClassName)}
@@ -131,8 +145,11 @@ export function PannaTextareaField({
         required={required}
         rows={rows}
         spellCheck={spellCheck}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? errorId : undefined}
         className={cn("panna-form__control panna-form__textarea", controlClassName)}
       />
+      <PannaFieldError id={errorId} message={error} />
     </Field>
   )
 }
@@ -148,9 +165,15 @@ export function PannaChoiceGroup({
   inputType,
   options,
   optionsClassName,
+  error,
 }: PannaChoiceGroupProps) {
+  const errorId = `${id}-error`
   return (
-    <FieldSet className={pannaFormFieldClassName(width, className)}>
+    <FieldSet
+      className={pannaFormFieldClassName(width, className)}
+      data-invalid={error ? true : undefined}
+      aria-describedby={error ? errorId : undefined}
+    >
       <FieldLegend className={cn("panna-form__label", labelClassName)}>
         {label}
         <PannaRequiredMark required={required} />
@@ -167,6 +190,7 @@ export function PannaChoiceGroup({
                 type={inputType}
                 value={option.value}
                 required={required}
+                aria-invalid={error ? true : undefined}
                 className="panna-form__checkbox"
               />
               <span className="panna-form__option-text">{option.label}</span>
@@ -174,6 +198,7 @@ export function PannaChoiceGroup({
           )
         })}
       </div>
+      <PannaFieldError id={errorId} message={error} />
     </FieldSet>
   )
 }
@@ -187,9 +212,15 @@ export function PannaAcceptanceField({
   className,
   labelClassName,
   text,
+  error,
 }: PannaAcceptanceFieldProps) {
+  const errorId = `${id}-error`
   return (
-    <FieldSet className={pannaFormFieldClassName(width, className)}>
+    <FieldSet
+      className={pannaFormFieldClassName(width, className)}
+      data-invalid={error ? true : undefined}
+      aria-describedby={error ? errorId : undefined}
+    >
       <FieldLegend className={cn("panna-form__label", labelClassName)}>
         {label}
         <PannaRequiredMark required={required} />
@@ -200,10 +231,12 @@ export function PannaAcceptanceField({
           name={name}
           type="checkbox"
           required={required}
+          aria-invalid={error ? true : undefined}
           className="panna-form__checkbox"
         />
         <span className="panna-form__acceptance-text">{text}</span>
       </label>
+      <PannaFieldError id={errorId} message={error} />
     </FieldSet>
   )
 }
@@ -217,6 +250,18 @@ function PannaRequiredMark({ required }: { required?: boolean }) {
     <span className="panna-form__required" aria-hidden="true">
       {" *"}
     </span>
+  )
+}
+
+function PannaFieldError({ id, message }: { id: string; message?: string }) {
+  if (!message) {
+    return null
+  }
+
+  return (
+    <p id={id} className="panna-form__error" role="alert">
+      {message}
+    </p>
   )
 }
 

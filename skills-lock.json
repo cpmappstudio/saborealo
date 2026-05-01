@@ -19,6 +19,12 @@
       "skillPath": "skills/dial-your-context/SKILL.md",
       "computedHash": "6457172cf80695a7563116847f68fa64d1bf48b77cac6a850b964e5dacdb5241"
     },
+    "email-best-practices": {
+      "source": "resend/email-best-practices",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "6a88d51e8c8ffd7d5b70831c303878ad29a3734792db9b56456269c4d70c2ff8"
+    },
     "frontend-design": {
       "source": "anthropics/skills",
       "sourceType": "github",
@@ -30,6 +36,18 @@
       "sourceType": "github",
       "skillPath": ".agents/skills/pnpm/SKILL.md",
       "computedHash": "755a02251e7e24534d8e78ea50bcdb426cd82e7147d2e866d64dd21716c75dd9"
+    },
+    "resend": {
+      "source": "resend/resend-skills",
+      "sourceType": "github",
+      "skillPath": "skills/resend/SKILL.md",
+      "computedHash": "936851c3e22e6de1d416134a9cd170d7540ddebe5a1c0113eef66537c843c6ed"
+    },
+    "resend-design-skills": {
+      "source": "resend/design-skills",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "b7adcc927f8f6f2c2434e4d2902cd02bff5c0056d36fff7b74a125745b1fe6fe"
     },
     "sanity-best-practices": {
       "source": "sanity-io/agent-toolkit",

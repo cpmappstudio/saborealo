@@ -57,7 +57,8 @@ export type JobApplicationFormItemConfig =
   | JobApplicationSection
   | JobApplicationTextareaField
 
-const phonePattern = "[0-9()#&+*=. -]+"
+// v-mode safe (HTML5 pattern attribute). Escape parens and dash.
+const phonePattern = "[0-9 .,\\(\\)*+=#&\\-]+"
 const phoneTitle = "Only numbers and phone characters (#, -, *, etc) are accepted."
 
 const yesNoOptions = [

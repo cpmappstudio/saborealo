@@ -71,7 +71,7 @@ export const pannaContactData = {
         type: "tel",
         autoComplete: "tel",
         inputMode: "tel",
-        pattern: "[0-9()#&+*=. -]+",
+        pattern: "[0-9 .,\\(\\)*+=#&\\-]+",
         title: "Only numbers and phone characters (#, -, *, etc) are accepted.",
         required: true,
       },

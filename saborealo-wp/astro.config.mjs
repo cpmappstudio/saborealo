@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import node from "@astrojs/node";
+import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
 import sanity from "@sanity/astro";
@@ -25,9 +25,9 @@ if (!projectId || !dataset) {
 
 export default defineConfig({
   // Site pages are static by default. The embedded Sanity Studio under
-  // `/admin/[...params]` runs as SPA (prerender: false), so a server
-  // adapter is required at build time.
-  adapter: node({ mode: "standalone" }),
+  // `/admin/[...params]` and the form pages (`prerender = false`) run as
+  // SSR functions on Vercel; static pages prerender to the CDN.
+  adapter: vercel(),
 
   redirects: {
     "/locations": "/",

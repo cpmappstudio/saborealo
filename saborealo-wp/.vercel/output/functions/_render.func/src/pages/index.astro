@@ -1,0 +1,92 @@
+---
+import {
+	HeroCarousel,
+	type HeroSlide,
+} from "@/components/home/HeroCarousel"
+import {
+	MenuGrid,
+	type HomeMenuCategory,
+} from "@/components/home/MenuGrid"
+import { PromoCards } from "@/components/home/PromoCards"
+import { StarProductCarousel } from "@/components/home/StarProductCarousel"
+import {
+	StoreCards,
+	type HomeStore,
+} from "@/components/home/StoreCards"
+import { pannaHomeData } from "@/data/panna-home"
+import { imageUrl } from "@/lib/sanity/image"
+import {
+	HERO_SLIDES_QUERY,
+	HOME_MENU_CATEGORIES_QUERY,
+	HOME_STORES_QUERY,
+} from "@/lib/sanity/queries"
+import SiteLayout from "@/layouts/SiteLayout.astro"
+import { sanityClient } from "sanity:client"
+
+const [heroSlidesRaw, homeCategoriesRaw, storesRaw] = await Promise.all([
+	sanityClient.fetch(HERO_SLIDES_QUERY),
+	sanityClient.fetch(HOME_MENU_CATEGORIES_QUERY),
+	sanityClient.fetch(HOME_STORES_QUERY),
+])
+
+const heroSlides: HeroSlide[] = heroSlidesRaw
+	.filter((slide) => slide.desktopImage && slide.mobileImage)
+	.map((slide) => ({
+		id: slide._id,
+		alt: slide.alt ?? "",
+		desktop: imageUrl(slide.desktopImage!, { width: 1920, height: 500 }),
+		mobile: imageUrl(slide.mobileImage!, { width: 768, height: 1024 }),
+	}))
+
+const homeCategories: HomeMenuCategory[] = homeCategoriesRaw
+	.filter(
+		(category) =>
+			category.slug &&
+			category.icon &&
+			(category.homeRow === "top" || category.homeRow === "bottom"),
+	)
+	.map((category) => ({
+		id: category._id,
+		slug: category.slug as string,
+		label: category.label ?? "",
+		icon: {
+			src: imageUrl(category.icon!, { width: 180, height: 180 }),
+			alt: category.icon?.alt ?? category.label ?? "",
+		},
+		homeRow: category.homeRow as "top" | "bottom",
+	}))
+
+const stores: HomeStore[] = storesRaw
+	.filter((store) => store.slug && store.cardImage)
+	.map((store) => ({
+		id: store._id,
+		slug: store.slug as string,
+		name: store.title ?? "",
+		badgeName: store.badgeName ?? "",
+		guruHref: store.guruUrl ?? "",
+		image: {
+			src: imageUrl(store.cardImage!, { width: 768, height: 384 }),
+			alt: store.cardImage?.alt ?? `PANNA ${store.title ?? ""}`,
+		},
+		address: store.address ?? "",
+		phone: store.phone ?? "",
+	}))
+---
+
+<SiteLayout
+	title="PANNA - New Latino Food"
+	description="Discover PANNA New Latino Food menus, promotions, store locations, and Venezuelan-inspired favorites."
+>
+	<h1 class="sr-only">PANNA New Latino Food</h1>
+	<HeroCarousel slides={heroSlides} client:load />
+	<MenuGrid
+		categories={homeCategories}
+		client:visible={{ rootMargin: "200px" }}
+	/>
+	<StarProductCarousel
+		slides={pannaHomeData.starProducts}
+		client:visible={{ rootMargin: "200px" }}
+	/>
+	<PromoCards cards={pannaHomeData.promoCards} />
+	<StoreCards stores={stores} story={pannaHomeData.aboutStory} />
+</SiteLayout>
