@@ -51,7 +51,7 @@ export const pannaHomeData = {
   ],
   aboutStory: {
     title: "Authentic Puerto Rican Flavor, Fresh Every Day",
-    underline: image("2024/10/TRAZO@2x.webp"),
+    underline: "/trazo.webp",
     image: "/images/stores/saborealo-matador-store.jpg",
     imageAlt: "Saborealo Bakery store exterior",
     paragraphs: [

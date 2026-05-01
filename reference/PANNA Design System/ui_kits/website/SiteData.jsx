@@ -11,7 +11,10 @@ window.PANNA_DATA = (() => {
         href: "#",
         sub: [
           { label: "DINE-IN", href: "https://mypanna.com/menu/dine-in/" },
-          { label: "AREPA PICK 4 FLAVORS", href: "https://mypanna.com/menu/arepa-pick-4-flavors/" },
+          {
+            label: "AREPA PICK 4 FLAVORS",
+            href: "https://mypanna.com/menu/arepa-pick-4-flavors/",
+          },
           { label: "HOLIDAY", href: "https://mypanna.com/menu/holiday-menu/" },
           { label: "CATERING", href: "https://mypanna.com/menu/catering/" },
           { label: "GIFT CARDS", href: "https://mypanna.com/giftcards/" },
@@ -21,12 +24,30 @@ window.PANNA_DATA = (() => {
         label: "BLOG",
         href: "https://mypanna.com/blog/",
         sub: [
-          { label: "We are PANNA", href: "https://mypanna.com/category/somos-panna/" },
-          { label: "Introduction to Venezuelan food", href: "https://mypanna.com/category/introduccion-a-la-comida-venezolana/" },
-          { label: "Essence of Venezuelan food", href: "https://mypanna.com/category/esencia-de-la-comida-venezolana/" },
-          { label: "Must-try Venezuelan dishes", href: "https://mypanna.com/category/platos-venezolanos-imprescindibles/" },
-          { label: "Traditional Venezuelan drinks", href: "https://mypanna.com/category/bebidas-tradicionales-venezolanas/" },
-          { label: "Flavors of Venezuela in Miami", href: "https://mypanna.com/category/sabores-de-venezuela-en-miami/" },
+          {
+            label: "We are PANNA",
+            href: "https://mypanna.com/category/somos-panna/",
+          },
+          {
+            label: "Introduction to Venezuelan food",
+            href: "https://mypanna.com/category/introduccion-a-la-comida-venezolana/",
+          },
+          {
+            label: "Essence of Venezuelan food",
+            href: "https://mypanna.com/category/esencia-de-la-comida-venezolana/",
+          },
+          {
+            label: "Must-try Venezuelan dishes",
+            href: "https://mypanna.com/category/platos-venezolanos-imprescindibles/",
+          },
+          {
+            label: "Traditional Venezuelan drinks",
+            href: "https://mypanna.com/category/bebidas-tradicionales-venezolanas/",
+          },
+          {
+            label: "Flavors of Venezuela in Miami",
+            href: "https://mypanna.com/category/sabores-de-venezuela-en-miami/",
+          },
         ],
       },
       {
@@ -35,8 +56,14 @@ window.PANNA_DATA = (() => {
         sub: [
           { label: "DORAL", href: "https://mypanna.com/locations/doral/" },
           { label: "ORLANDO", href: "https://mypanna.com/locations/orlando/" },
-          { label: "WESTON ROAD", href: "https://mypanna.com/locations/weston-road/" },
-          { label: "WESTON TOWN CENTER", href: "https://mypanna.com/locations/weston-town-center/" },
+          {
+            label: "WESTON ROAD",
+            href: "https://mypanna.com/locations/weston-road/",
+          },
+          {
+            label: "WESTON TOWN CENTER",
+            href: "https://mypanna.com/locations/weston-town-center/",
+          },
         ],
       },
       { label: "CONTACT", href: "https://mypanna.com/contact/" },
@@ -45,17 +72,32 @@ window.PANNA_DATA = (() => {
         href: "https://mypanna.com/orders/",
         sub: [
           { label: "DORAL (3rd PARTY)", href: "https://mypanna.com/orders/" },
-          { label: "ORLANDO (3rd PARTY)", href: "https://www.getsauce.com/order/panna-orlando/menu" },
-          { label: "WESTON RD (3rd PARTY)", href: "https://mypanna.com/orders/" },
-          { label: "WESTON TOWN CENTER (3rd PARTY)", href: "https://mypanna.com/orders/" },
+          {
+            label: "ORLANDO (3rd PARTY)",
+            href: "https://www.getsauce.com/order/panna-orlando/menu",
+          },
+          {
+            label: "WESTON RD (3rd PARTY)",
+            href: "https://mypanna.com/orders/",
+          },
+          {
+            label: "WESTON TOWN CENTER (3rd PARTY)",
+            href: "https://mypanna.com/orders/",
+          },
         ],
       },
       {
         label: "DOWNLOAD APP",
         href: "#",
         sub: [
-          { label: "IPHONE", href: "https://apps.apple.com/us/app/panna-new-latino-food/id6474134808" },
-          { label: "ANDROID", href: "https://play.google.com/store/apps/details?id=com.como.prod976720239767" },
+          {
+            label: "IPHONE",
+            href: "https://apps.apple.com/us/app/panna-new-latino-food/id6474134808",
+          },
+          {
+            label: "ANDROID",
+            href: "https://play.google.com/store/apps/details?id=com.como.prod976720239767",
+          },
         ],
       },
     ],
@@ -122,7 +164,10 @@ window.PANNA_DATA = (() => {
         { label: "CACHAPAS", image: img("2024/10/ICONO_CACHAPAS.webp") },
         { label: "BRUNCH", image: img("2025/09/BRUNCH2.webp") },
         { label: "FROM THE GRILL", image: img("2024/10/FROM-THE-GRILL.webp") },
-        { label: "LATIN CORNER", image: img("2024/10/ICONO_LATIN-CORNER.webp") },
+        {
+          label: "LATIN CORNER",
+          image: img("2024/10/ICONO_LATIN-CORNER.webp"),
+        },
         { label: "PLATTERS", image: img("2024/10/ICONO_PLATTERS.webp") },
         { label: "GRAB 'N GO", image: img("2024/10/ICONO_GRAB-GO.webp") },
         { label: "BURGERS", image: img("2024/10/BURGER.webp") },
@@ -132,7 +177,10 @@ window.PANNA_DATA = (() => {
         { label: "PATACONES", image: img("2024/10/ICONO_PATACON.webp") },
         { label: "BREAKFAST", image: img("2024/10/ICONO_BREAKFAST.webp") },
         { label: "COFFEE", image: img("2024/10/ICONO_COFFEE.webp") },
-        { label: "JUICES & SMOOTHIES", image: img("2024/10/ICONO_JUICE-SMOOTHIES.webp") },
+        {
+          label: "JUICES & SMOOTHIES",
+          image: img("2024/10/ICONO_JUICE-SMOOTHIES.webp"),
+        },
         { label: "DESSERT", image: img("2024/10/ICONO_DESSERT.webp") },
         { label: "PLATO LATINO", image: img("2024/10/NEW-LATINO-MIX-1.webp") },
       ],
@@ -226,6 +274,7 @@ window.PANNA_DATA = (() => {
     aboutStory: {
       title: "A Fast Casual Venezuelan Restaurant Making History in the USA!",
       underline: img("2024/10/TRAZO@2x.webp"),
+      underline: "/trazo.webp",
       image: img("2024/10/PANNA-STORES.webp"),
       imageAlt: "PANNA store exterior",
       paragraphs: [
@@ -253,28 +302,67 @@ window.PANNA_DATA = (() => {
         { label: "About Us", href: "https://mypanna.com/about-us/" },
         { label: "Our Menu", href: "https://mypanna.com/menu/dine-in/" },
         { label: "Orders", href: "https://mypanna.com/orders/" },
-        { label: "Arepa pick 4 flavor", href: "https://mypanna.com/menu/arepa-pick-4-flavors/" },
+        {
+          label: "Arepa pick 4 flavor",
+          href: "https://mypanna.com/menu/arepa-pick-4-flavors/",
+        },
         { label: "Catering", href: "https://mypanna.com/menu/catering/" },
-        { label: "Holiday Menu", href: "https://mypanna.com/menu/holiday-menu/" },
-        { label: "Job Application", href: "https://mypanna.com/job-application/" },
+        {
+          label: "Holiday Menu",
+          href: "https://mypanna.com/menu/holiday-menu/",
+        },
+        {
+          label: "Job Application",
+          href: "https://mypanna.com/job-application/",
+        },
         { label: "Accessibility", href: "https://mypanna.com/accessibility/" },
         { label: "Contact", href: "https://mypanna.com/contact/" },
       ],
       storeLinks: [
         { label: "Doral", href: "https://mypanna.com/locations/doral/" },
         { label: "Orlando", href: "https://mypanna.com/locations/orlando/" },
-        { label: "Weston Road", href: "https://mypanna.com/locations/weston-road/" },
-        { label: "Weston Town Center", href: "https://mypanna.com/locations/weston-town-center/" },
+        {
+          label: "Weston Road",
+          href: "https://mypanna.com/locations/weston-road/",
+        },
+        {
+          label: "Weston Town Center",
+          href: "https://mypanna.com/locations/weston-town-center/",
+        },
       ],
       social: [
-        { type: "facebook", label: "Facebook", href: "https://www.facebook.com/pannastores" },
-        { type: "instagram", label: "Instagram", href: "https://www.instagram.com/pannastores/" },
-        { type: "tiktok", label: "TikTok", href: "https://www.tiktok.com/@pannastores" },
-        { type: "google", label: "Google", href: "https://www.google.com/search?q=MYPANNA" },
+        {
+          type: "facebook",
+          label: "Facebook",
+          href: "https://www.facebook.com/pannastores",
+        },
+        {
+          type: "instagram",
+          label: "Instagram",
+          href: "https://www.instagram.com/pannastores/",
+        },
+        {
+          type: "tiktok",
+          label: "TikTok",
+          href: "https://www.tiktok.com/@pannastores",
+        },
+        {
+          type: "google",
+          label: "Google",
+          href: "https://www.google.com/search?q=MYPANNA",
+        },
       ],
       appButtons: [
-        { image: img("2024/10/APP-STORE.webp"), href: "https://apps.apple.com/us/app/panna-new-latino-food/id6474134808", alt: "Download on the App Store" },
-        { image: img("2024/10/GOOGLE-PLAY.webp"), href: "https://play.google.com/store/apps/details?id=com.como.prod976720239767", alt: "Get it on Google Play" },
+        {
+          image: img("2024/10/APP-STORE.webp"),
+          href: "https://apps.apple.com/us/app/panna-new-latino-food/id6474134808",
+          alt: "Download on the App Store",
+        },
+        {
+          image: img("2024/10/GOOGLE-PLAY.webp"),
+          href: "https://play.google.com/store/apps/details?id=com.como.prod976720239767",
+          alt: "Get it on Google Play",
+        },
       ],
     },
   };

@@ -1,45 +1,44 @@
-import { pannaImage as image } from "@/data/panna-assets"
+import { pannaImage as image } from "@/data/panna-assets";
 
 type ContactInputField = {
-  control: "input"
-  id: string
-  name: string
-  label: string
-  placeholder: string
-  type: "text" | "tel" | "email"
-  autoComplete: string
-  required?: boolean
-  inputMode?: "text" | "tel" | "email"
-  pattern?: string
-  title?: string
-  spellCheck?: boolean
-}
+  control: "input";
+  id: string;
+  name: string;
+  label: string;
+  placeholder: string;
+  type: "text" | "tel" | "email";
+  autoComplete: string;
+  required?: boolean;
+  inputMode?: "text" | "tel" | "email";
+  pattern?: string;
+  title?: string;
+  spellCheck?: boolean;
+};
 
 type ContactTextareaField = {
-  control: "textarea"
-  id: string
-  name: string
-  label: string
-  placeholder: string
-  autoComplete: string
-  rows: number
-  required?: boolean
-  spellCheck?: boolean
-}
+  control: "textarea";
+  id: string;
+  name: string;
+  label: string;
+  placeholder: string;
+  autoComplete: string;
+  rows: number;
+  required?: boolean;
+  spellCheck?: boolean;
+};
 
-export type ContactFormFieldConfig = ContactInputField | ContactTextareaField
+export type ContactFormFieldConfig = ContactInputField | ContactTextareaField;
 
 export const pannaContactData = {
   help: {
     title: "LET US HELP YOU",
     underline: {
-      src: image("2024/10/MANCHA.png"),
+      src: "/mancha.webp",
       width: 361,
       height: 44,
     },
     copy: "We are here to serve you and hear any feedback that helps us keep our food and service at its best.",
-    officeHours:
-      "",
+    officeHours: "",
   },
   form: {
     name: "contact-us",
@@ -111,8 +110,7 @@ export const pannaContactData = {
   },
   contactBand: {
     title: "CONTACT US",
-    description:
-      "",
+    description: "",
     background: "#000000",
     mascot: {
       src: "/images/stores/puerto-rico-flag.png",
@@ -120,6 +118,6 @@ export const pannaContactData = {
       height: 552,
     },
   },
-} as const
+} as const;
 
-export type PannaContactData = typeof pannaContactData
+export type PannaContactData = typeof pannaContactData;

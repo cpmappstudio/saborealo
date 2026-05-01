@@ -1,29 +1,29 @@
-import { pannaImage as image } from "@/data/panna-assets"
+import { pannaImage as image } from "@/data/panna-assets";
 
 type AboutStoryImage = {
-  src: string
-  alt: string
-  width: number
-  height: number
-}
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
 
 type AboutStorySection = {
-  id: string
-  title: string
-  paragraphs: readonly string[]
-}
+  id: string;
+  title: string;
+  paragraphs: readonly string[];
+};
 
 type AboutStoryColumn = {
-  id: string
-  image: AboutStoryImage
-  sections: readonly AboutStorySection[]
-}
+  id: string;
+  image: AboutStoryImage;
+  sections: readonly AboutStorySection[];
+};
 
 export const pannaAboutData = {
   intro: {
     title: "Authentic Puerto Rican flavor, right here in Kissimmee!",
     underline: {
-      src: image("2024/10/MANCHA.png"),
+      src: "/mancha.webp",
       width: 361,
       height: 44,
     },
@@ -80,6 +80,6 @@ export const pannaAboutData = {
       },
     ] satisfies AboutStoryColumn[],
   },
-} as const
+} as const;
 
-export type PannaAboutData = typeof pannaAboutData
+export type PannaAboutData = typeof pannaAboutData;
