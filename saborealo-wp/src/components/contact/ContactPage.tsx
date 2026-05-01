@@ -108,16 +108,6 @@ function ContactForm({
       aria-label="Contact Saborealo Bakery"
       data-astro-reload
     >
-      {/* Honeypot — bots fill this, humans don't */}
-      <input
-        type="text"
-        name="company"
-        tabIndex={-1}
-        autoComplete="off"
-        aria-hidden="true"
-        style={honeypotStyle}
-      />
-
       <FieldSet className="panna-form__fieldset">
         <FieldLegend className="sr-only">Contact Saborealo Bakery</FieldLegend>
         <FieldGroup className="panna-form__fields">
@@ -222,10 +212,3 @@ function ContactInfoList({
   )
 }
 
-const honeypotStyle: CSSProperties = {
-  position: "absolute",
-  left: "-9999px",
-  width: 1,
-  height: 1,
-  overflow: "hidden",
-}

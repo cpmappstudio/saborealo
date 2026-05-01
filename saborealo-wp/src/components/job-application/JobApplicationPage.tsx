@@ -96,16 +96,6 @@ function JobApplicationForm({
       aria-label={form.title}
       data-astro-reload
     >
-      {/* Honeypot — bots fill this, humans don't */}
-      <input
-        type="text"
-        name="company"
-        tabIndex={-1}
-        autoComplete="off"
-        aria-hidden="true"
-        style={honeypotStyle}
-      />
-
       <FieldSet className="panna-form__fieldset">
         <FieldLegend className="sr-only">{form.title}</FieldLegend>
         <FieldGroup className="panna-form__grid">
@@ -221,10 +211,3 @@ function JobApplicationSection({
   )
 }
 
-const honeypotStyle: CSSProperties = {
-  position: "absolute",
-  left: "-9999px",
-  width: 1,
-  height: 1,
-  overflow: "hidden",
-}

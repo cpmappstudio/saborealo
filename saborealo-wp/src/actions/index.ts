@@ -25,8 +25,6 @@ export const server = {
     // client-side; the schema only re-validates email format server-side
     // and accepts the rest as plain strings.
     input: z.object({
-      // honeypot — bots fill this, humans don't
-      company: z.string().max(0).optional(),
       first_name: z.string().optional(),
       last_name: z.string(),
       phone: z.string(),
@@ -35,11 +33,6 @@ export const server = {
       message: z.string().optional(),
     }),
     handler: async (data) => {
-      // Honeypot — silently succeed without sending
-      if (data.company) {
-        return { id: "skipped" };
-      }
-
       const emailContent = ContactNotification({
         first_name: data.first_name,
         last_name: data.last_name,
@@ -78,7 +71,6 @@ export const server = {
     // metadata to render every value with its label.
     input: z
       .object({
-        company: z.string().max(0).optional(),
         position: z.string(),
         name: z.string(),
         applicant_certification: z.literal("on"),
@@ -87,10 +79,6 @@ export const server = {
         z.union([z.string(), z.array(z.string())]).optional(),
       ),
     handler: async (data) => {
-      if (data.company) {
-        return { id: "skipped" };
-      }
-
       const emailContent = JobApplicationNotification({ data });
       const html = await render(emailContent);
       const text = await render(emailContent, { plainText: true });
