@@ -205,25 +205,27 @@ function MobileNavigation({
 function HeaderSearch({ className }: { className?: string }) {
   return (
     <form
-      action="https://mypanna.com/"
       className={cn("site-search__form", className)}
       method="get"
       role="search"
       aria-label="Site search"
+      onSubmit={(event) => event.preventDefault()}
     >
       <Input
         name="s"
-        placeholder="Search Products…"
+        placeholder="Search coming soon…"
         type="search"
         autoComplete="off"
         aria-label="Search products"
         className="site-search__input"
+        disabled
       />
       <Button
         type="submit"
         size="icon"
         aria-label="Search"
         className="site-search__button"
+        disabled
       >
         <HugeiconsIcon
           icon={Search01Icon}
