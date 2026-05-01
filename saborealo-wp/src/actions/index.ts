@@ -15,16 +15,7 @@ function requireEnv(name: string): string {
   return value;
 }
 
-// Lazy-init Resend so the module loads on serverless cold start even when
-// env vars haven't been set yet (e.g. preview deploys without secrets).
-// The instance is cached across invocations of the same warm function.
-let resendClient: Resend | undefined;
-function getResend(): Resend {
-  if (!resendClient) {
-    resendClient = new Resend(requireEnv("RESEND_API_KEY"));
-  }
-  return resendClient;
-}
+const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
 export const server = {
   submitContact: defineAction({
@@ -60,7 +51,7 @@ export const server = {
       const html = await render(emailContent);
       const text = await render(emailContent, { plainText: true });
 
-      const { data: sent, error } = await getResend().emails.send({
+      const { data: sent, error } = await resend.emails.send({
         from: requireEnv("MAIL_FROM"),
         to: [requireEnv("MAIL_TO_CONTACT")],
         replyTo: data.email,
@@ -104,7 +95,7 @@ export const server = {
       const html = await render(emailContent);
       const text = await render(emailContent, { plainText: true });
 
-      const { data: sent, error } = await getResend().emails.send({
+      const { data: sent, error } = await resend.emails.send({
         from: requireEnv("MAIL_FROM"),
         to: [requireEnv("MAIL_TO_JOB_APPLICATION")],
         subject: `New job application — ${data.name} (${data.position})`,
