@@ -7,21 +7,9 @@ import PannaTextHero from "@/components/site/PannaTextHero.astro"
 import { pannaSectionAssets } from "@/data/panna-section-assets"
 import { emailToHref, phoneToHref } from "@/lib/contact-href"
 import { imageUrl } from "@/lib/sanity/image"
-import {
-	LOCATION_PAGE_QUERY,
-	LOCATION_SLUGS_QUERY,
-} from "@/lib/sanity/queries"
+import { LOCATION_PAGE_QUERY } from "@/lib/sanity/queries"
 import SiteLayout from "@/layouts/SiteLayout.astro"
 import { sanityClient } from "sanity:client"
-
-export async function getStaticPaths() {
-	const slugs = await sanityClient.fetch(LOCATION_SLUGS_QUERY)
-	return slugs
-		.filter((entry) => entry.slug)
-		.map((entry) => ({
-			params: { location: entry.slug as string },
-		}))
-}
 
 const { location: locationSlug } = Astro.params
 

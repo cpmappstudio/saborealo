@@ -7,21 +7,9 @@ import {
 } from "@/components/menu/MenuProductGrid"
 import { pannaSectionAssets } from "@/data/panna-section-assets"
 import { imageUrl } from "@/lib/sanity/image"
-import {
-	MENU_CATEGORY_PAGE_QUERY,
-	MENU_CATEGORY_SLUGS_QUERY,
-} from "@/lib/sanity/queries"
+import { MENU_CATEGORY_PAGE_QUERY } from "@/lib/sanity/queries"
 import SiteLayout from "@/layouts/SiteLayout.astro"
 import { sanityClient } from "sanity:client"
-
-export async function getStaticPaths() {
-	const slugs = await sanityClient.fetch(MENU_CATEGORY_SLUGS_QUERY)
-	return slugs
-		.filter((entry) => entry.slug)
-		.map((entry) => ({
-			params: { category: entry.slug as string },
-		}))
-}
 
 const { category: categorySlug } = Astro.params
 

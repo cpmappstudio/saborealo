@@ -52,12 +52,6 @@ export const MENU_CATEGORY_PAGE_QUERY = defineQuery(/* groq */ `
   }
 `)
 
-export const MENU_CATEGORY_SLUGS_QUERY = defineQuery(/* groq */ `
-  *[_type == "menuCategory" && defined(slug.current)]{
-    "slug": slug.current
-  }
-`)
-
 /* ─── Menu items ────────────────────────────────────────────────── */
 
 export const MENU_ITEM_PAGE_QUERY = defineQuery(/* groq */ `
@@ -76,15 +70,6 @@ export const MENU_ITEM_PAGE_QUERY = defineQuery(/* groq */ `
         "slug": slug.current,
         label
       }
-    }
-`)
-
-export const MENU_ITEM_SLUGS_QUERY = defineQuery(/* groq */ `
-  *[_type == "menuItem"
-    && defined(slug.current)
-    && defined(category->slug.current)] {
-      "slug": slug.current,
-      "categorySlug": category->slug.current
     }
 `)
 
@@ -156,8 +141,3 @@ export const LOCATION_PAGE_QUERY = defineQuery(/* groq */ `
   }
 `)
 
-export const LOCATION_SLUGS_QUERY = defineQuery(/* groq */ `
-  *[_type == "location" && defined(slug.current)]{
-    "slug": slug.current
-  }
-`)

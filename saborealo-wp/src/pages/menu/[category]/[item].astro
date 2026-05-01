@@ -5,24 +5,9 @@ import {
 	type MenuItemDetailData,
 } from "@/components/menu/MenuItemDetail"
 import { imageUrl } from "@/lib/sanity/image"
-import {
-	MENU_ITEM_PAGE_QUERY,
-	MENU_ITEM_SLUGS_QUERY,
-} from "@/lib/sanity/queries"
+import { MENU_ITEM_PAGE_QUERY } from "@/lib/sanity/queries"
 import SiteLayout from "@/layouts/SiteLayout.astro"
 import { sanityClient } from "sanity:client"
-
-export async function getStaticPaths() {
-	const items = await sanityClient.fetch(MENU_ITEM_SLUGS_QUERY)
-	return items
-		.filter((entry) => entry.slug && entry.categorySlug)
-		.map((entry) => ({
-			params: {
-				category: entry.categorySlug as string,
-				item: entry.slug as string,
-			},
-		}))
-}
 
 const { category: categorySlug, item: itemSlug } = Astro.params
 

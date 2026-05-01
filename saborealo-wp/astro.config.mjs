@@ -24,9 +24,10 @@ if (!projectId || !dataset) {
 }
 
 export default defineConfig({
-  // Site pages are static by default. The embedded Sanity Studio under
-  // `/admin/[...params]` and the form pages (`prerender = false`) run as
-  // SSR functions on Vercel; static pages prerender to the CDN.
+  // SSR per the official `sanity-template-astro-clean` template — pages
+  // fetch fresh content per request so editor changes appear without a
+  // redeploy. Sanity's CDN keeps the per-request cost low.
+  output: "server",
   adapter: vercel(),
 
   redirects: {
@@ -38,7 +39,7 @@ export default defineConfig({
       projectId,
       dataset,
       apiVersion: "2026-02-01",
-      useCdn: false,
+      useCdn: true,
       studioBasePath: "/admin",
     }),
     react(),
