@@ -221,8 +221,7 @@ export const location = defineType({
       title: "Restaurant Guru URL",
       type: "url",
       group: "contact",
-      validation: (rule) =>
-        rule.uri({ scheme: ["http", "https"] }).required(),
+      validation: (rule) => rule.uri({ scheme: ["http", "https"] }),
     }),
     defineField({
       name: "badgeName",

@@ -16,6 +16,7 @@ export function PannaRestaurantGuruBadge({
   sourceLabel = "Restaurant Guru",
   year = "2025",
 }: PannaRestaurantGuruBadgeProps) {
+  if (!href) return null;
   return (
     <Badge
       className={cn("restaurant-guru-badge", className)}
