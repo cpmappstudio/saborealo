@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect, useId, useRef, useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
+  Cancel01Icon,
   Menu01Icon,
   Search01Icon,
 } from "@hugeicons/core-free-icons";
@@ -22,15 +24,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 import { SiteLogo } from "@/components/site/SiteLogo";
 import type { PannaSiteData } from "@/data/panna-site";
 import {
@@ -59,7 +52,7 @@ export function SiteHeader({ logo, nav, currentPath }: SiteHeaderProps) {
         </div>
 
         <div className="site-header__nav-wrap site-header__mobile-nav">
-          <MobileNavigation currentPath={currentPath} logo={logo} nav={nav} />
+          <MobileNavigation currentPath={currentPath} nav={nav} />
         </div>
 
         <div className="site-search">
@@ -148,41 +141,76 @@ function DesktopNavigation({
 }
 
 function MobileNavigation({
-  logo,
   nav,
   currentPath,
-}: SiteHeaderProps) {
+}: {
+  nav: SiteHeaderProps["nav"];
+  currentPath: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const menuId = useId();
+  const navigationRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [currentPath]);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!navigationRef.current?.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
+
   return (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="site-header__toggle"
-          aria-label="Open navigation"
+    <div
+      className="site-header__mobile-nav-panel"
+      data-open={open ? "true" : undefined}
+      ref={navigationRef}
+    >
+      <Button
+        variant="ghost"
+        size="icon"
+        className="site-header__toggle"
+        aria-controls={menuId}
+        aria-label={open ? "Close navigation" : "Open navigation"}
+        aria-expanded={open}
+        onClick={() => setOpen((current) => !current)}
+      >
+        <HugeiconsIcon
+          icon={open ? Cancel01Icon : Menu01Icon}
+          data-icon="inline-start"
+          strokeWidth={2}
+          aria-hidden="true"
+        />
+      </Button>
+      {open ? (
+        <div
+          className="site-header__sheet"
+          id={menuId}
+          role="dialog"
+          aria-label="Mobile navigation"
         >
-          <HugeiconsIcon
-            icon={Menu01Icon}
-            data-icon="inline-start"
-            strokeWidth={2}
-            aria-hidden="true"
-          />
-        </Button>
-      </SheetTrigger>
-      <SheetContent side="left" className="site-header__sheet">
-        <SheetHeader>
-          <SheetTitle className="site-header__sheet-title">
-            <SiteLogo logo={logo} decorative />
-            <span>Navigation</span>
-          </SheetTitle>
-          <SheetDescription className="site-header__sheet-description">
-            Browse PANNA sections and quick actions.
-          </SheetDescription>
-        </SheetHeader>
-
-        <div className="site-header__sheet-body">
-          <HeaderSearch className="site-header__sheet-search-form" />
-
+          <div className="site-header__sheet-body">
           <Accordion
             type="single"
             collapsible
@@ -190,15 +218,17 @@ function MobileNavigation({
           >
             {nav.map((item) => (
               <MobileNavigationItem
+                closeMenu={() => setOpen(false)}
                 currentPath={currentPath}
                 key={item.label}
                 item={item}
               />
             ))}
           </Accordion>
+          </div>
         </div>
-      </SheetContent>
-    </Sheet>
+      ) : null}
+    </div>
   );
 }
 
@@ -241,27 +271,28 @@ function HeaderSearch({ className }: { className?: string }) {
 function MobileNavigationItem({
   item,
   currentPath,
+  closeMenu,
 }: {
   item: NavItem;
   currentPath: string;
+  closeMenu: () => void;
 }) {
   const isActive = isActiveLink(currentPath, item);
 
   if (!("sub" in item) || !item.sub || item.href !== "#") {
     return (
-      <SheetClose asChild>
-        <a
-          aria-current={
-            isCurrentPage(currentPath, item.href) ? "page" : undefined
-          }
-          className="site-header__mobile-link"
-          data-active={isActive ? "true" : undefined}
-          href={item.href}
-          {...getLinkAttributes(item)}
-        >
-          {item.label}
-        </a>
-      </SheetClose>
+      <a
+        aria-current={
+          isCurrentPage(currentPath, item.href) ? "page" : undefined
+        }
+        className="site-header__mobile-link"
+        data-active={isActive ? "true" : undefined}
+        href={item.href}
+        onClick={closeMenu}
+        {...getLinkAttributes(item)}
+      >
+        {item.label}
+      </a>
     );
   }
 
@@ -277,21 +308,21 @@ function MobileNavigationItem({
       <AccordionContent>
         <div className="site-header__mobile-sub-list">
           {item.sub.map((subItem) => (
-            <SheetClose asChild key={subItem.label}>
-              <a
-                aria-current={
-                  isCurrentPage(currentPath, subItem.href) ? "page" : undefined
-                }
-                className="site-header__mobile-sub-link"
-                data-active={
-                  isActiveLink(currentPath, subItem) ? "true" : undefined
-                }
-                href={subItem.href}
-                {...getLinkAttributes(subItem)}
-              >
-                {subItem.label}
-              </a>
-            </SheetClose>
+            <a
+              aria-current={
+                isCurrentPage(currentPath, subItem.href) ? "page" : undefined
+              }
+              className="site-header__mobile-sub-link"
+              data-active={
+                isActiveLink(currentPath, subItem) ? "true" : undefined
+              }
+              href={subItem.href}
+              key={subItem.label}
+              onClick={closeMenu}
+              {...getLinkAttributes(subItem)}
+            >
+              {subItem.label}
+            </a>
           ))}
         </div>
       </AccordionContent>
