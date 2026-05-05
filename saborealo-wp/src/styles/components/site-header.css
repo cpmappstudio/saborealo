@@ -380,7 +380,7 @@
         grid-template-columns: 50% 50%;
         row-gap: 10px;
         min-height: 0;
-        padding: 20px;
+        padding: 10px;
     }
 
     .site-header__logo img {
