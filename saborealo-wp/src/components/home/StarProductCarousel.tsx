@@ -41,7 +41,7 @@ export function StarProductCarousel({ slides }: StarProductCarouselProps) {
           >
             <CarouselContent className="star-card__track">
               {slides.map((slide) => (
-                <CarouselItem key={slide.href} className="star-card__item">
+                <CarouselItem key={slide.id} className="star-card__item">
                   <StarProductSlide slide={slide} />
                 </CarouselItem>
               ))}

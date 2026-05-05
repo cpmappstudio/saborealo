@@ -4,6 +4,7 @@ import { PANNA_ORDER_URL } from "@/data/panna-links"
 export const pannaHomeData = {
   starProducts: [
     {
+      id: "breakfast-menu",
       layout: "text",
       bg: "#FFBA52",
       product: "/images/products/breakfast.png",
@@ -13,6 +14,7 @@ export const pannaHomeData = {
       href: "/menu",
     },
     {
+      id: "puerto-rico-menu",
       layout: "text",
       bg: "#FFBA52",
       product: "/images/products/puerto-rico-food.png",
@@ -22,6 +24,7 @@ export const pannaHomeData = {
       href: "/menu",
     },
     {
+      id: "drinks-menu",
       layout: "text",
       bg: "#FFBA52",
       product: "/images/products/drinks.png",
