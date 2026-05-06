@@ -118,6 +118,7 @@
 .menu-category-card__header[data-slot="card-header"] {
   display: grid;
   place-items: center;
+  align-content: space-around;
   width: 100%;
   block-size: 98px;
   overflow: hidden;

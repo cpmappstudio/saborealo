@@ -210,9 +210,26 @@
     min-height: 0;
   }
 
+  .star-card__track {
+    align-items: stretch;
+  }
+
+  .star-card__item[data-slot="carousel-item"] {
+    display: flex;
+  }
+
   .star-card__slide[data-slot="card-content"] {
-    min-height: 0;
+    min-height: 640px;
+    height: 100%;
+    grid-template-rows: auto minmax(0, 1fr);
+    align-items: stretch;
     padding: 30px 0;
+  }
+
+  .star-card__copy {
+    height: 100%;
+    gap: 16px;
+    justify-content: space-between;
   }
 
   .star-card__heading {
