@@ -58,8 +58,13 @@ export function StoreCards({ stores, story }: StoreCardsProps) {
 }
 
 function StoreCard({ store }: { store: HomeStore }) {
+  const hasGuruBadge = Boolean(store.guruHref)
+
   return (
-    <Card className="store-card">
+    <Card
+      className="store-card"
+      data-has-guru={hasGuruBadge ? "true" : "false"}
+    >
       <div className="store-card__media">
         <img
           src={store.image.src}
