@@ -59,6 +59,7 @@
 .menu-category-link {
   position: relative;
   display: block;
+  height: 100%;
   min-width: 0;
   color: var(--panna-black);
   text-decoration: none;
@@ -82,15 +83,18 @@
 }
 
 .menu-category-card[data-slot="card"] {
-  min-height: 265px;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) 98px;
+  height: 360px;
+  min-height: 0;
   gap: 0;
-  align-items: center;
   padding: 10px;
   overflow: hidden;
   background: var(--panna-white);
   border: 0;
   border-radius: 15px;
   box-shadow: none;
+  container-type: inline-size;
   transition:
     background-color .3s ease,
     box-shadow .3s ease;
@@ -105,29 +109,33 @@
 .menu-category-card__image {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 1;
+  height: 100%;
+  min-height: 0;
   object-fit: cover;
   border-radius: 5px;
 }
 
 .menu-category-card__header[data-slot="card-header"] {
   display: grid;
-  flex: 1;
   place-items: center;
   width: 100%;
-  padding: 10px 0 0;
+  block-size: 98px;
+  overflow: hidden;
+  padding: 12px 0 0;
 }
 
 .menu-category-card__title {
+  width: 100%;
+  margin: 0;
   color: var(--panna-black);
   font-family: var(--font-display);
-  font-size: 40px;
+  font-size: var(--menu-category-title-size, clamp(24px, 12cqi, 40px));
   font-weight: 500;
-  line-height: 1.05;
+  line-height: 0.92;
   text-align: center;
   text-transform: uppercase;
   text-wrap: balance;
+  overflow-wrap: anywhere;
   letter-spacing: 0;
 }
 
@@ -145,11 +153,12 @@
   }
 
   .menu-category-card[data-slot="card"] {
-    min-height: 230px;
+    height: 320px;
+    grid-template-rows: minmax(0, 1fr) 88px;
   }
 
-  .menu-category-card__title {
-    font-size: 30px;
+  .menu-category-card__header[data-slot="card-header"] {
+    block-size: 88px;
   }
 }
 
@@ -182,7 +191,17 @@
   }
 
   .menu-category-card[data-slot="card"] {
+    height: auto;
     min-height: 285px;
+    grid-template-rows: minmax(0, 1fr) 88px;
+  }
+
+  .menu-category-card__header[data-slot="card-header"] {
+    block-size: 88px;
+  }
+
+  .menu-category-card__title {
+    width: 100%;
   }
 }
 

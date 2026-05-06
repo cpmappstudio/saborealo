@@ -1,9 +1,7 @@
 ---
 import MenuHero from "@/components/menu/MenuHero.astro"
-import {
-	MenuCategoryGrid,
-	type MenuCategoryCard,
-} from "@/components/menu/MenuCategoryGrid"
+import MenuCategoryGrid from "@/components/menu/MenuCategoryGrid.astro"
+import type { MenuCategoryCard } from "@/components/menu/menu-category-grid.types"
 import { pannaSectionAssets } from "@/data/panna-section-assets"
 import { imageUrl } from "@/lib/sanity/image"
 import { MENU_CATEGORIES_QUERY } from "@/lib/sanity/queries"
