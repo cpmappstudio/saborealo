@@ -1,0 +1,161 @@
+---
+import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import type { MenuCategoryCard } from "./menu-category-grid.types"
+
+interface Props {
+	categories: readonly MenuCategoryCard[]
+}
+
+const { categories } = Astro.props
+---
+
+{
+	categories.length > 0 && (
+		<menu-category-grid-fit style="display: contents;">
+			<section
+				class="menu-page__grid-section"
+				aria-labelledby="menu-categories-title"
+			>
+				<div class="panna-shell">
+					<h2 id="menu-categories-title" class="sr-only">
+						Menu Categories
+					</h2>
+
+					<ul class="menu-category-grid">
+						{categories.map((category) => (
+							<li class="menu-category-item">
+								<a
+									class="menu-category-link"
+									href={`/menu/${category.slug}/`}
+								>
+									<Card className="menu-category-card">
+										<img
+											class="menu-category-card__image"
+											src={category.image.src}
+											alt={category.image.alt}
+											width={400}
+											height={400}
+											loading="lazy"
+											decoding="async"
+										/>
+
+										<CardHeader className="menu-category-card__header">
+											<CardTitle
+												className="menu-category-card__title"
+												data-fit-text
+											>
+												{category.label}
+											</CardTitle>
+										</CardHeader>
+									</Card>
+								</a>
+							</li>
+						))}
+					</ul>
+				</div>
+			</section>
+		</menu-category-grid-fit>
+	)
+}
+
+<script>
+	const HEIGHT_FUZZ = 0.5;
+	const MIN_TITLE_SIZE = 14;
+	const TITLE_SELECTOR = "[data-fit-text]";
+	const HEADER_SELECTOR = ".menu-category-card__header";
+
+	const getAvailableHeight = (element: HTMLElement) => {
+		const header = element.closest(HEADER_SELECTOR);
+		if (!(header instanceof HTMLElement)) return 0;
+
+		const styles = window.getComputedStyle(header);
+		const paddingTop = Number.parseFloat(styles.paddingTop) || 0;
+		const paddingBottom = Number.parseFloat(styles.paddingBottom) || 0;
+
+		return header.clientHeight - paddingTop - paddingBottom;
+	};
+
+	const fitTitle = (element: HTMLElement) => {
+		element.style.removeProperty("--menu-category-title-size");
+
+		const maxHeight = getAvailableHeight(element);
+		if (!maxHeight) return;
+
+		const initialHeight = element.getBoundingClientRect().height;
+		if (initialHeight <= maxHeight + HEIGHT_FUZZ) return;
+
+		let low = MIN_TITLE_SIZE;
+		let high = Number.parseFloat(window.getComputedStyle(element).fontSize);
+		let best = low;
+
+		while (high - low > HEIGHT_FUZZ) {
+			const mid = (low + high) / 2;
+			element.style.setProperty("--menu-category-title-size", `${mid}px`);
+
+			if (element.getBoundingClientRect().height <= maxHeight + HEIGHT_FUZZ) {
+				best = mid;
+				low = mid;
+			} else {
+				high = mid;
+			}
+		}
+
+		element.style.setProperty("--menu-category-title-size", `${best}px`);
+	};
+
+	class MenuCategoryGridFit extends HTMLElement {
+		private frame = 0;
+		private resizeObserver?: ResizeObserver;
+
+		private fitAllTitles = () => {
+			this.querySelectorAll(TITLE_SELECTOR).forEach((node) => {
+				if (node instanceof HTMLElement) {
+					fitTitle(node);
+				}
+			});
+		};
+
+		private scheduleFit = () => {
+			window.cancelAnimationFrame(this.frame);
+			this.frame = window.requestAnimationFrame(this.fitAllTitles);
+		};
+
+		private handleWindowResize = () => {
+			this.scheduleFit();
+		};
+
+		connectedCallback() {
+			this.scheduleFit();
+
+			window.addEventListener("resize", this.handleWindowResize, {
+				passive: true,
+			});
+
+			document.fonts?.ready.then(() => {
+				this.scheduleFit();
+			});
+
+			if ("ResizeObserver" in window) {
+				this.resizeObserver = new ResizeObserver(() => {
+					this.scheduleFit();
+				});
+
+				this.querySelectorAll(HEADER_SELECTOR).forEach((node) => {
+					if (node instanceof HTMLElement) {
+						this.resizeObserver?.observe(node);
+					}
+				});
+			}
+		}
+
+		disconnectedCallback() {
+			window.cancelAnimationFrame(this.frame);
+			window.removeEventListener("resize", this.handleWindowResize);
+			this.resizeObserver?.disconnect();
+		}
+	}
+
+	if (!customElements.get("menu-category-grid-fit")) {
+		customElements.define("menu-category-grid-fit", MenuCategoryGridFit);
+	}
+</script>
