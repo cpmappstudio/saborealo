@@ -1,0 +1,174 @@
+---
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import type { MenuProductCard } from "./menu-product-grid.types"
+
+interface Props {
+	title: string
+	categorySlug: string
+	products: readonly MenuProductCard[]
+}
+
+const { title, categorySlug, products } = Astro.props
+---
+
+{
+	products.length > 0 && (
+		<menu-product-grid-fit style="display: contents;">
+			<section
+				class="menu-category-products"
+				aria-labelledby="menu-category-products-title"
+			>
+				<div class="panna-shell">
+					<h2 id="menu-category-products-title" class="sr-only">
+						{title} Menu Items
+					</h2>
+
+					<ul class="menu-product-grid">
+						{products.map((product) => {
+							const href = `/menu/${categorySlug}/${product.slug}/`
+
+							return (
+								<li class="menu-product-item">
+									<Card className="menu-product-card">
+										<img
+											class="menu-product-card__image"
+											src={product.image.src}
+											alt={product.image.alt}
+											width={400}
+											height={400}
+											loading="lazy"
+											decoding="async"
+										/>
+
+										<CardHeader className="menu-product-card__header">
+											<CardTitle className="menu-product-card__title-wrap">
+												<h3 class="menu-product-card__title" data-fit-text>
+													{product.title}
+												</h3>
+											</CardTitle>
+										</CardHeader>
+
+										<CardFooter className="menu-product-card__footer">
+											<a
+												class="btn menu-product-card__button"
+												data-slot="button"
+												href={href}
+											>
+												VIEW DETAILS
+											</a>
+										</CardFooter>
+									</Card>
+								</li>
+							)
+						})}
+					</ul>
+				</div>
+			</section>
+		</menu-product-grid-fit>
+	)
+}
+
+<script>
+	const HEIGHT_FUZZ = 0.5;
+	const MOBILE_BREAKPOINT = 767;
+	const MIN_TITLE_SIZE = 16;
+	const TITLE_SELECTOR = "[data-fit-text]";
+	const HEADER_SELECTOR = ".menu-product-card__header";
+
+	const getAvailableHeight = (element: HTMLElement) => {
+		const header = element.closest(HEADER_SELECTOR);
+		if (!(header instanceof HTMLElement)) return 0;
+
+		const styles = window.getComputedStyle(header);
+		const paddingTop = Number.parseFloat(styles.paddingTop) || 0;
+		const paddingBottom = Number.parseFloat(styles.paddingBottom) || 0;
+
+		return header.clientHeight - paddingTop - paddingBottom;
+	};
+
+	const fitTitle = (element: HTMLElement) => {
+		element.style.removeProperty("--menu-product-title-size");
+
+		if (window.innerWidth <= MOBILE_BREAKPOINT) return;
+
+		const maxHeight = getAvailableHeight(element);
+		if (!maxHeight) return;
+
+		const initialHeight = element.getBoundingClientRect().height;
+		if (initialHeight <= maxHeight + HEIGHT_FUZZ) return;
+
+		let low = MIN_TITLE_SIZE;
+		let high = Number.parseFloat(window.getComputedStyle(element).fontSize);
+		let best = low;
+
+		while (high - low > HEIGHT_FUZZ) {
+			const mid = (low + high) / 2;
+			element.style.setProperty("--menu-product-title-size", `${mid}px`);
+
+			if (element.getBoundingClientRect().height <= maxHeight + HEIGHT_FUZZ) {
+				best = mid;
+				low = mid;
+			} else {
+				high = mid;
+			}
+		}
+
+		element.style.setProperty("--menu-product-title-size", `${best}px`);
+	};
+
+	class MenuProductGridFit extends HTMLElement {
+		private frame = 0;
+		private resizeObserver?: ResizeObserver;
+
+		private fitAllTitles = () => {
+			this.querySelectorAll(TITLE_SELECTOR).forEach((node) => {
+				if (node instanceof HTMLElement) {
+					fitTitle(node);
+				}
+			});
+		};
+
+		private scheduleFit = () => {
+			window.cancelAnimationFrame(this.frame);
+			this.frame = window.requestAnimationFrame(this.fitAllTitles);
+		};
+
+		private handleWindowResize = () => {
+			this.scheduleFit();
+		};
+
+		connectedCallback() {
+			this.scheduleFit();
+
+			window.addEventListener("resize", this.handleWindowResize, {
+				passive: true,
+			});
+
+			document.fonts?.ready.then(() => {
+				this.scheduleFit();
+			});
+
+			if ("ResizeObserver" in window) {
+				this.resizeObserver = new ResizeObserver(() => {
+					this.scheduleFit();
+				});
+
+				this.querySelectorAll(HEADER_SELECTOR).forEach((node) => {
+					if (node instanceof HTMLElement) {
+						this.resizeObserver?.observe(node);
+					}
+				});
+			}
+		}
+
+		disconnectedCallback() {
+			window.cancelAnimationFrame(this.frame);
+			window.removeEventListener("resize", this.handleWindowResize);
+			this.resizeObserver?.disconnect();
+		}
+	}
+
+	if (!customElements.get("menu-product-grid-fit")) {
+		customElements.define("menu-product-grid-fit", MenuProductGridFit);
+	}
+</script>

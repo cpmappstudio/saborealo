@@ -21,29 +21,35 @@
 }
 
 .menu-product-card[data-slot="card"] {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) 100px auto;
   height: 100%;
-  gap: 20px;
-  align-items: center;
-  padding: 10px 10px 20px;
-  overflow: visible;
+  gap: 10px;
+  padding: 10px 10px 16px;
+  overflow: hidden;
   background: var(--panna-white);
   border: 0;
   border-radius: 22px;
   box-shadow: 1px 3px 4px 1px rgba(0, 0, 0, 0.23);
+  container-type: inline-size;
 }
 
 .menu-product-card__image {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 1;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
   border-radius: 18px;
 }
 
 .menu-product-card__header[data-slot="card-header"] {
   display: grid;
   place-items: center;
+  align-content: space-around;
   width: 100%;
+  block-size: 122px;
+  overflow: hidden;
   padding: 0;
 }
 
@@ -54,13 +60,13 @@
 .menu-product-card__title {
   color: var(--panna-black);
   font-family: var(--font-display);
-  font-size: 30px;
+  font-size: var(--menu-product-title-size, clamp(22px, 8.5cqi, 30px));
   font-weight: 500;
-  line-height: 40px;
+  line-height: 1.05;
   text-align: center;
   text-transform: uppercase;
   text-wrap: balance;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
   letter-spacing: 0.3px;
   margin: 0;
 }
@@ -70,6 +76,7 @@
   justify-content: center;
   width: 100%;
   padding: 0;
+  margin-top: 2px;
 }
 
 .panna-site .menu-product-card__button[data-slot="button"] {
@@ -89,6 +96,14 @@
     padding-top: 30px;
   }
 
+  .menu-product-card[data-slot="card"] {
+    grid-template-rows: minmax(0, 1fr) 112px auto;
+  }
+
+  .menu-product-card__header[data-slot="card-header"] {
+    block-size: 112px;
+  }
+
   .panna-site .menu-product-card__button[data-slot="button"] {
     padding: 18px 25px;
   }
@@ -100,6 +115,35 @@
   }
 
   .menu-product-card[data-slot="card"] {
+    display: flex;
+    height: 100%;
     min-height: 0;
+    gap: 20px;
+    align-items: center;
+    padding: 10px 10px 20px;
+    overflow: visible;
+    container-type: normal;
+    grid-template-rows: none;
+  }
+
+  .menu-product-card__image {
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: fill;
+  }
+
+  .menu-product-card__header[data-slot="card-header"] {
+    block-size: auto;
+    overflow: visible;
+  }
+
+  .menu-product-card__title {
+    font-size: 30px;
+    line-height: 40px;
+    overflow-wrap: break-word;
+  }
+
+  .menu-product-card__footer[data-slot="card-footer"] {
+    margin-top: 0;
   }
 }
