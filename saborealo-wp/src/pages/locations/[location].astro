@@ -6,6 +6,7 @@ import type { LocationDetail } from "@/components/locations/types"
 import PannaTextHero from "@/components/site/PannaTextHero.astro"
 import { pannaSectionAssets } from "@/data/panna-section-assets"
 import { emailToHref, phoneToHref } from "@/lib/contact-href"
+import { rebrandPannaCopy } from "@/lib/rebrand"
 import { imageUrl } from "@/lib/sanity/image"
 import { LOCATION_PAGE_QUERY } from "@/lib/sanity/queries"
 import SiteLayout from "@/layouts/SiteLayout.astro"
@@ -21,14 +22,14 @@ if (!data) {
 	return Astro.rewrite("/404")
 }
 
-const phrase = data.phrase ?? ""
+const phrase = rebrandPannaCopy(data.phrase)
 const phone = data.phone ?? ""
 const email = data.email ?? ""
 
 const location: LocationDetail = {
 	id: data._id,
 	slug: data.slug as string,
-	title: data.title ?? "",
+	title: rebrandPannaCopy(data.title),
 	phrase,
 	address: data.address ?? "",
 	phone,
@@ -42,17 +43,17 @@ const location: LocationDetail = {
 		time: hour.time ?? "",
 	})),
 	guruHref: data.guruUrl ?? "",
-	badgeName: data.badgeName ?? "",
+	badgeName: rebrandPannaCopy(data.badgeName),
 	mapEmbedUrl: data.mapEmbedUrl ?? "",
 	mapTitle: data.mapTitle ?? "",
-	mapTagline: data.mapTagline ?? "",
+	mapTagline: rebrandPannaCopy(data.mapTagline),
 	overviewParagraphs: (data.overviewParagraphs ?? []).filter(
 		(p): p is string => typeof p === "string",
-	),
-	overviewHighlight: data.overviewHighlight ?? "",
+	).map((paragraph) => rebrandPannaCopy(paragraph)),
+	overviewHighlight: rebrandPannaCopy(data.overviewHighlight),
 	overviewBullets: (data.overviewBullets ?? []).filter(
 		(b): b is string => typeof b === "string",
-	),
+	).map((bullet) => rebrandPannaCopy(bullet)),
 	gallery: (data.gallery ?? [])
 		.filter((image) => image && image.asset)
 		.map((image) => ({
@@ -66,8 +67,8 @@ const location: LocationDetail = {
 ---
 
 <SiteLayout
-	title={data.metaTitle ?? `${location.title} | PANNA New Latino Food`}
-	description={data.metaDescription ?? location.phrase}
+	title={rebrandPannaCopy(data.metaTitle) || `${location.title} | Saborealo Bakery`}
+	description={rebrandPannaCopy(data.metaDescription) || location.phrase}
 >
 	<div class="location-page">
 		<PannaTextHero

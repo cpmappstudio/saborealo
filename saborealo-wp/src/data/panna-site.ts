@@ -28,7 +28,7 @@ export function buildPannaSiteData({
       src: "/logo.svg",
       width: 1024,
       height: 477,
-      alt: "PANNA New Latino Food",
+      alt: "Saborealo Bakery",
     },
     nav: [
       { label: "MENU", href: "/menu/", matchPath: "/menu/" },

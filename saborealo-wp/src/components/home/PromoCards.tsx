@@ -21,7 +21,7 @@ export function PromoCards({ cards }: PromoCardsProps) {
   }
 
   return (
-    <section className="feature-section" aria-label="PANNA promotions">
+    <section className="feature-section" aria-label="Saborealo Bakery promotions">
       <div className="panna-shell">
         <div className="promo-grid">
           {cards.map((card) => (

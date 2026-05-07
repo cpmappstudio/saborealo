@@ -14,6 +14,7 @@ import {
 	type HomeStore,
 } from "@/components/home/StoreCards"
 import { pannaHomeData } from "@/data/panna-home"
+import { rebrandPannaCopy } from "@/lib/rebrand"
 import { imageUrl } from "@/lib/sanity/image"
 import {
 	HERO_SLIDES_QUERY,
@@ -61,12 +62,12 @@ const stores: HomeStore[] = storesRaw
 	.map((store) => ({
 		id: store._id,
 		slug: store.slug as string,
-		name: store.title ?? "",
-		badgeName: store.badgeName ?? "",
+		name: rebrandPannaCopy(store.title),
+		badgeName: rebrandPannaCopy(store.badgeName),
 		guruHref: store.guruUrl ?? "",
 		image: {
 			src: imageUrl(store.cardImage!, { width: 768, height: 384 }),
-			alt: store.cardImage?.alt ?? `PANNA ${store.title ?? ""}`,
+			alt: store.cardImage?.alt ?? `Saborealo Bakery ${store.title ?? ""}`,
 		},
 		address: store.address ?? "",
 		phone: store.phone ?? "",
@@ -74,10 +75,10 @@ const stores: HomeStore[] = storesRaw
 ---
 
 <SiteLayout
-	title="PANNA - New Latino Food"
-	description="Discover PANNA New Latino Food menus, promotions, store locations, and Venezuelan-inspired favorites."
+	title="Saborealo Bakery"
+	description="Discover Saborealo Bakery menus, online ordering, and Puerto Rican favorites in Kissimmee."
 >
-	<h1 class="sr-only">PANNA New Latino Food</h1>
+	<h1 class="sr-only">Saborealo Bakery</h1>
 	<HeroCarousel slides={heroSlides} client:load />
 	<MenuGrid
 		categories={homeCategories}
