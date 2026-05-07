@@ -1,5 +1,7 @@
 "use client"
 
+import type { CSSProperties } from "react"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -12,7 +14,21 @@ import { useCarouselAutoplay } from "@/hooks/use-carousel-autoplay"
 
 import { CarouselDots } from "./CarouselDots"
 
-type StarProduct = PannaHomeData["starProducts"][number]
+type StarProduct = PannaHomeData["starProducts"][number] & {
+  bg?: string
+  bgImage?: string
+  bgImageMobile?: string
+  product: string
+  productMobile?: string
+  title?: string
+  titleImage?: string
+  text?: string
+}
+
+type StarProductSlideStyle = CSSProperties & {
+  "--star-card-bg-desktop"?: string
+  "--star-card-bg-mobile"?: string
+}
 
 type StarProductCarouselProps = {
   slides: readonly StarProduct[]
@@ -62,26 +78,58 @@ export function StarProductCarousel({ slides }: StarProductCarouselProps) {
 }
 
 function StarProductSlide({ slide }: { slide: StarProduct }) {
+  const hasBackgroundImage = Boolean(slide.bgImage)
+  const hasTitleImage = Boolean(slide.titleImage)
+  const style: StarProductSlideStyle = {
+    backgroundColor: slide.bg,
+    "--star-card-bg-desktop": hasBackgroundImage ? `url("${slide.bgImage}")` : undefined,
+    "--star-card-bg-mobile": slide.bgImageMobile
+      ? `url("${slide.bgImageMobile}")`
+      : hasBackgroundImage
+        ? `url("${slide.bgImage}")`
+        : undefined,
+  }
+
   return (
     <CardContent
-      className="star-card__slide is-light"
-      style={{ backgroundColor: slide.bg }}
+      className={`star-card__slide${hasBackgroundImage ? " has-bg-image" : " is-light"}`}
+      style={style}
     >
       <div className="star-card__media">
-        <img
-          src={slide.product}
-          alt=""
-          width={900}
-          height={600}
-          loading="lazy"
-          decoding="async"
-          className="star-card__product"
-        />
+        <picture className="star-card__product-picture">
+          {slide.productMobile ? (
+            <source media="(max-width: 1024px)" srcSet={slide.productMobile} />
+          ) : null}
+          <img
+            src={slide.product}
+            alt=""
+            width={900}
+            height={600}
+            loading="lazy"
+            decoding="async"
+            className="star-card__product"
+          />
+        </picture>
       </div>
 
       <div className="star-card__copy">
-        <h3 className="star-card__heading">{slide.title}</h3>
-        <p className="star-card__text">{slide.text}</p>
+        {hasTitleImage ? (
+          <img
+            src={slide.titleImage}
+            alt=""
+            width={520}
+            height={180}
+            loading="lazy"
+            decoding="async"
+            className="star-card__title-image"
+          />
+        ) : (
+          <h3 className="star-card__heading">{"title" in slide ? slide.title : ""}</h3>
+        )}
+
+        {"text" in slide && slide.text ? (
+          <p className="star-card__text">{slide.text}</p>
+        ) : null}
         <Button className="btn" asChild>
           <a href={slide.href}>{slide.cta}</a>
         </Button>

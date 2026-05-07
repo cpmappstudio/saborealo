@@ -1,38 +1,38 @@
-import { pannaImage as image } from "@/data/panna-assets"
-import { PANNA_ORDER_URL } from "@/data/panna-links"
+import { pannaImage as image } from "@/data/panna-assets";
+import { PANNA_ORDER_URL } from "@/data/panna-links";
 
 export const pannaHomeData = {
   starProducts: [
-    {
-      id: "breakfast-menu",
-      layout: "text",
-      bg: "#FFBA52",
-      product: "/images/products/breakfast.png",
-      title: "START YOUR DAY THE SABOREALO WAY",
-      text: "Build your perfect breakfast plate. Pick your eggs, pick your side — come in and make it yours.",
-      cta: "SEE BREAKFAST MENU",
-      href: "/menu",
-    },
+    // {
+    //   id: "breakfast-menu",
+    //   layout: "text",
+    //   bg: "#FFBA52",
+    //   product: "/images/products/breakfast.png",
+    //   title: "START YOUR DAY THE SABOREALO WAY",
+    //   text: "Build your perfect breakfast plate. Pick your eggs, pick your side — come in and make it yours.",
+    //   cta: "SEE BREAKFAST MENU",
+    //   href: "/menu",
+    // },
     {
       id: "puerto-rico-menu",
-      layout: "text",
-      bg: "#FFBA52",
+      bgImage: "/images/products/bg-puerto-rico-food.png",
+      bgImageMobile: "/images/products/bg-puerto-rico-food-mobile.png",
       product: "/images/products/puerto-rico-food.png",
-      title: "A TASTE OF PUERTO RICO",
-      text: "Authentic flavors straight from the island. Bring the tradition to your table.",
+      productMobile: "/images/products/puerto-rico-food-mobile.png",
+      titleImage: "/images/products/text-puerto-rico-food.png",
       cta: "SEE FULL MENU",
       href: "/menu",
     },
-    {
-      id: "drinks-menu",
-      layout: "text",
-      bg: "#FFBA52",
-      product: "/images/products/drinks.png",
-      title: "DRINKS FOR EVERY MOOD",
-      text: "Fresh juices, smoothies, and coffee. Always cold, always hot, always SABOREALO.",
-      cta: "SEE DRINKS MENU",
-      href: "/menu",
-    },
+    // {
+    //   id: "drinks-menu",
+    //   layout: "text",
+    //   bg: "#FFBA52",
+    //   product: "/images/products/drinks.png",
+    //   title: "DRINKS FOR EVERY MOOD",
+    //   text: "Fresh juices, smoothies, and coffee. Always cold, always hot, always SABOREALO.",
+    //   cta: "SEE DRINKS MENU",
+    //   href: "/menu",
+    // },
   ],
   promoCards: [
     {
