@@ -2,16 +2,19 @@
 import { actions, isInputError } from "astro:actions";
 
 import { ContactPage } from "@/components/contact/ContactPage";
+import { SuccessToastTrigger } from "@/components/ui/SuccessToastTrigger";
 import { pannaContactData } from "@/data/panna-contact";
 import { pannaSiteContact } from "@/data/panna-site";
+import { contactSuccessToast, hasSuccessToast } from "@/lib/form-success-toast";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 
 const result = Astro.getActionResult(actions.submitContact);
 if (result?.data) {
-    return Astro.redirect("/contact/");
+    return Astro.redirect(contactSuccessToast.successRedirectPath);
 }
 
 const inputErrors = isInputError(result?.error) ? result.error.fields : {};
+const showSuccessToast = hasSuccessToast(Astro.url.searchParams, contactSuccessToast);
 ---
 
 <SiteLayout
@@ -24,4 +27,5 @@ const inputErrors = isInputError(result?.error) ? result.error.fields : {};
         action={String(actions.submitContact)}
         inputErrors={inputErrors}
     />
+    {showSuccessToast && <SuccessToastTrigger client:load config={contactSuccessToast} />}
 </SiteLayout>
