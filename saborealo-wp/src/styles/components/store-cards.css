@@ -267,6 +267,14 @@
     display: none;
   }
 
+  .store-card[data-has-guru="false"] .store-card__media {
+    min-height: 0;
+  }
+
+  .store-card[data-has-guru="false"] .store-card__image {
+    display: block;
+  }
+
   .store-card__badge[data-slot="badge"] {
     top: 18px;
     right: auto;

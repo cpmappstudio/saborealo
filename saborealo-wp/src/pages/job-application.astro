@@ -2,15 +2,24 @@
 import { actions, isInputError } from "astro:actions";
 
 import { JobApplicationPage } from "@/components/job-application/JobApplicationPage";
+import { SuccessToastTrigger } from "@/components/ui/SuccessToastTrigger";
 import { pannaJobApplicationData } from "@/data/panna-job-application";
+import {
+    hasSuccessToast,
+    jobApplicationSuccessToast,
+} from "@/lib/form-success-toast";
 import SiteLayout from "@/layouts/SiteLayout.astro";
 
 const result = Astro.getActionResult(actions.submitJobApplication);
 if (result?.data) {
-    return Astro.redirect("/job-application/");
+    return Astro.redirect(jobApplicationSuccessToast.successRedirectPath);
 }
 
 const inputErrors = isInputError(result?.error) ? result.error.fields : {};
+const showSuccessToast = hasSuccessToast(
+    Astro.url.searchParams,
+    jobApplicationSuccessToast,
+);
 ---
 
 <SiteLayout
@@ -22,4 +31,7 @@ const inputErrors = isInputError(result?.error) ? result.error.fields : {};
         action={String(actions.submitJobApplication)}
         inputErrors={inputErrors}
     />
+    {showSuccessToast && (
+        <SuccessToastTrigger client:load config={jobApplicationSuccessToast} />
+    )}
 </SiteLayout>

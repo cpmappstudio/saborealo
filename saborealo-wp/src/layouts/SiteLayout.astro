@@ -1,6 +1,7 @@
 ---
 import { SiteFooter } from "@/components/site/SiteFooter"
 import { SiteHeader } from "@/components/site/SiteHeader"
+import { Toaster } from "@/components/ui/sonner"
 import { buildPannaSiteData } from "@/data/panna-site"
 import { LOCATIONS_NAV_QUERY } from "@/lib/sanity/queries"
 import Layout from "./Layout.astro"
@@ -61,5 +62,6 @@ const siteData = buildPannaSiteData({
 			footer={siteData.footer}
 			currentPath={currentPath}
 		/>
+		<Toaster client:load />
 	</div>
 </Layout>
