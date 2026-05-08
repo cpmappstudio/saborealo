@@ -16,6 +16,16 @@
   border-radius: 0 0 30px 30px;
 }
 
+.stores-section::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background-image: url('../../../public/stores-bg.png');
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 640px auto;
+  opacity: .25;
+}
 
 .stores-section__notch {
   position: absolute;

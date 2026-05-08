@@ -41,7 +41,7 @@ export function StoreCards({ stores, story }: StoreCardsProps) {
         </div>
       </section>
 
-      <section className="stores-section" aria-label="PANNA locations">
+      <section className="stores-section" aria-label="Saborealo Bakery locations">
         <PannaSectionNotch className="stores-section__notch" />
 
         <div className="stores-section__inner panna-shell">

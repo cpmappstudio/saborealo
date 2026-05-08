@@ -3,6 +3,7 @@ import { SiteFooter } from "@/components/site/SiteFooter"
 import { SiteHeader } from "@/components/site/SiteHeader"
 import { Toaster } from "@/components/ui/sonner"
 import { buildPannaSiteData } from "@/data/panna-site"
+import { rebrandPannaCopy } from "@/lib/rebrand"
 import { LOCATIONS_NAV_QUERY } from "@/lib/sanity/queries"
 import Layout from "./Layout.astro"
 import { sanityClient } from "sanity:client"
@@ -22,8 +23,8 @@ const locationLinks = navLocations
 	.map((location) => {
 		const path = `/locations/${location.slug as string}/`
 		return {
-			label: location.title ?? location.footerLabel ?? "",
-			footerLabel: location.footerLabel ?? location.title ?? "",
+			label: rebrandPannaCopy(location.title ?? location.footerLabel),
+			footerLabel: rebrandPannaCopy(location.footerLabel ?? location.title),
 			href: path,
 			matchPath: path,
 		}

@@ -5,7 +5,8 @@
   padding: 50px;
   padding-bottom: 80px;
   background-color: var(--panna-cream);
-  background-image: var(--panna-text-hero-background);
+  background-image:
+    var(--panna-text-hero-background);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;

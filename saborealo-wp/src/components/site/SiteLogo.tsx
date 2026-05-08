@@ -23,7 +23,7 @@ export function SiteLogo({
   variant = "primary",
   href,
   alt = logo.alt,
-  ariaLabel = "PANNA home",
+  ariaLabel = "Saborealo home",
   linkClassName,
   imageClassName,
   loading,

@@ -16,7 +16,7 @@ type AboutStoryStyle = CSSProperties & {
 
 export function AboutPage({ about }: AboutPageProps) {
   const storyStyle: AboutStoryStyle = {
-    "--about-story-background": `url("${about.story.background}")`,
+    "--about-story-background": `url("/stores-bg.png")`,
   }
 
   return (
