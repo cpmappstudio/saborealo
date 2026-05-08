@@ -1,4 +1,5 @@
 import { pannaImage as image } from "@/data/panna-assets"
+import { url } from "astro:schema"
 
 /**
  * Brand assets that belong to the layout/design system rather than to
@@ -17,7 +18,7 @@ export const pannaSectionAssets = {
         height: 406,
       },
       logoImage: {
-        src: image("2024/10/LOGO-DINE-IN.png"),
+        src: "/menu-hero-logo.png",
         width: 401,
         height: 235,
       },
@@ -30,7 +31,6 @@ export const pannaSectionAssets = {
     hero: {
       background: image("2024/10/BNR-CATEGORIAS-1.webp"),
     },
-    mapBackground: image("2024/10/Graffiti-Negro.webp"),
     infoIcons: {
       address: image("2024/10/ADDRESS.webp"),
       email: image("2024/10/EMAIL.webp"),

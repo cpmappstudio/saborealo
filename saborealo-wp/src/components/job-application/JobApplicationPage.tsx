@@ -82,7 +82,7 @@ function JobApplicationForm({
   inputErrors?: Record<string, string[] | undefined>
 }) {
   const formStyle: JobApplicationFormStyle = {
-    "--job-application-form-background": `url("${form.background}")`,
+    "--job-application-form-background": 'url("/stores-bg.png")',
   }
 
   return (
@@ -210,4 +210,3 @@ function JobApplicationSection({
     </h2>
   )
 }
-

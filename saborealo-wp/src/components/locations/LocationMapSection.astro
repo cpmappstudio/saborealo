@@ -3,17 +3,16 @@ import type { LocationDetail } from "@/components/locations/types"
 import { PannaSectionNotch } from "@/components/site/PannaSectionNotch"
 
 interface Props {
-	background: string
 	location: LocationDetail
 }
 
-const { background, location } = Astro.props
+const { location } = Astro.props
 const titleId = `${location.slug}-map-title`
 ---
 
 <section
 	class="location-map"
-	style={`--location-map-background: url("${background}")`}
+	style={`--location-map-background: url("/stores-bg.png")`}
 	aria-labelledby={titleId}
 >
 	<PannaSectionNotch className="location-map__notch" />
