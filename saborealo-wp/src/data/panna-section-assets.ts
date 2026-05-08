@@ -13,7 +13,7 @@ export const pannaSectionAssets = {
       title: "Dine In Menu",
       background: image("2024/10/BACK-DINE-IN.webp"),
       titleImage: {
-        src: image("2024/10/DINE-IN-MENU.webp"),
+        src: "/menu-hero-product.png",
         width: 967,
         height: 406,
       },
